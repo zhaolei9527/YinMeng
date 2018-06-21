@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgfff"
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x42"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/bgfff">
+
+        <FrameLayout
+            android:id="@+id/rl_back"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x10">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center"
+                android:background="@mipmap/fanhui" />
+
+        </FrameLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="实名认证"
+            android:textColor="@color/text000"
+            android:textSize="@dimen/x16" />
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y34"
+                android:background="#F0EFF5"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/x15"
+                android:text="请填写身份信息，以完成实名认证"
+                android:textColor="@color/text333"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="姓名："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请输入您的真实姓名"
+                    android:inputType="text"
+                    android:maxLength="11"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="手机号码："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_phone"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:hint="您的手机号码"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+                <Button
+                    android:id="@+id/btn_getSMScode"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/y26"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:background="@drawable/bg_login"
+                    android:text="获取验证码"
+                    android:textColor="@color/bgfff" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="验证码："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_yanzhengma"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请输入验证码"
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="身份证号："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_shenfenzheng"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="您的身份证号码"
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="银行卡："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_yinhangkahao"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请输入您的卡号"
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="开户行："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <EditText
+                    android:id="@+id/et_kaihuhang"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请输入您的开户行	"
+                    android:inputType="text"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y39"
+                android:background="@color/bgfff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="开户行地址："
+                    android:textColor="#333"
+                    android:textSize="@dimen/x13" />
+
+                <TextView
+                    android:id="@+id/et_kaihuhangaddress"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_weight="1"
+                    android:background="#00ffffff"
+                    android:gravity="center_vertical"
+                    android:hint="请选择开户行所在地"
+                    android:inputType="text"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:textColor="@color/text333"
+                    android:textColorHint="#999"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#ccc"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x15"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/ll_zhengmian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/x5"
+                        android:layout_marginTop="@dimen/x5"
+                        android:text="身份证正面"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/x12" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_zhengmian"
+                        android:layout_width="@dimen/x140"
+                        android:layout_height="@dimen/y84"
+                        android:background="@mipmap/sfzimg"
+                        android:orientation="vertical">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/SimpleDraweeView1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_fanmian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/x5"
+                        android:layout_marginTop="@dimen/x5"
+                        android:text="银行卡正面"
+                        android:textColor="@color/text333"
+                        android:textSize="@dimen/x12" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_fanmian"
+                        android:layout_width="@dimen/x140"
+                        android:layout_height="@dimen/y84"
+                        android:background="@mipmap/yhkimg"
+                        android:orientation="vertical">
+
+                        <com.facebook.drawee.view.SimpleDraweeView
+                            android:id="@+id/SimpleDraweeView2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="@dimen/x262"
+                android:layout_height="@dimen/y33"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/x30"
+                android:layout_marginTop="@dimen/x15"
+                android:background="@drawable/bg_login"
+                android:text="提交"
+                android:textColor="@color/bgfff" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

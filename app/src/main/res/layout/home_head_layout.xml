@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/bgfff"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.jude.rollviewpager.RollPagerView
+            android:id="@+id/RollPagerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y141" />
+
+    </FrameLayout>
+
+    <include layout="@layout/home_itme1_layout"></include>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y29"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:text="亿卡汇推荐"
+            android:textColor="@color/text333"
+            android:textSize="@dimen/x15" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:text="RECOMMEND"
+            android:textColor="@color/text999"
+            android:textSize="@dimen/x15" />
+
+    </LinearLayout>
+
+</LinearLayout>

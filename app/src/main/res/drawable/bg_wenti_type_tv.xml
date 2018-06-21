@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:innerRadius="@dimen/x120"
+    android:shape="rectangle"
+    android:thickness="@dimen/x1"
+    android:useLevel="false">
+    <solid android:color="#fff" />
+    <corners
+        android:bottomLeftRadius="8dp"
+        android:bottomRightRadius="8dp"
+        android:topLeftRadius="8dp"
+        android:topRightRadius="8dp" />
+    <!-- 描边 -->
+    <stroke
+        android:width="1px"
+        android:color="@color/text333" />
+</shape>

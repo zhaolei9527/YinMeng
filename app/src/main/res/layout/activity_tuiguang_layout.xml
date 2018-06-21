@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/textred">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/tuiguangbg">
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/user_head"
+            android:layout_width="@dimen/x75"
+            android:layout_height="@dimen/x75"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y55"
+            fresco:roundAsCircle="true" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/user_head"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x5"
+            android:text="姓名：sakura"
+            android:textColor="@color/bgfff"
+            android:textSize="@dimen/x15" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_name"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x15"
+            android:text="成功推广注册一人，可获得一个随机红包哟"
+            android:textColor="@color/bgfff"
+            android:textSize="@dimen/x12" />
+
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/SimpleDraweeView"
+            android:layout_width="@dimen/x110"
+            android:layout_height="@dimen/x110"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y220" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x42"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x42"
+            android:background="@color/bgfff"
+            android:visibility="visible">
+
+            <FrameLayout
+                android:id="@+id/rl_back"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/fanhui" />
+
+            </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="推广二维码"
+                android:textColor="@color/text000"
+                android:textSize="@dimen/x16" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</FrameLayout>
