@@ -11,16 +11,13 @@ import java.util.List;
  */
 public class UserTxRecordBean {
 
-
     /**
      * status : 1
-     * msg : [{"id":"2","money":"1.00","addtime":"1528365693","status":"-1"}]
-     * fy : 0
+     * tdata : [{"bank":"河南农村信用社","tixian_num":"50.20","add_time":"1529564967","kaid":"6217002710000684874","stu":"1","stus":"审核中"},{"bank":"河南农村信用社","tixian_num":"50.00","add_time":"1529564962","kaid":"6217002710000684874","stu":"1","stus":"审核中"},{"bank":"河南农村信用社","tixian_num":"50.00","add_time":"1529564951","kaid":"6217002710000684874","stu":"1","stus":"审核中"}]
      */
 
     private int status;
-    private int fy;
-    private List<MsgBean> msg;
+    private List<TdataBean> tdata;
 
     public int getStatus() {
         return status;
@@ -30,65 +27,77 @@ public class UserTxRecordBean {
         this.status = status;
     }
 
-    public int getFy() {
-        return fy;
+    public List<TdataBean> getTdata() {
+        return tdata;
     }
 
-    public void setFy(int fy) {
-        this.fy = fy;
+    public void setTdata(List<TdataBean> tdata) {
+        this.tdata = tdata;
     }
 
-    public List<MsgBean> getMsg() {
-        return msg;
-    }
-
-    public void setMsg(List<MsgBean> msg) {
-        this.msg = msg;
-    }
-
-    public static class MsgBean {
+    public static class TdataBean {
         /**
-         * id : 2
-         * money : 1.00
-         * addtime : 1528365693
-         * status : -1
+         * bank : 河南农村信用社
+         * tixian_num : 50.20
+         * add_time : 1529564967
+         * kaid : 6217002710000684874
+         * stu : 1
+         * stus : 审核中
          */
 
-        private String id;
-        private String money;
-        private String addtime;
-        private String status;
+        private String bank;
+        private String tixian_num;
+        private String add_time;
+        private String kaid;
+        private String stu;
+        private String stus;
 
-        public String getId() {
-            return id;
+        public String getBank() {
+            return bank;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setBank(String bank) {
+            this.bank = bank;
         }
 
-        public String getMoney() {
-            return money;
+        public String getTixian_num() {
+            return tixian_num;
         }
 
-        public void setMoney(String money) {
-            this.money = money;
+        public void setTixian_num(String tixian_num) {
+            this.tixian_num = tixian_num;
         }
 
-        public String getAddtime() {
-            return addtime;
+        public String getAdd_time() {
+            return add_time;
         }
 
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
+        public void setAdd_time(String add_time) {
+            this.add_time = add_time;
         }
 
-        public String getStatus() {
-            return status;
+        public String getKaid() {
+            return kaid;
         }
 
-        public void setStatus(String status) {
-            this.status = status;
+        public void setKaid(String kaid) {
+            this.kaid = kaid;
+        }
+
+        public String getStu() {
+            return stu;
+        }
+
+        public void setStu(String stu) {
+            this.stu = stu;
+        }
+
+        public String getStus() {
+            return stus;
+        }
+
+        public void setStus(String stus) {
+            this.stus = stus;
         }
     }
 }

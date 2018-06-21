@@ -18,6 +18,8 @@ import com.google.gson.Gson;
 import com.yinmeng.Activity.AddressActivitry;
 import com.yinmeng.Activity.ChangePasswordActivity;
 import com.yinmeng.Activity.MyMessageActivity;
+import com.yinmeng.Activity.TiXianGuanLiActivity;
+import com.yinmeng.Activity.TiXianListActivity;
 import com.yinmeng.Activity.TuiGuangActivity;
 import com.yinmeng.Bean.UserIndexBean;
 import com.yinmeng.R;
@@ -162,11 +164,17 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
             case R.id.ll_xiugaimima:
                 startActivity(new Intent(context, ChangePasswordActivity.class));
                 break;
-            case R.id.ll_shoucang:
+            case R.id.ll_wdeshoucang:
                 EasyToast.showShort(context, "正在开发中");
                 break;
             case R.id.ll_erweima:
                 startActivity(new Intent(context, TuiGuangActivity.class));
+                break;
+            case R.id.ll_tixianguanli:
+                startActivity(new Intent(context, TiXianGuanLiActivity.class));
+                break;
+            case R.id.ll_tixianjilu:
+                startActivity(new Intent(context, TiXianListActivity.class));
                 break;
             default:
                 break;

@@ -1,6 +1,7 @@
 package com.yinmeng.Activity;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +37,7 @@ import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
 import com.yinmeng.Utils.Utils;
 import com.yinmeng.Utils.Validator;
+import com.yinmeng.View.NeutralDialogFragment;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
@@ -326,6 +328,14 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                             xian = userResetinforBean.getUdata().getXian();
                         } else if ("-1".equals(userResetinforBean.getUdata().getIs_shen())) {
                             btnSubmit.setText("重新提交");
+
+                            NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
+                            neutralDialogFragment.show("审核失败", "请验证个人信息并上传符合规则的资料。", "我已知晓~", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }, getSupportFragmentManager());
+
                             etName.setText(userResetinforBean.getUdata().getTruename());
                             etShenfenzheng.setText(userResetinforBean.getUdata().getIdcard());
                             etYinhangkahao.setText(userResetinforBean.getUdata().getCart());

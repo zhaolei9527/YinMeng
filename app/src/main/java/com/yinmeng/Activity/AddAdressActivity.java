@@ -189,7 +189,7 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
             pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
             pvOptions.show();
         }
-        
+
     }
 
     @Override
