@@ -131,21 +131,28 @@ public class TuiGuangShouYiActivity extends BaseActivity {
         llLeijishouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","1"));
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty", "1"));
             }
         });
 
         llJintshouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","2"));
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty", "2"));
             }
         });
 
         llBenyueshouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","3"));
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty", "3"));
+            }
+        });
+
+        llTuanduixinxi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, TuanDuiXinXiActivity.class));
             }
         });
 

@@ -97,47 +97,42 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 holder.rollPagerView.setPlayDelay(3000);
                 holder.rollPagerView.setHintPadding(0, 0, 0, 0);
                 holder.rollPagerView.setAdapter(new LoopAdapter(holder.rollPagerView, homeBean.getLunbo()));
-                holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
-
-                holder.gv_home_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                        switch (i) {
-                            case 0:
-                                EasyToast.showShort(mContext, "正在开发中");
-                                break;
-                            case 1:
-                                break;
-                            case 2:
-                                break;
-                            case 3:
-                                mContext.startActivity(new Intent(mContext, TuiGuangShouYiActivity.class));
-                                break;
-                            case 4:
-                                EasyToast.showShort(mContext, "正在开发中");
-                                break;
-                            case 5:
-                                EasyToast.showShort(mContext, "正在开发中");
-                                break;
-                            case 6:
-                                mContext.startActivity(new Intent(mContext, MyMessageActivity.class));
-                                break;
-                            case 7:
-                                EasyToast.showShort(mContext, "正在开发中");
-                                break;
-                            default:
-                                break;
-                        }
-
-
-                    }
-                });
-
                 isfirst = !isfirst;
             } else {
-
             }
+            holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
+            holder.gv_home_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    switch (i) {
+                        case 0:
+                            EasyToast.showShort(mContext, "正在开发中");
+                            break;
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            mContext.startActivity(new Intent(mContext, TuiGuangShouYiActivity.class));
+                            break;
+                        case 4:
+                            EasyToast.showShort(mContext, "正在开发中");
+                            break;
+                        case 5:
+                            EasyToast.showShort(mContext, "正在开发中");
+                            break;
+                        case 6:
+                            mContext.startActivity(new Intent(mContext, MyMessageActivity.class));
+                            break;
+                        case 7:
+                            EasyToast.showShort(mContext, "正在开发中");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            });
+
         } else {
             holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position - 1).getImg_feng());
             holder.tv_title.setText(datas.get(position - 1).getTitle());
