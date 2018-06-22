@@ -13,7 +13,7 @@ public class GoodsDetailBean {
 
     /**
      * status : 1
-     * good : {"id":"33","title":"瑞银信G2（自选商户）❤","img":"/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg","price":"280.00","tab":"押金，推广奖励20元","gz_num":"7862","paizhao":"瑞银信POS机","fei":"0.55","yun":"15","yajin":"0.00","image_arr":["/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg"],"content":"/danye/goodsdetail.html"}
+     * good : {"id":"43","title":"瑞和宝（瑞银信手刷）","img":"/Public/uploads/goods/2018-04-02/5ac1fb8c56461.png","price":"0.00","tab":"推广奖励80元","gz_num":"6943","paizhao":"瑞和宝","fei":"0.55","yun":"15","yajin":"0.00","image_arr":["/Public/uploads/goods/2018-04-02/5ac1fb8c56461.png"],"content":"http://192.168.1.212/api.php/danye/goodsdetail/gid/43.html"}
      */
 
     private int status;
@@ -37,18 +37,18 @@ public class GoodsDetailBean {
 
     public static class GoodBean {
         /**
-         * id : 33
-         * title : 瑞银信G2（自选商户）❤
-         * img : /Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg
-         * price : 280.00
-         * tab : 押金，推广奖励20元
-         * gz_num : 7862
-         * paizhao : 瑞银信POS机
+         * id : 43
+         * title : 瑞和宝（瑞银信手刷）
+         * img : /Public/uploads/goods/2018-04-02/5ac1fb8c56461.png
+         * price : 0.00
+         * tab : 推广奖励80元
+         * gz_num : 6943
+         * paizhao : 瑞和宝
          * fei : 0.55
          * yun : 15
          * yajin : 0.00
-         * image_arr : ["/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg"]
-         * content : /danye/goodsdetail.html
+         * image_arr : ["/Public/uploads/goods/2018-04-02/5ac1fb8c56461.png"]
+         * content : http://192.168.1.212/api.php/danye/goodsdetail/gid/43.html
          */
 
         private String id;

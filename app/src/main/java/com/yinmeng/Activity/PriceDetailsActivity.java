@@ -200,7 +200,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         });
         dialog = Utils.showLoadingDialog(context);
         dialog.show();
-        //wb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
         goodsDetail();
     }
 
@@ -260,6 +259,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     tvZhifupaizhao.setText("支付牌照：" + goodsDetailBean.getGood().getPaizhao());
                     tvYifukuan.setText(goodsDetailBean.getGood().getGz_num() + "人已关注");
                     tvYunfei.setText("运费：" + goodsDetailBean.getGood().getYun());
+                    wb.loadUrl(goodsDetailBean.getGood().getContent());
                     result = null;
                 } catch (Exception e) {
                     dialog.dismiss();

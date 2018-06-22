@@ -131,21 +131,21 @@ public class TuiGuangShouYiActivity extends BaseActivity {
         llLeijishouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyToast.showShort(context, "累计收益..");
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","1"));
             }
         });
 
         llJintshouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyToast.showShort(context, "今日收益..");
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","2"));
             }
         });
 
         llBenyueshouyi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EasyToast.showShort(context, "本月收益..");
+                startActivity(new Intent(context, ShouYiMingXiActivity.class).putExtra("daty","3"));
             }
         });
 
