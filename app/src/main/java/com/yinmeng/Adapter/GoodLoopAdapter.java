@@ -32,7 +32,7 @@ public class GoodLoopAdapter extends LoopPagerAdapter {
 
     @Override
     public View getView(ViewGroup container, int position) {
-        View inflate = View.inflate(container.getContext(), R.layout.layout_img, null);
+        View inflate = View.inflate(container.getContext(), R.layout.layout_goodimg, null);
         SimpleDraweeView SimpleDraweeView = (com.facebook.drawee.view.SimpleDraweeView) inflate.findViewById(R.id.SimpleDraweeView);
         try {
             SimpleDraweeView.setImageURI(UrlUtils.URL + lbdatas.get(position));

@@ -313,6 +313,13 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
 
                         } else if ("1".equals(userResetinforBean.getUdata().getIs_shen())) {
                             btnSubmit.setText("修改资料");
+                            NeutralDialogFragment neutralDialogFragment = new NeutralDialogFragment();
+                            neutralDialogFragment.show("审核成功", "实名认证信息已通过。", "我已知晓~", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                }
+                            }, getSupportFragmentManager());
+
                             etName.setFocusable(false);
                             etShenfenzheng.setFocusable(false);
 

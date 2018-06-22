@@ -12,18 +12,12 @@ import java.util.List;
 public class GoodsDetailBean {
 
     /**
-     * normname : [{"nid":"9","title":"套餐","term":[{"tid":"19","title":"标准装（1盒）"},{"tid":"20","title":"套餐二（2盒）"}]}]
      * status : 1
-     * goods : {"id":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","is_norm":"1","price":"81.00","price1":"81.00","price2":"80.00","price3":"78.00","price4":"75.00","is_coll":0}
-     * imgs : ["/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","/Public/uploads/goods/2018-05-28/2018_05_28_09_33_57_16797.jpg","/Public/uploads/goods/2018-05-28/2018_05_28_09_34_01_93954.jpg"]
-     * usertype : 1
+     * good : {"id":"33","title":"瑞银信G2（自选商户）❤","img":"/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg","price":"280.00","tab":"押金，推广奖励20元","gz_num":"7862","paizhao":"瑞银信POS机","fei":"0.55","yun":"15","yajin":"0.00","image_arr":["/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg"],"content":"/danye/goodsdetail.html"}
      */
 
     private int status;
-    private GoodsBean goods;
-    private String usertype;
-    private List<NormnameBean> normname;
-    private List<String> imgs;
+    private GoodBean good;
 
     public int getStatus() {
         return status;
@@ -33,60 +27,42 @@ public class GoodsDetailBean {
         this.status = status;
     }
 
-    public GoodsBean getGoods() {
-        return goods;
+    public GoodBean getGood() {
+        return good;
     }
 
-    public void setGoods(GoodsBean goods) {
-        this.goods = goods;
+    public void setGood(GoodBean good) {
+        this.good = good;
     }
 
-    public String getUsertype() {
-        return usertype;
-    }
-
-    public void setUsertype(String usertype) {
-        this.usertype = usertype;
-    }
-
-    public List<NormnameBean> getNormname() {
-        return normname;
-    }
-
-    public void setNormname(List<NormnameBean> normname) {
-        this.normname = normname;
-    }
-
-    public List<String> getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(List<String> imgs) {
-        this.imgs = imgs;
-    }
-
-    public static class GoodsBean {
+    public static class GoodBean {
         /**
-         * id : 19
-         * gname : 善存 多维元素片(29) 60片 centrum 补充维生素及矿物质
-         * is_norm : 1
-         * price : 81.00
-         * price1 : 81.00
-         * price2 : 80.00
-         * price3 : 78.00
-         * price4 : 75.00
-         * is_coll : 0
+         * id : 33
+         * title : 瑞银信G2（自选商户）❤
+         * img : /Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg
+         * price : 280.00
+         * tab : 押金，推广奖励20元
+         * gz_num : 7862
+         * paizhao : 瑞银信POS机
+         * fei : 0.55
+         * yun : 15
+         * yajin : 0.00
+         * image_arr : ["/Public/uploads/goods/2018-01-26/5a6ad7d0f0d0b.jpg"]
+         * content : /danye/goodsdetail.html
          */
 
         private String id;
-        private String gname;
-        private String is_norm;
+        private String title;
+        private String img;
         private String price;
-        private String price1;
-        private String price2;
-        private String price3;
-        private String price4;
-        private int is_coll;
+        private String tab;
+        private String gz_num;
+        private String paizhao;
+        private String fei;
+        private String yun;
+        private String yajin;
+        private String content;
+        private List<String> image_arr;
 
         public String getId() {
             return id;
@@ -94,90 +70,6 @@ public class GoodsDetailBean {
 
         public void setId(String id) {
             this.id = id;
-        }
-
-        public String getGname() {
-            return gname;
-        }
-
-        public void setGname(String gname) {
-            this.gname = gname;
-        }
-
-        public String getIs_norm() {
-            return is_norm;
-        }
-
-        public void setIs_norm(String is_norm) {
-            this.is_norm = is_norm;
-        }
-
-        public String getPrice() {
-            return price;
-        }
-
-        public void setPrice(String price) {
-            this.price = price;
-        }
-
-        public String getPrice1() {
-            return price1;
-        }
-
-        public void setPrice1(String price1) {
-            this.price1 = price1;
-        }
-
-        public String getPrice2() {
-            return price2;
-        }
-
-        public void setPrice2(String price2) {
-            this.price2 = price2;
-        }
-
-        public String getPrice3() {
-            return price3;
-        }
-
-        public void setPrice3(String price3) {
-            this.price3 = price3;
-        }
-
-        public String getPrice4() {
-            return price4;
-        }
-
-        public void setPrice4(String price4) {
-            this.price4 = price4;
-        }
-
-        public int getIs_coll() {
-            return is_coll;
-        }
-
-        public void setIs_coll(int is_coll) {
-            this.is_coll = is_coll;
-        }
-    }
-
-    public static class NormnameBean {
-        /**
-         * nid : 9
-         * title : 套餐
-         * term : [{"tid":"19","title":"标准装（1盒）"},{"tid":"20","title":"套餐二（2盒）"}]
-         */
-
-        private String nid;
-        private String title;
-        private List<TermBean> term;
-
-        public String getNid() {
-            return nid;
-        }
-
-        public void setNid(String nid) {
-            this.nid = nid;
         }
 
         public String getTitle() {
@@ -188,38 +80,84 @@ public class GoodsDetailBean {
             this.title = title;
         }
 
-        public List<TermBean> getTerm() {
-            return term;
+        public String getImg() {
+            return img;
         }
 
-        public void setTerm(List<TermBean> term) {
-            this.term = term;
+        public void setImg(String img) {
+            this.img = img;
         }
 
-        public static class TermBean {
-            /**
-             * tid : 19
-             * title : 标准装（1盒）
-             */
+        public String getPrice() {
+            return price;
+        }
 
-            private String tid;
-            private String title;
+        public void setPrice(String price) {
+            this.price = price;
+        }
 
-            public String getTid() {
-                return tid;
-            }
+        public String getTab() {
+            return tab;
+        }
 
-            public void setTid(String tid) {
-                this.tid = tid;
-            }
+        public void setTab(String tab) {
+            this.tab = tab;
+        }
 
-            public String getTitle() {
-                return title;
-            }
+        public String getGz_num() {
+            return gz_num;
+        }
 
-            public void setTitle(String title) {
-                this.title = title;
-            }
+        public void setGz_num(String gz_num) {
+            this.gz_num = gz_num;
+        }
+
+        public String getPaizhao() {
+            return paizhao;
+        }
+
+        public void setPaizhao(String paizhao) {
+            this.paizhao = paizhao;
+        }
+
+        public String getFei() {
+            return fei;
+        }
+
+        public void setFei(String fei) {
+            this.fei = fei;
+        }
+
+        public String getYun() {
+            return yun;
+        }
+
+        public void setYun(String yun) {
+            this.yun = yun;
+        }
+
+        public String getYajin() {
+            return yajin;
+        }
+
+        public void setYajin(String yajin) {
+            this.yajin = yajin;
+        }
+
+        public String getContent() {
+            return content;
+        }
+
+        public void setContent(String content) {
+            this.content = content;
+        }
+
+        public List<String> getImage_arr() {
+            return image_arr;
+        }
+
+        public void setImage_arr(List<String> image_arr) {
+            this.image_arr = image_arr;
         }
     }
 }

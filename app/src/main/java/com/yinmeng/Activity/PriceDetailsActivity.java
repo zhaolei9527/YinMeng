@@ -1,7 +1,6 @@
 package com.yinmeng.Activity;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,11 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckedTextView;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,19 +22,15 @@ import com.tencent.smtt.sdk.WebSettings;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.yinmeng.Adapter.GoodLoopAdapter;
+import com.yinmeng.App;
 import com.yinmeng.Base.BaseActivity;
-import com.yinmeng.Bean.CodeBean;
-import com.yinmeng.Bean.GoodsCangBean;
-import com.yinmeng.Bean.GoodsChangePriceBean;
 import com.yinmeng.Bean.GoodsDetailBean;
-import com.yinmeng.Bean.OrderBuyBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DensityUtils;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
 import com.yinmeng.Utils.Utils;
-import com.yinmeng.View.FlowLayout;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
@@ -47,36 +39,38 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.yinmeng.R.id.btn_jia;
-import static com.yinmeng.R.id.btn_shuliang;
+import static com.yinmeng.R.id.tv_feilv;
+import static com.yinmeng.R.id.tv_yajin;
 
 public class PriceDetailsActivity extends BaseActivity implements View.OnClickListener {
 
 
     @BindView(R.id.rl_back)
     FrameLayout rlBack;
-    @BindView(R.id.tv_countCart)
-    TextView tvCountCart;
-    @BindView(R.id.rl_shoppingcart)
-    RelativeLayout rlShoppingcart;
     @BindView(R.id.RollPagerView)
     com.jude.rollviewpager.RollPagerView RollPagerView;
     @BindView(R.id.tv_title)
     TextView tvTitle;
+    @BindView(tv_feilv)
+    TextView tvFeilv;
+    @BindView(R.id.tv_jiangli)
+    TextView tvJiangli;
+    @BindView(tv_yajin)
+    TextView tvYajin;
     @BindView(R.id.tv_price)
     TextView tvPrice;
+    @BindView(R.id.tv_zhifupaizhao)
+    TextView tvZhifupaizhao;
+    @BindView(R.id.tv_yunfei)
+    TextView tvYunfei;
+    @BindView(R.id.tv_yifukuan)
+    TextView tvYifukuan;
     @BindView(R.id.wb)
     WebView wb;
-    @BindView(R.id.ll_gohome)
-    LinearLayout llGohome;
-    @BindView(R.id.img_shoucang)
-    ImageView imgShoucang;
-    @BindView(R.id.ll_shoucang)
-    LinearLayout llShoucang;
     @BindView(R.id.tv_addshop)
     TextView tvAddshop;
-    @BindView(R.id.shopnow)
-    TextView shopnow;
+    @BindView(R.id.SimpleDraweeView)
+    com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
     @BindView(R.id.tv_type_title)
     TextView tvTypeTitle;
     @BindView(R.id.tv_type_money)
@@ -85,9 +79,9 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvKucun;
     @BindView(R.id.btn_jian)
     Button btnJian;
-    @BindView(btn_shuliang)
+    @BindView(R.id.btn_shuliang)
     TextView btnShuliang;
-    @BindView(btn_jia)
+    @BindView(R.id.btn_jia)
     Button btnJia;
     @BindView(R.id.ll_checkmax)
     LinearLayout llCheckmax;
@@ -99,10 +93,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView typeShopnow;
     @BindView(R.id.ll_type_check)
     LinearLayout llTypeCheck;
-    @BindView(R.id.tv_otherPrice)
-    TextView tvOtherPrice;
-    @BindView(R.id.SimpleDraweeView)
-    com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
     private Dialog dialog;
     private String uid;
     private GoodsDetailBean goodsDetailBean;
@@ -112,6 +102,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        App.getQueues().cancelAll("goods/detail");
         System.gc();
     }
 
@@ -131,11 +122,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         RollPagerView.setHintView(new IconHintView(context, R.drawable.shape_selected, R.drawable.shape_noraml, DensityUtils.dp2px(context, getResources().getDimension(R.dimen.x7))));
         RollPagerView.setPlayDelay(30000);
         rlBack.setOnClickListener(this);
-        llShoucang.setOnClickListener(this);
-        rlShoppingcart.setOnClickListener(this);
-        shopnow.setOnClickListener(this);
         tvAddshop.setOnClickListener(this);
-        llGohome.setOnClickListener(this);
         typeShopnow.setOnClickListener(this);
         tvTypeAddshop.setOnClickListener(this);
 
@@ -213,7 +200,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         });
         dialog = Utils.showLoadingDialog(context);
         dialog.show();
-        wb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
+        //wb.loadUrl(UrlUtils.BASE_URL + "danye/goods/id/" + id);
         goodsDetail();
     }
 
@@ -224,86 +211,8 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.shopnow:
-                if (TextUtils.isEmpty(uid)) {
-                    EasyToast.showShort(context, "请先登录");
-                    startActivity(new Intent(context, LoginActivity.class));
-                    return;
-                }
-                typeshow = true;
-                llTypeCheck.setVisibility(View.VISIBLE);
-
-
-                break;
             case R.id.rl_back:
                 finish();
-                break;
-            case R.id.ll_shoucang:
-                if (TextUtils.isEmpty(uid)) {
-                    EasyToast.showShort(context, "请先登录");
-                    startActivity(new Intent(context, LoginActivity.class));
-                    return;
-                }
-                //  if ("0".equals(String.valueOf(goodsDetailBean.getGoods().getIs_coll()))) {
-                goodsCang();
-                imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
-                EasyToast.showShort(context, "收藏成功");
-                goodsDetailBean.getGoods().setIs_coll(1);
-                //} else {
-                //  goodsOnCang();
-                // imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc1));
-                // EasyToast.showShort(context, "取消收藏");
-                // goodsDetailBean.getGoods().setIs_coll(0);
-                //}
-                break;
-            case R.id.tv_addshop:
-                if (TextUtils.isEmpty(uid)) {
-                    EasyToast.showShort(context, "请先登录");
-                    startActivity(new Intent(context, LoginActivity.class));
-                    return;
-                }
-                typeshow = true;
-                llTypeCheck.setVisibility(View.VISIBLE);
-//                cartJoinCart();
-                break;
-            case R.id.rl_shoppingcart:
-                if (TextUtils.isEmpty(uid)) {
-                    EasyToast.showShort(context, "请先登录");
-                    startActivity(new Intent(context, LoginActivity.class));
-                    return;
-                }
-                startActivity(new Intent(context, MyShopCarActivity.class));
-                break;
-            case R.id.ll_gohome:
-                finish();
-                break;
-            case R.id.type_shopnow:
-                if (Utils.isConnected(context)) {
-                    if (typeMap != null) {
-                        if (typeMap.containsValue("!!!")) {
-                            EasyToast.showShort(context, "请选择商品规格");
-                            break;
-                        }
-                    }
-                    dialog.show();
-                    orderBuy();
-                } else {
-                    EasyToast.showShort(context, R.string.Networkexception);
-                }
-                break;
-            case R.id.tv_type_addshop:
-                if (Utils.isConnected(context)) {
-                    if (typeMap != null) {
-                        if (typeMap.containsValue("!!!")) {
-                            EasyToast.showShort(context, "请选择商品规格");
-                            break;
-                        }
-                    }
-                    dialog.show();
-                    cartJoinCart();
-                } else {
-                    EasyToast.showShort(context, R.string.Networkexception);
-                }
                 break;
             default:
                 break;
@@ -325,108 +234,32 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     private void goodsDetail() {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("pwd", UrlUtils.KEY);
-        params.put("id", String.valueOf(getIntent().getStringExtra("id")));
+        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/details", "goods/details", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/detail", "goods/detail", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 Log.e("PriceDetailsActivity", result);
                 try {
                     dialog.dismiss();
                     goodsDetailBean = new Gson().fromJson(result, GoodsDetailBean.class);
-                    RollPagerView.setAdapter(new GoodLoopAdapter(RollPagerView, goodsDetailBean.getImgs()));
-                    tvTitle.setText(goodsDetailBean.getGoods().getGname());
-                    tvTypeTitle.setText(goodsDetailBean.getGoods().getGname());
-                    tvTypeMoney.setText(goodsDetailBean.getGoods().getPrice());
-                    SimpleDraweeView.setImageURI(UrlUtils.URL + goodsDetailBean.getImgs().get(0));
-
-                    if (1 == goodsDetailBean.getGoods().getIs_coll()) {
-                        imgShoucang.setBackground(getResources().getDrawable(R.mipmap.new_sc2));
-                    }
-
-                    /**
-                     字段usertype：
-                     1：当前价格为零售价，不显示其他价格
-                     2：当前价格为批发价，在价格下方展示零售价（price1）
-                     3：当前价格为代理价，在价格下方展示零售价（price1）、批发价（price2）
-                     4和5：当前价格为加盟价，在价格下方展示零售价（price1）、批发价（price2）、代理价（price3）
-                     * */
-                    if ("1".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setVisibility(View.GONE);
-                    } else if ("2".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("批发价：" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1());
-                    } else if ("3".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价:" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2());
-                    } else if ("4".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
-                    } else if ("5".equals(String.valueOf(goodsDetailBean.getUsertype()))) {
-                        tvPrice.setText("代理价：" + goodsDetailBean.getGoods().getPrice());
-                        tvOtherPrice.setText("零售价：" + goodsDetailBean.getGoods().getPrice1() + "  批发价：" + goodsDetailBean.getGoods().getPrice2() + "  代理价：" + goodsDetailBean.getGoods().getPrice3());
-                    }
-
-                    /**
-                     * 规格标签
-                     */
-                    if ("1".equals(goodsDetailBean.getGoods().getIs_norm())) {
-                        typeMap = new HashMap<>();
-                        for (int i = 0; i < goodsDetailBean.getNormname().size(); i++) {
-                            View goodtype_layout = View.inflate(context, R.layout.good_details_goodtype_layout, null);
-                            TextView tv_type_title = goodtype_layout.findViewById(R.id.tv_type_title);
-                            tv_type_title.setText(goodsDetailBean.getNormname().get(i).getTitle());
-                            final FlowLayout mFlowLayout = goodtype_layout.findViewById(R.id.id_flowlayout);
-                            typeMap.put(String.valueOf(i), "!!!");
-                            for (int j = 0; j < goodsDetailBean.getNormname().get(i).getTerm().size(); j++) {
-                                final CheckedTextView tv = (CheckedTextView) mInflater.inflate(
-                                        R.layout.label_tv_keshi_layout, mFlowLayout, false);
-                                tv.setText(goodsDetailBean.getNormname().get(i).getTerm().get(j).getTitle());
-                                tv.setTag(goodsDetailBean.getNormname().get(i).getTerm().get(j).getTid());
-                                final String str = tv.getText().toString();
-                                //点击事件
-                                final int finalI = i;
-                                final int finalJ = j;
-                                tv.setOnClickListener(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        for (int i1 = 0; i1 < mFlowLayout.getChildCount(); i1++) {
-                                            CheckedTextView childAt = (CheckedTextView) mFlowLayout.getChildAt(i1);
-                                            if (tv.getTag().equals(childAt.getTag())) {
-                                                typeMap.put(String.valueOf(finalI), String.valueOf(childAt.getTag()));
-                                                childAt.setChecked(true);
-                                                childAt.setBackground(getResources().getDrawable(R.drawable.bg_keshi_lable_check));
-                                            } else {
-                                                childAt.setChecked(false);
-                                                childAt.setBackground(getResources().getDrawable(R.drawable.bg_keshi_lable_nocheck));
-                                            }
-                                        }
-                                        if (!typeMap.containsValue("!!!")) {
-                                            StringBuilder stringBuilder = new StringBuilder();
-                                            for (int i1 = 0; i1 < typeMap.size(); i1++) {
-                                                if (i1 == 0) {
-                                                    stringBuilder.append(typeMap.get(String.valueOf(i1)));
-                                                } else {
-                                                    stringBuilder.append("|" + typeMap.get(String.valueOf(i1)));
-                                                }
-                                            }
-
-                                            if (Utils.isConnected(context)) {
-                                                getypeprice(stringBuilder.toString());
-                                            } else {
-                                                EasyToast.showShort(context, R.string.Networkexception);
-                                            }
-
-                                        }
-                                    }
-                                });
-                                mFlowLayout.addView(tv);//添加到父View
-                            }
-                            llTypecontent.addView(goodtype_layout);
+                    RollPagerView.setAdapter(new GoodLoopAdapter(RollPagerView, goodsDetailBean.getGood().getImage_arr()));
+                    tvTitle.setText(goodsDetailBean.getGood().getTitle());
+                    tvPrice.setText(goodsDetailBean.getGood().getPrice());
+                    tvFeilv.setText(goodsDetailBean.getGood().getFei());
+                    if (!TextUtils.isEmpty(goodsDetailBean.getGood().getYajin())) {
+                        if ("0.00".equals(goodsDetailBean.getGood().getYajin())) {
+                            tvYajin.setText("无押金");
+                        } else {
+                            tvYajin.setText("押金" + goodsDetailBean.getGood().getYajin());
                         }
+                    } else {
+                        tvYajin.setText("无押金");
                     }
+                    tvZhifupaizhao.setText("支付牌照：" + goodsDetailBean.getGood().getPaizhao());
+                    tvYifukuan.setText(goodsDetailBean.getGood().getGz_num() + "人已关注");
+                    tvYunfei.setText("运费：" + goodsDetailBean.getGood().getYun());
                     result = null;
                 } catch (Exception e) {
                     dialog.dismiss();
@@ -443,229 +276,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
-
-    /**
-     * 获取商品规格价格
-     */
-    private void getypeprice(String str) {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
-        params.put("str", str);
-        Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/change_price", "goods/change_price", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("PriceDetailsActivity", result);
-                try {
-                    GoodsChangePriceBean goodsChangePriceBean = new Gson().fromJson(result, GoodsChangePriceBean.class);
-                    if (1 == goodsChangePriceBean.getStatus()) {
-                        tvKucun.setText("库存:" + goodsChangePriceBean.getNums());
-                        tvTypeMoney.setText("￥" + goodsChangePriceBean.getPrice());
-                    }
-                    result = null;
-                } catch (Exception e) {
-                    dialog.dismiss();
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * 收藏产品
-     */
-    private void goodsCang() {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("id", String.valueOf(getIntent().getStringExtra("id")));
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/coll", "goods/coll", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("PriceDetailsActivity", result);
-                try {
-
-                    result = null;
-                } catch (Exception e) {
-                    dialog.dismiss();
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * 取消收藏
-     */
-    private void goodsOnCang() {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
-        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/nocang", "goods/nocang", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("RegisterActivity", result);
-                try {
-                    GoodsCangBean goodsCangBean = new Gson().fromJson(result, GoodsCangBean.class);
-                    if ("310".equals(String.valueOf(goodsCangBean.getCode()))) {
-                    } else {
-                        goodsDetailBean.getGoods().setIs_coll(1);
-                        imgShoucang.setBackgroundResource(R.mipmap.new_sc2);
-                        EasyToast.showShort(context, "取消失败");
-                    }
-                    goodsCangBean = null;
-                    result = null;
-                } catch (Exception e) {
-                    dialog.dismiss();
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-
-    /**
-     * 加入购物车
-     */
-    private void cartJoinCart() {
-        HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("gnum", btnShuliang.getText().toString());
-        if ("1".equals(goodsDetailBean.getGoods().getIs_norm())) {
-            params.put("is_norm", "1");
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i1 = 0; i1 < typeMap.size(); i1++) {
-                if (i1 == 0) {
-                    stringBuilder.append(typeMap.get(String.valueOf(i1)));
-                } else {
-                    stringBuilder.append("|" + typeMap.get(String.valueOf(i1)));
-                }
-            }
-            params.put("str", stringBuilder.toString());
-        } else {
-            params.put("is_norm", "-1");
-        }
-        Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/cart", "goods/cart", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("PriceDetailsActivity", result);
-                try {
-                    dialog.dismiss();
-                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
-                    if (1 == codeBean.getStatus()) {
-                        llTypeCheck.setVisibility(View.GONE);
-                    }
-                    EasyToast.showShort(context, codeBean.getMsg());
-                    codeBean = null;
-                    result = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                error.printStackTrace();
-                dialog.dismiss();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * 确认订单（立即购买）
-     */
-    private void orderBuy() {
-        final HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("id", String.valueOf(getIntent().getStringExtra("id")));
-        params.put("amount", btnShuliang.getText().toString());
-        if ("1".equals(goodsDetailBean.getGoods().getIs_norm())) {
-            params.put("is_norm", "1");
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i1 = 0; i1 < typeMap.size(); i1++) {
-                if (i1 == 0) {
-                    stringBuilder.append(typeMap.get(String.valueOf(i1)));
-                } else {
-                    stringBuilder.append("|" + typeMap.get(String.valueOf(i1)));
-                }
-            }
-            params.put("normstr", stringBuilder.toString());
-        } else {
-            params.put("is_norm", "-1");
-        }
-        Log.e("PriceDetailsActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/buy", "order/buy", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                Log.e("PriceDetailsActivity", result);
-                try {
-                    dialog.dismiss();
-                    OrderBuyBean orderBuyBean = new Gson().fromJson(result, OrderBuyBean.class);
-                    if (1 == orderBuyBean.getStatus()) {
-                        context.startActivity(new Intent(context, OrderBuyActivity.class)
-                                .putExtra("order", result)
-                                .putExtra("gid", String.valueOf(getIntent().getStringExtra("id")))
-                                .putExtra("is_norm", params.get("is_norm"))
-                                .putExtra("norm", params.get("normstr"))
-                                .putExtra("amount", params.get("amount"))
-                                .putExtra("val", orderBuyBean.getGoods().getVal())
-                        );
-                        finish();
-                    } else {
-                        EasyToast.showShort(context, R.string.Abnormalserver);
-                    }
-                    result = null;
-                } catch (Exception e) {
-                    dialog.dismiss();
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
     @Override
     public void onBackPressed() {

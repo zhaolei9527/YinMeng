@@ -11,12 +11,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.yinmeng.Activity.MainActivity;
 import com.yinmeng.Activity.MyMessageActivity;
+import com.yinmeng.Activity.PriceDetailsActivity;
 import com.yinmeng.Adapter.HomeListAdapter;
 import com.yinmeng.App;
 import com.yinmeng.Bean.HomeBean;
@@ -141,6 +143,16 @@ public class HomeFragment extends BaseLazyFragment {
                         if (adapter == null) {
                             adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
                             rv_homelist.setAdapter(adapter);
+
+                            rv_homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    if (i != 0) {
+                                        startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i-1).getId()));
+                                    }
+                                }
+                            });
+
                         } else {
                             adapter.setDatas(homeBean.getGoods());
                         }

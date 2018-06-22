@@ -48,6 +48,6 @@ public class LoopAdapter extends LoopPagerAdapter {
 
     @Override
     public int getRealCount() {
-        return 3;
+        return lbdatas.size();
     }
 }

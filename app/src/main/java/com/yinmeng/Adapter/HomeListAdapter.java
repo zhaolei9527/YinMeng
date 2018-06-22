@@ -1,5 +1,6 @@
 package com.yinmeng.Adapter;
 
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,9 +18,12 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.yinmeng.Activity.MainActivity;
+import com.yinmeng.Activity.MyMessageActivity;
+import com.yinmeng.Activity.TuiGuangShouYiActivity;
 import com.yinmeng.Bean.HomeBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DensityUtils;
+import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.UrlUtils;
 import com.yinmeng.View.MyGridView;
 
@@ -93,6 +98,42 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 holder.rollPagerView.setHintPadding(0, 0, 0, 0);
                 holder.rollPagerView.setAdapter(new LoopAdapter(holder.rollPagerView, homeBean.getLunbo()));
                 holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
+
+                holder.gv_home_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                        switch (i) {
+                            case 0:
+                                EasyToast.showShort(mContext, "正在开发中");
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                break;
+                            case 3:
+                                mContext.startActivity(new Intent(mContext, TuiGuangShouYiActivity.class));
+                                break;
+                            case 4:
+                                EasyToast.showShort(mContext, "正在开发中");
+                                break;
+                            case 5:
+                                EasyToast.showShort(mContext, "正在开发中");
+                                break;
+                            case 6:
+                                mContext.startActivity(new Intent(mContext, MyMessageActivity.class));
+                                break;
+                            case 7:
+                                EasyToast.showShort(mContext, "正在开发中");
+                                break;
+                            default:
+                                break;
+                        }
+
+
+                    }
+                });
+
                 isfirst = !isfirst;
             } else {
 
