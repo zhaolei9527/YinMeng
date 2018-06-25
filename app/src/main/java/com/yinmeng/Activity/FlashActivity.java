@@ -144,6 +144,7 @@ public class FlashActivity extends BaseActivity {
                         SpUtil.putAndApply(context, "password", password);
                         SpUtil.putAndApply(context, "tel", loginBean.getUdata().getTel());
                         SpUtil.putAndApply(context, "is_shen", loginBean.getUdata().getIs_shen());
+                        SpUtil.putAndApply(context, "is_dai", loginBean.getUdata().getIs_dai());
                         gotoMain();
                     } else {
                         delayGoToLogin();

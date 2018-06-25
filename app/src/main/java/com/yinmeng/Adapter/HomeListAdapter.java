@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
+import com.yinmeng.Activity.DaiLiShangActivity;
+import com.yinmeng.Activity.JiJuActivity;
 import com.yinmeng.Activity.MainActivity;
 import com.yinmeng.Activity.MyMessageActivity;
 import com.yinmeng.Activity.TuiGuangShouYiActivity;
@@ -24,6 +26,7 @@ import com.yinmeng.Bean.HomeBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DensityUtils;
 import com.yinmeng.Utils.EasyToast;
+import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
 import com.yinmeng.View.MyGridView;
 
@@ -109,8 +112,15 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                             EasyToast.showShort(mContext, "正在开发中");
                             break;
                         case 1:
+                            String is_dai = (String) SpUtil.get(mContext, "is_dai", "0");
+                            if ("1".equals(is_dai)) {
+                                mContext.startActivity(new Intent(mContext, DaiLiShangActivity.class));
+                            } else {
+                                EasyToast.showShort(mContext, "你还不是代理!~");
+                            }
                             break;
                         case 2:
+                            mContext.startActivity(new Intent(mContext, JiJuActivity.class));
                             break;
                         case 3:
                             mContext.startActivity(new Intent(mContext, TuiGuangShouYiActivity.class));

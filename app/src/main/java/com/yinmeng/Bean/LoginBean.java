@@ -9,10 +9,11 @@ package com.yinmeng.Bean;
  */
 public class LoginBean {
 
+
     /**
      * status : 1
      * msg : 登陆成功
-     * udata : {"id":"22625","is_shen":"0","img":"/Public/headimg.jpg","ni_name":"sakura","tel":"17629345001"}
+     * udata : {"id":"22625","is_shen":"1","img":"/Public/headimg.jpg","ni_name":"sakura","tel":"17629345001","is_dai":"0"}
      */
 
     private int status;
@@ -46,10 +47,11 @@ public class LoginBean {
     public static class UdataBean {
         /**
          * id : 22625
-         * is_shen : 0
+         * is_shen : 1
          * img : /Public/headimg.jpg
          * ni_name : sakura
          * tel : 17629345001
+         * is_dai : 0
          */
 
         private String id;
@@ -57,6 +59,7 @@ public class LoginBean {
         private String img;
         private String ni_name;
         private String tel;
+        private String is_dai;
 
         public String getId() {
             return id;
@@ -96,6 +99,14 @@ public class LoginBean {
 
         public void setTel(String tel) {
             this.tel = tel;
+        }
+
+        public String getIs_dai() {
+            return is_dai;
+        }
+
+        public void setIs_dai(String is_dai) {
+            this.is_dai = is_dai;
         }
     }
 }
