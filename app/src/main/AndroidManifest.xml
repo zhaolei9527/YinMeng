@@ -167,6 +167,15 @@
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
+            android:name="com.yinmeng.Activity.DingDanFaHuoActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="com.yinmeng.Activity.WoDeTuanDuiActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+        <activity
             android:name="com.yinmeng.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"

@@ -1,6 +1,7 @@
 package com.yinmeng.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.yinmeng.Activity.DingDanFaHuoActivity;
 import com.yinmeng.Bean.AgentDllistBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.UrlUtils;
@@ -51,10 +53,16 @@ public class DaiLiDingDanListAdapter extends RecyclerView.Adapter<DaiLiDingDanLi
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-        holder.simpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg());
+        holder.simpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg_feng());
         holder.tv_jifen.setText("0");
         holder.tv_price.setText("￥" + datas.get(position).getTotalprice());
         holder.tv_title.setText(datas.get(position).getTitle());
+        holder.btn_fahuo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.startActivity(new Intent(mContext, DingDanFaHuoActivity.class).putExtra("id", datas.get(position).getId()));
+            }
+        });
 
     }
 

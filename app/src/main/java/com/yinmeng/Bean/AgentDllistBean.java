@@ -13,7 +13,7 @@ public class AgentDllistBean {
 
     /**
      * status : 1
-     * dorders : [{"id":"1547","gid":"15","status":"1","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img":"/Public/uploads/goods/2018-01-16/5a5dafdcd6fd8.png,/Public/uploads/goods/2018-01-16/5a5dafdcd8748.png"},{"id":"1548","gid":"15","status":"1","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img":"/Public/uploads/goods/2018-01-16/5a5dafdcd6fd8.png,/Public/uploads/goods/2018-01-16/5a5dafdcd8748.png"},{"id":"1549","gid":"15","status":"2","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img":"/Public/uploads/goods/2018-01-16/5a5dafdcd6fd8.png,/Public/uploads/goods/2018-01-16/5a5dafdcd8748.png"},{"id":"1550","gid":"15","status":"1","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img":"/Public/uploads/goods/2018-01-16/5a5dafdcd6fd8.png,/Public/uploads/goods/2018-01-16/5a5dafdcd8748.png"}]
+     * dorders : [{"id":"1547","gid":"15","status":"1","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img_feng":"/Public/uploads/goods/2018-01-16/5a5dafdcc52b0.png","status_s":"待付款"},{"id":"1548","gid":"15","status":"3","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img_feng":"/Public/uploads/goods/2018-01-16/5a5dafdcc52b0.png","status_s":"待收货"},{"id":"1549","gid":"15","status":"2","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img_feng":"/Public/uploads/goods/2018-01-16/5a5dafdcc52b0.png","status_s":"已付款"},{"id":"1550","gid":"15","status":"1","num":"1","totalprice":"0.01","price":"0.01","title":"阿萨德发","img_feng":"/Public/uploads/goods/2018-01-16/5a5dafdcc52b0.png","status_s":"待付款"}]
      */
 
     private int status;
@@ -44,7 +44,8 @@ public class AgentDllistBean {
          * totalprice : 0.01
          * price : 0.01
          * title : 阿萨德发
-         * img : /Public/uploads/goods/2018-01-16/5a5dafdcd6fd8.png,/Public/uploads/goods/2018-01-16/5a5dafdcd8748.png
+         * img_feng : /Public/uploads/goods/2018-01-16/5a5dafdcc52b0.png
+         * status_s : 待付款
          */
 
         private String id;
@@ -54,7 +55,8 @@ public class AgentDllistBean {
         private String totalprice;
         private String price;
         private String title;
-        private String img;
+        private String img_feng;
+        private String status_s;
 
         public String getId() {
             return id;
@@ -112,12 +114,20 @@ public class AgentDllistBean {
             this.title = title;
         }
 
-        public String getImg() {
-            return img;
+        public String getImg_feng() {
+            return img_feng;
         }
 
-        public void setImg(String img) {
-            this.img = img;
+        public void setImg_feng(String img_feng) {
+            this.img_feng = img_feng;
+        }
+
+        public String getStatus_s() {
+            return status_s;
+        }
+
+        public void setStatus_s(String status_s) {
+            this.status_s = status_s;
         }
     }
 }
