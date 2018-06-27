@@ -11,15 +11,24 @@ import java.util.List;
  */
 public class OrderListsBean {
 
+
     /**
+     * stat :
      * status : 1
-     * msg : [{"id":"45","totalprice":"0.01","addtime":"1528702044","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"44","totalprice":"0.01","addtime":"1528702035","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"43","totalprice":"0.01","addtime":"1528701744","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"42","totalprice":"0.01","addtime":"1528701594","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"41","totalprice":"0.01","addtime":"1528701427","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"39","totalprice":"0.01","addtime":"1528698301","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"38","totalprice":"0.01","addtime":"1528698217","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"37","totalprice":"0.01","addtime":"1528698076","status":"2","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"36","totalprice":"0.01","addtime":"1528697965","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"35","totalprice":"0.01","addtime":"1528697932","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"34","totalprice":"0.01","addtime":"1528697809","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"33","totalprice":"0.01","addtime":"1528697788","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"32","totalprice":"0.01","addtime":"1528697562","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"31","totalprice":"0.01","addtime":"1528696949","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"30","totalprice":"0.01","addtime":"1528695865","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"29","totalprice":"0.01","addtime":"1528694961","status":"2","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"28","totalprice":"0.01","addtime":"1528690822","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"27","totalprice":"0.01","addtime":"1528687553","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"26","totalprice":"0.01","addtime":"1528687211","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]},{"id":"25","totalprice":"0.01","addtime":"1528687085","status":"1","gid":"19","nid":"19","val":"标准装（1盒）","price":"0.01","amount":"1","ocount":1,"res":[{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]}]
-     * fy : 1
+     * order : [{"status":"1","id":"1607","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627155358868630","addtime":"1530086038","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1606","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627153250665246","addtime":"1530084770","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1605","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627144117395065","addtime":"1530081677","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1604","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627144103901287","addtime":"1530081663","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1603","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627144052877420","addtime":"1530081652","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1602","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627144042780053","addtime":"1530081642","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1601","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627143928487460","addtime":"1530081568","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1600","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627143843417559","addtime":"1530081523","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1599","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627143839142764","addtime":"1530081519","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"},{"status":"1","id":"1598","gid":"43","uid":"22625","totalprice":"15.00","num":"1","orderid":"20180627143829689196","addtime":"1530081509","did":"22624","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","title":"瑞和宝（瑞银信手刷）","price":"0.00","status_s":"待付款"}]
      */
 
+    private String stat;
     private int status;
-    private int fy;
-    private List<MsgBean> msg;
+    private List<OrderBean> order;
+
+    public String getStat() {
+        return stat;
+    }
+
+    public void setStat(String stat) {
+        this.stat = stat;
+    }
 
     public int getStatus() {
         return status;
@@ -29,72 +38,44 @@ public class OrderListsBean {
         this.status = status;
     }
 
-    public int getFy() {
-        return fy;
+    public List<OrderBean> getOrder() {
+        return order;
     }
 
-    public void setFy(int fy) {
-        this.fy = fy;
+    public void setOrder(List<OrderBean> order) {
+        this.order = order;
     }
 
-    public List<MsgBean> getMsg() {
-        return msg;
-    }
-
-    public void setMsg(List<MsgBean> msg) {
-        this.msg = msg;
-    }
-
-    public static class MsgBean {
+    public static class OrderBean {
         /**
-         * id : 45
-         * totalprice : 0.01
-         * addtime : 1528702044
          * status : 1
-         * gid : 19
-         * nid : 19
-         * val : 标准装（1盒）
-         * price : 0.01
-         * amount : 1
-         * ocount : 1
-         * res : [{"gid":"19","gname":"善存 多维元素片(29) 60片 centrum 补充维生素及矿物质","img":"/Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg","guige":"标准装（1盒）","price":"0.01","amount":"1"}]
+         * id : 1607
+         * gid : 43
+         * uid : 22625
+         * totalprice : 15.00
+         * num : 1
+         * orderid : 20180627155358868630
+         * addtime : 1530086038
+         * did : 22624
+         * img_feng : /Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg
+         * title : 瑞和宝（瑞银信手刷）
+         * price : 0.00
+         * status_s : 待付款
          */
 
-        private String id;
-        private String totalprice;
-        private String addtime;
         private String status;
+        private String id;
         private String gid;
-        private String nid;
-        private String val;
+        private String uid;
+        private String totalprice;
+        private String num;
+        private String orderid;
+        private String addtime;
+        private String did;
+        private String img_feng;
+        private String title;
         private String price;
-        private String amount;
-        private int ocount;
-        private List<ResBean> res;
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-        public String getTotalprice() {
-            return totalprice;
-        }
-
-        public void setTotalprice(String totalprice) {
-            this.totalprice = totalprice;
-        }
-
-        public String getAddtime() {
-            return addtime;
-        }
-
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
-        }
+        private String status_s;
 
         public String getStatus() {
             return status;
@@ -102,6 +83,14 @@ public class OrderListsBean {
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
         }
 
         public String getGid() {
@@ -112,20 +101,68 @@ public class OrderListsBean {
             this.gid = gid;
         }
 
-        public String getNid() {
-            return nid;
+        public String getUid() {
+            return uid;
         }
 
-        public void setNid(String nid) {
-            this.nid = nid;
+        public void setUid(String uid) {
+            this.uid = uid;
         }
 
-        public String getVal() {
-            return val;
+        public String getTotalprice() {
+            return totalprice;
         }
 
-        public void setVal(String val) {
-            this.val = val;
+        public void setTotalprice(String totalprice) {
+            this.totalprice = totalprice;
+        }
+
+        public String getNum() {
+            return num;
+        }
+
+        public void setNum(String num) {
+            this.num = num;
+        }
+
+        public String getOrderid() {
+            return orderid;
+        }
+
+        public void setOrderid(String orderid) {
+            this.orderid = orderid;
+        }
+
+        public String getAddtime() {
+            return addtime;
+        }
+
+        public void setAddtime(String addtime) {
+            this.addtime = addtime;
+        }
+
+        public String getDid() {
+            return did;
+        }
+
+        public void setDid(String did) {
+            this.did = did;
+        }
+
+        public String getImg_feng() {
+            return img_feng;
+        }
+
+        public void setImg_feng(String img_feng) {
+            this.img_feng = img_feng;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
         }
 
         public String getPrice() {
@@ -136,94 +173,12 @@ public class OrderListsBean {
             this.price = price;
         }
 
-        public String getAmount() {
-            return amount;
+        public String getStatus_s() {
+            return status_s;
         }
 
-        public void setAmount(String amount) {
-            this.amount = amount;
-        }
-
-        public int getOcount() {
-            return ocount;
-        }
-
-        public void setOcount(int ocount) {
-            this.ocount = ocount;
-        }
-
-        public List<ResBean> getRes() {
-            return res;
-        }
-
-        public void setRes(List<ResBean> res) {
-            this.res = res;
-        }
-
-        public static class ResBean {
-            /**
-             * gid : 19
-             * gname : 善存 多维元素片(29) 60片 centrum 补充维生素及矿物质
-             * img : /Public/uploads/goods/2018-05-28/2018_05_28_09_33_53_82652.jpg
-             * guige : 标准装（1盒）
-             * price : 0.01
-             * amount : 1
-             */
-
-            private String gid;
-            private String gname;
-            private String img;
-            private String guige;
-            private String price;
-            private String amount;
-
-            public String getGid() {
-                return gid;
-            }
-
-            public void setGid(String gid) {
-                this.gid = gid;
-            }
-
-            public String getGname() {
-                return gname;
-            }
-
-            public void setGname(String gname) {
-                this.gname = gname;
-            }
-
-            public String getImg() {
-                return img;
-            }
-
-            public void setImg(String img) {
-                this.img = img;
-            }
-
-            public String getGuige() {
-                return guige;
-            }
-
-            public void setGuige(String guige) {
-                this.guige = guige;
-            }
-
-            public String getPrice() {
-                return price;
-            }
-
-            public void setPrice(String price) {
-                this.price = price;
-            }
-
-            public String getAmount() {
-                return amount;
-            }
-
-            public void setAmount(String amount) {
-                this.amount = amount;
-            }
+        public void setStatus_s(String status_s) {
+            this.status_s = status_s;
         }
     }
 }

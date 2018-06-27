@@ -1,6 +1,7 @@
 package com.yinmeng.Activity;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,6 +26,7 @@ import com.yinmeng.Adapter.GoodLoopAdapter;
 import com.yinmeng.App;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.GoodsDetailBean;
+import com.yinmeng.Bean.GoodsXiadanBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DensityUtils;
 import com.yinmeng.Utils.EasyToast;
@@ -39,6 +41,7 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.yinmeng.R.id.tv_addshop;
 import static com.yinmeng.R.id.tv_feilv;
 import static com.yinmeng.R.id.tv_yajin;
 
@@ -67,7 +70,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
     TextView tvYifukuan;
     @BindView(R.id.wb)
     WebView wb;
-    @BindView(R.id.tv_addshop)
+    @BindView(tv_addshop)
     TextView tvAddshop;
     @BindView(R.id.SimpleDraweeView)
     com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
@@ -143,6 +146,17 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
                     i = i - 1;
                 }
                 btnShuliang.setText(String.valueOf(i));
+            }
+        });
+
+        tvAddshop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Utils.isConnected(context)) {
+                    goodsXiadan();
+                } else {
+                    EasyToast.showShort(context, R.string.Networkexception);
+                }
             }
         });
 
@@ -235,6 +249,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         params.put("pwd", UrlUtils.KEY);
         params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("num", "1");
         Log.e("PriceDetailsActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/detail", "goods/detail", params, new VolleyInterface(context) {
             @Override
@@ -276,6 +291,50 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
             }
         });
     }
+
+
+    /**
+     * 产品下单
+     */
+    private void goodsXiadan() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("num", "1");
+        Log.e("PriceDetailsActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/xiadan", "goods/xiadan", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("PriceDetailsActivity", result);
+                try {
+                    dialog.dismiss();
+                    GoodsXiadanBean goodsXiadanBean = new Gson().fromJson(result, GoodsXiadanBean.class);
+                    if (1 == goodsXiadanBean.getStatus()) {
+                        startActivity(new Intent(context, OrderActivity.class).putExtra("order", result));
+                    } else if (0 == goodsXiadanBean.getStatus()) {
+                        EasyToast.showShort(context, "请先添加收货地址");
+                        startActivity(new Intent(context, AddressActivitry.class).putExtra("order", result));
+                    } else {
+                        EasyToast.showShort(context, "购买失败，请联系管理员");
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    dialog.dismiss();
+                    e.printStackTrace();
+                    EasyToast.showShort(context, R.string.Abnormalserver);
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                EasyToast.showShort(context, R.string.Abnormalserver);
+            }
+        });
+    }
+
 
     @Override
     public void onBackPressed() {

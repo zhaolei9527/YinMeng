@@ -175,6 +175,28 @@
             android:name="com.yinmeng.Activity.WoDeTuanDuiActivity"
             android:launchMode="singleTop"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="com.yinmeng.Activity.POSShopListActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="com.yinmeng.Activity.LianXiWoMenActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="com.yinmeng.Activity.GuanYuWoMenActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+        <activity
+            android:name="com.yinmeng.Activity.OrderListActivity"
+            android:launchMode="singleTop"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
+
         <activity
             android:name="com.yinmeng.wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

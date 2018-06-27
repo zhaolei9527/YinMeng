@@ -21,6 +21,7 @@ import com.yinmeng.Activity.DaiLiShangActivity;
 import com.yinmeng.Activity.JiJuActivity;
 import com.yinmeng.Activity.MainActivity;
 import com.yinmeng.Activity.MyMessageActivity;
+import com.yinmeng.Activity.POSShopListActivity;
 import com.yinmeng.Activity.TuiGuangShouYiActivity;
 import com.yinmeng.Bean.HomeBean;
 import com.yinmeng.R;
@@ -46,6 +47,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
     private HomeBean homeBean;
 
     private ArrayList<HomeBean.GoodsBean> datas = new ArrayList();
+    private myHomeTypeAdadapter adapter;
 
     public ArrayList<HomeBean.GoodsBean> getDatas() {
         return datas;
@@ -103,13 +105,14 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 isfirst = !isfirst;
             } else {
             }
-            holder.gv_home_type.setAdapter(new myHomeTypeAdadapter());
+            adapter = new myHomeTypeAdadapter();
+            holder.gv_home_type.setAdapter(adapter);
             holder.gv_home_type.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                     switch (i) {
                         case 0:
-                            EasyToast.showShort(mContext, "正在开发中");
+                            mContext.startActivity(new Intent(mContext, POSShopListActivity.class));
                             break;
                         case 1:
                             String is_dai = (String) SpUtil.get(mContext, "is_dai", "0");

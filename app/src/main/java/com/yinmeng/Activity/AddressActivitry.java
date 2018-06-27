@@ -210,6 +210,9 @@ public class AddressActivitry extends BaseActivity implements View.OnClickListen
                                 item_address.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
+                                        TextView tv_name = (TextView) v.findViewById(R.id.tv_name);
+                                        TextView tv_phone = (TextView) v.findViewById(R.id.tv_phone);
+                                        TextView tv_address = (TextView) v.findViewById(R.id.tv_address);
                                         setResult(200, new Intent()
                                                 .putExtra("name", tv_name.getText())
                                                 .putExtra("phone", tv_phone.getText())

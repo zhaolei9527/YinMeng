@@ -19,7 +19,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.yinmeng.App;
 import com.yinmeng.Base.BaseActivity;
-import com.yinmeng.Bean.OrderOrderBean;
+import com.yinmeng.Bean.GoodsXiadanBean;
+import com.yinmeng.Bean.GoodsZhiFuBean;
 import com.yinmeng.Bean.OrderYueBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
@@ -65,9 +66,11 @@ public class OrderActivity extends BaseActivity {
     private int addressCode = 200;
     private RelativeLayout rl_yue;
     private String addressID = "";
-    private OrderOrderBean orderOrderBean;
-    private String cart_id;
-    private String amount_list;
+    private GoodsXiadanBean goodsXiadanBean;
+    private CheckBox Choosedweixin;
+    private CheckBox Choosedalipay;
+    // private String cart_id;
+    // private String amount_list;
 
     @Override
     protected void onDestroy() {
@@ -130,6 +133,8 @@ public class OrderActivity extends BaseActivity {
         mTvTotal = (TextView) findViewById(R.id.tv_total);
         mShopnow = (TextView) findViewById(R.id.shopnow);
         mTvMoney = (TextView) findViewById(tv_money);
+        Choosedweixin = (CheckBox) findViewById(R.id.Choosedweixin);
+        Choosedalipay = (CheckBox) findViewById(R.id.Choosedalipay);
     }
 
     @Override
@@ -155,7 +160,14 @@ public class OrderActivity extends BaseActivity {
                     EasyToast.showShort(context, "请填写收货地址");
                     return;
                 }
-                orderOrder(addressID);
+
+                if (0 == Double.parseDouble(goodsXiadanBean.getOrder().getTotalprice())) {
+                    goodsZhifu(addressID);
+                } else {
+                    dialog.dismiss();
+                    EasyToast.showShort(context, "在线支付待审核");
+                }
+
             }
         });
 
@@ -168,27 +180,48 @@ public class OrderActivity extends BaseActivity {
                 if (isChecked) {
                     mChoosedBalance.setChecked(true);
                     mChoosedNtegral.setChecked(false);
-                    double v = orderOrderBean.getOrdertotal() - yuev;
+                    double v = Double.parseDouble(goodsXiadanBean.getOrder().getTotalprice()) - yuev;
                     if (v < 0) {
                         v = 0;
                     }
                     mTvMoney.setText("￥" + Utils.formatDouble(v));
                 } else {
                     if (!mChoosedNtegral.isChecked()) {
-                        double v = orderOrderBean.getOrdertotal();
+                        double v = Double.parseDouble(goodsXiadanBean.getOrder().getTotalprice());
                         mTvMoney.setText("￥" + Utils.formatDouble(v));
                     }
                 }
             }
         });
+
+        Choosedalipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Choosedalipay.isChecked()) {
+                    Choosedweixin.setChecked(false);
+                } else {
+                    Choosedweixin.setChecked(true);
+                }
+            }
+        });
+
+        Choosedweixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Choosedweixin.isChecked()) {
+                    Choosedalipay.setChecked(false);
+                } else {
+                    Choosedalipay.setChecked(true);
+                }
+            }
+        });
+
     }
 
     @Override
     protected void initData() {
         String order = getIntent().getStringExtra("order");
-        cart_id = getIntent().getStringExtra("cart_id");
-        amount_list = getIntent().getStringExtra("amount_list");
-        orderOrderBean = new Gson().fromJson(order, OrderOrderBean.class);
+        goodsXiadanBean = new Gson().fromJson(order, GoodsXiadanBean.class);
         yue = (String) SpUtil.get(context, "Money", "");
         if (!TextUtils.isEmpty(yue)) {
             yuev = Double.parseDouble(yue);
@@ -196,38 +229,31 @@ public class OrderActivity extends BaseActivity {
                 rl_yue.setVisibility(View.GONE);
             } else {
                 rl_yue.setVisibility(View.VISIBLE);
-
-                if (orderOrderBean.getOrdertotal() > yuev) {
+                if (Double.parseDouble(goodsXiadanBean.getOrder().getTotalprice()) > yuev) {
                     mTvBalance.setText(Utils.formatDouble(yuev));
                 } else {
-                    mTvBalance.setText(Utils.formatDouble(orderOrderBean.getOrdertotal()));
+                    mTvBalance.setText(goodsXiadanBean.getOrder().getTotalprice());
                 }
-
             }
         } else {
             rl_yue.setVisibility(View.GONE);
         }
 
-        mTvPrice.setText("￥" + orderOrderBean.getGoodstotal());
-        mTvTotal.setText("￥" + orderOrderBean.getOrdertotal());
-        mTvMoney.setText("￥" + orderOrderBean.getOrdertotal());
-        mTvFreight.setText("￥" + orderOrderBean.getYunfei());
+        mTvPrice.setText("￥" + goodsXiadanBean.getOrder().getPrice());
+        mTvTotal.setText("￥" + goodsXiadanBean.getOrder().getTotalprice());
+        mTvMoney.setText("￥" + goodsXiadanBean.getOrder().getTotalprice());
+        mTvFreight.setText("￥" + goodsXiadanBean.getOrder().getYunfei());
 
-        if (1 == orderOrderBean.getAddr()) {
+        if (goodsXiadanBean.getOrder() != null) {
             mTvAddDizhi.setVisibility(View.INVISIBLE);
             mTvName.setVisibility(View.VISIBLE);
-            mTvName.setText(orderOrderBean.getAddress().getName());
+            mTvName.setText(goodsXiadanBean.getOrder().getRecename());
             mTvDizhi.setVisibility(View.VISIBLE);
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(orderOrderBean.getAddress().getSheng());
-            stringBuilder.append(orderOrderBean.getAddress().getShi());
-            stringBuilder.append(orderOrderBean.getAddress().getXian());
-            stringBuilder.append(orderOrderBean.getAddress().getAddress());
-            mTvDizhi.setText(stringBuilder.toString());
+            mTvDizhi.setText(goodsXiadanBean.getOrder().getReceadd());
             mTvPhone.setVisibility(View.VISIBLE);
-            mTvPhone.setText(orderOrderBean.getAddress().getTel());
+            mTvPhone.setText(goodsXiadanBean.getOrder().getRecetel());
             //地址id
-            addressID = orderOrderBean.getAddress().getId();
+            addressID = goodsXiadanBean.getOrder().getAid();
         } else {
             mTvAddDizhi.setVisibility(View.VISIBLE);
             mTvName.setVisibility(View.INVISIBLE);
@@ -236,20 +262,16 @@ public class OrderActivity extends BaseActivity {
         }
 
         Log.e("OrderActivity", order);
-        for (int i = 0; i < orderOrderBean.getGoods().size(); i++) {
-            View inflate = View.inflate(context, R.layout.item_oreder_layout, null);
-            SimpleDraweeView simpleDraweeView = (SimpleDraweeView) inflate.findViewById(R.id.SimpleDraweeView);
-            simpleDraweeView.setImageURI(UrlUtils.URL + orderOrderBean.getGoods().get(i).getImgurl());
-            TextView tv_type = (TextView) inflate.findViewById(R.id.tv_type);
-            tv_type.setText(orderOrderBean.getGoods().get(i).getVal());
-            TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
-            tv_title.setText(orderOrderBean.getGoods().get(i).getTitle());
-            TextView tv_classify = (TextView) inflate.findViewById(R.id.tv_classify);
-            tv_classify.setText("￥" + orderOrderBean.getGoods().get(i).getPrice());
-            TextView tv_size = (TextView) inflate.findViewById(R.id.tv_size);
-            tv_size.setText("×" + orderOrderBean.getGoods().get(i).getAmount());
-            ll_oreders.addView(inflate);
-        }
+        View inflate = View.inflate(context, R.layout.item_oreder_layout, null);
+        SimpleDraweeView simpleDraweeView = (SimpleDraweeView) inflate.findViewById(R.id.SimpleDraweeView);
+        simpleDraweeView.setImageURI(UrlUtils.URL + goodsXiadanBean.getGdata().getImg_feng());
+        TextView tv_title = (TextView) inflate.findViewById(R.id.tv_title);
+        tv_title.setText(goodsXiadanBean.getGdata().getTitle());
+        TextView tv_classify = (TextView) inflate.findViewById(R.id.tv_classify);
+        tv_classify.setText("￥" + goodsXiadanBean.getGdata().getPrice());
+        TextView tv_size = (TextView) inflate.findViewById(R.id.tv_size);
+        tv_size.setText("×" + goodsXiadanBean.getOrder().getNum());
+        ll_oreders.addView(inflate);
         if (Utils.isConnected(context)) {
             dialog = Utils.showLoadingDialog(context);
         } else {
@@ -270,8 +292,8 @@ public class OrderActivity extends BaseActivity {
         } else {
             params.put("is_yue", "0");
         }
-        params.put("cart_id", cart_id);
-        params.put("amount_list", amount_list);
+        //params.put("cart_id", cart_id);
+        //params.put("amount_list", amount_list);
         Log.e("OrderActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/yue", "order/yue", params, new VolleyInterface(context) {
             @Override
@@ -292,6 +314,48 @@ public class OrderActivity extends BaseActivity {
                                     .putExtra("orderid", orderYueBean.getOid()));
                             finish();
                         }
+                    } else {
+                        Toast.makeText(context, "订单异常", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    /**
+     * 订单支付，免费
+     */
+    private void goodsZhifu(String addressId) {
+        HashMap<String, String> params = new HashMap<>(5);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("oid", goodsXiadanBean.getOrder().getId());
+        params.put("aid", addressId);
+        Log.e("OrderActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/zhifu", "goods/zhifu", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                dialog.dismiss();
+                Log.e("OrderActivity", result);
+                try {
+                    GoodsZhiFuBean goodsZhiFuBean = new Gson().fromJson(result, GoodsZhiFuBean.class);
+                    if (1 == goodsZhiFuBean.getStatus()) {
+                        EasyToast.showShort(context, goodsZhiFuBean.getMsg());
+                        startActivity(new Intent(context, GoodPayActivity.class)
+                                .putExtra("orderid", goodsZhiFuBean.getOrder().getId())
+                                .putExtra("type", "good"));
+                        finish();
                     } else {
                         Toast.makeText(context, "订单异常", Toast.LENGTH_SHORT).show();
                     }

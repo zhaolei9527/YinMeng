@@ -1,26 +1,33 @@
 package com.yinmeng.Bean;
 
-import java.util.List;
-
 /**
- * sakura.liangdinvshen.Bean
+ * com.yinmeng.Bean
  *
  * @author 赵磊
- * @date 2017/12/18
+ * @date 2018/6/27
  * 功能描述：
  */
-public class OrderDetailBean {
-
+public class GoodsZhiFuBean {
 
     /**
+     * order : {"id":"1593","orderid":"20180627141646918646","uid":"22625","gid":"37","status":"1","addtime":"1530080206","paytime":null,"shiptime":null,"rectime":null,"exp":null,"expnum":null,"shiplog":null,"price":"0.00","yunfei":"0.00","totalprice":"0.00","recename":"知道这些","recetel":"17629345001","receadd":"河南省 郑州市 中原区 谢谢吵过架飞机场","num":"1","did":"22624","cid":null,"type":null,"kid":null}
      * status : 1
-     * odata : {"id":"1595","orderid":"20180627142142310250","uid":"22625","gid":"37","status":"2","addtime":"1530080502","paytime":null,"shiptime":null,"rectime":null,"exp":null,"expnum":null,"shiplog":null,"price":"0.00","yunfei":"0.00","totalprice":"0.00","recename":"知道这些","recetel":"17629345001","receadd":"河南省 郑州市 中原区 谢谢吵过架飞机场","num":"1","did":"22624","cid":null,"type":null,"kid":null,"title":"各大银行信用官网卡办理","img_feng":"/Public/uploads/goods/2018-02-01/5a72bc06cff66.jpg","tab":"","fei":"0","paizhao":"0","gz_num":"6266","gprice":"0.00","s":"待发货"}
-     * test_array : ["下单时间 : 2018-06-27 14:21:42"]
+     * url : /about/order.html
+     * msg : 支付成功
      */
 
+    private OrderBean order;
     private int status;
-    private OdataBean odata;
-    private List<String> test_array;
+    private String url;
+    private String msg;
+
+    public OrderBean getOrder() {
+        return order;
+    }
+
+    public void setOrder(OrderBean order) {
+        this.order = order;
+    }
 
     public int getStatus() {
         return status;
@@ -30,30 +37,30 @@ public class OrderDetailBean {
         this.status = status;
     }
 
-    public OdataBean getOdata() {
-        return odata;
+    public String getUrl() {
+        return url;
     }
 
-    public void setOdata(OdataBean odata) {
-        this.odata = odata;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public List<String> getTest_array() {
-        return test_array;
+    public String getMsg() {
+        return msg;
     }
 
-    public void setTest_array(List<String> test_array) {
-        this.test_array = test_array;
+    public void setMsg(String msg) {
+        this.msg = msg;
     }
 
-    public static class OdataBean {
+    public static class OrderBean {
         /**
-         * id : 1595
-         * orderid : 20180627142142310250
+         * id : 1593
+         * orderid : 20180627141646918646
          * uid : 22625
          * gid : 37
-         * status : 2
-         * addtime : 1530080502
+         * status : 1
+         * addtime : 1530080206
          * paytime : null
          * shiptime : null
          * rectime : null
@@ -71,14 +78,6 @@ public class OrderDetailBean {
          * cid : null
          * type : null
          * kid : null
-         * title : 各大银行信用官网卡办理
-         * img_feng : /Public/uploads/goods/2018-02-01/5a72bc06cff66.jpg
-         * tab :
-         * fei : 0
-         * paizhao : 0
-         * gz_num : 6266
-         * gprice : 0.00
-         * s : 待发货
          */
 
         private String id;
@@ -87,12 +86,12 @@ public class OrderDetailBean {
         private String gid;
         private String status;
         private String addtime;
-        private String paytime;
-        private String shiptime;
-        private String rectime;
-        private String exp;
-        private String expnum;
-        private String shiplog;
+        private Object paytime;
+        private Object shiptime;
+        private Object rectime;
+        private Object exp;
+        private Object expnum;
+        private Object shiplog;
         private String price;
         private String yunfei;
         private String totalprice;
@@ -101,17 +100,9 @@ public class OrderDetailBean {
         private String receadd;
         private String num;
         private String did;
-        private String cid;
-        private String type;
-        private String kid;
-        private String title;
-        private String img_feng;
-        private String tab;
-        private String fei;
-        private String paizhao;
-        private String gz_num;
-        private String gprice;
-        private String s;
+        private Object cid;
+        private Object type;
+        private Object kid;
 
         public String getId() {
             return id;
@@ -161,51 +152,51 @@ public class OrderDetailBean {
             this.addtime = addtime;
         }
 
-        public String getPaytime() {
+        public Object getPaytime() {
             return paytime;
         }
 
-        public void setPaytime(String paytime) {
+        public void setPaytime(Object paytime) {
             this.paytime = paytime;
         }
 
-        public String getShiptime() {
+        public Object getShiptime() {
             return shiptime;
         }
 
-        public void setShiptime(String shiptime) {
+        public void setShiptime(Object shiptime) {
             this.shiptime = shiptime;
         }
 
-        public String getRectime() {
+        public Object getRectime() {
             return rectime;
         }
 
-        public void setRectime(String rectime) {
+        public void setRectime(Object rectime) {
             this.rectime = rectime;
         }
 
-        public String getExp() {
+        public Object getExp() {
             return exp;
         }
 
-        public void setExp(String exp) {
+        public void setExp(Object exp) {
             this.exp = exp;
         }
 
-        public String getExpnum() {
+        public Object getExpnum() {
             return expnum;
         }
 
-        public void setExpnum(String expnum) {
+        public void setExpnum(Object expnum) {
             this.expnum = expnum;
         }
 
-        public String getShiplog() {
+        public Object getShiplog() {
             return shiplog;
         }
 
-        public void setShiplog(String shiplog) {
+        public void setShiplog(Object shiplog) {
             this.shiplog = shiplog;
         }
 
@@ -273,92 +264,28 @@ public class OrderDetailBean {
             this.did = did;
         }
 
-        public String getCid() {
+        public Object getCid() {
             return cid;
         }
 
-        public void setCid(String cid) {
+        public void setCid(Object cid) {
             this.cid = cid;
         }
 
-        public String getType() {
+        public Object getType() {
             return type;
         }
 
-        public void setType(String type) {
+        public void setType(Object type) {
             this.type = type;
         }
 
-        public String getKid() {
+        public Object getKid() {
             return kid;
         }
 
-        public void setKid(String kid) {
+        public void setKid(Object kid) {
             this.kid = kid;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public void setTitle(String title) {
-            this.title = title;
-        }
-
-        public String getImg_feng() {
-            return img_feng;
-        }
-
-        public void setImg_feng(String img_feng) {
-            this.img_feng = img_feng;
-        }
-
-        public String getTab() {
-            return tab;
-        }
-
-        public void setTab(String tab) {
-            this.tab = tab;
-        }
-
-        public String getFei() {
-            return fei;
-        }
-
-        public void setFei(String fei) {
-            this.fei = fei;
-        }
-
-        public String getPaizhao() {
-            return paizhao;
-        }
-
-        public void setPaizhao(String paizhao) {
-            this.paizhao = paizhao;
-        }
-
-        public String getGz_num() {
-            return gz_num;
-        }
-
-        public void setGz_num(String gz_num) {
-            this.gz_num = gz_num;
-        }
-
-        public String getGprice() {
-            return gprice;
-        }
-
-        public void setGprice(String gprice) {
-            this.gprice = gprice;
-        }
-
-        public String getS() {
-            return s;
-        }
-
-        public void setS(String s) {
-            this.s = s;
         }
     }
 }

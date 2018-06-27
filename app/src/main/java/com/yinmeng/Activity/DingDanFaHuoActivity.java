@@ -1,6 +1,7 @@
 package com.yinmeng.Activity;
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,9 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.Gson;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.AgentDlorderDetailBean;
+import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DateUtils;
 import com.yinmeng.Utils.EasyToast;
@@ -24,6 +27,7 @@ import com.yinmeng.Utils.Utils;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -59,13 +63,25 @@ public class DingDanFaHuoActivity extends BaseActivity {
     TextView tvShouhuorenPhone;
     @BindView(R.id.tv_shouhuoren_address)
     TextView tvShouhuorenAddress;
-    @BindView(R.id.et_kuaidi_name)
-    EditText etKuaidiName;
+    @BindView(R.id.tv_kuaidi_name)
+    TextView tvKuaidiName;
     @BindView(R.id.et_kuaidi_num)
     EditText etKuaidiNum;
     @BindView(R.id.btn_submit)
     Button btnSubmit;
     private Dialog dialog;
+    private ArrayList<String> wuLiuList = new ArrayList<>();
+
+    private String kid = "";
+    private AgentDlorderDetailBean agentDlorderDetailBean;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 
     @Override
     protected int setthislayout() {
@@ -91,11 +107,11 @@ public class DingDanFaHuoActivity extends BaseActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String KuaidiName = etKuaidiName.getText().toString().trim();
+                String KuaidiName = tvKuaidiName.getText().toString().trim();
                 String KuaidiNum = etKuaidiNum.getText().toString().trim();
 
                 if (TextUtils.isEmpty(KuaidiName)) {
-                    EasyToast.showShort(context, "请输入快递名称");
+                    EasyToast.showShort(context, "请选择快递名称");
                     return;
                 }
 
@@ -103,7 +119,12 @@ public class DingDanFaHuoActivity extends BaseActivity {
                     EasyToast.showShort(context, "请输入快递单号");
                     return;
                 }
-
+                if (Utils.isConnected(context)) {
+                    dialog.show();
+                    doDlorder();
+                } else {
+                    EasyToast.showShort(context, R.string.Networkexception);
+                }
             }
         });
     }
@@ -117,13 +138,6 @@ public class DingDanFaHuoActivity extends BaseActivity {
         } else {
             EasyToast.showShort(context, R.string.Networkexception);
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 
     /**
@@ -141,7 +155,7 @@ public class DingDanFaHuoActivity extends BaseActivity {
                 dialog.dismiss();
                 Log.e("DingDanFaHuoActivity", result);
                 try {
-                    AgentDlorderDetailBean agentDlorderDetailBean = new Gson().fromJson(result, AgentDlorderDetailBean.class);
+                    agentDlorderDetailBean = new Gson().fromJson(result, AgentDlorderDetailBean.class);
                     if (1 == agentDlorderDetailBean.getStatus()) {
                         SimpleDraweeView.setImageURI(UrlUtils.URL + agentDlorderDetailBean.getDorder().getImg_feng());
                         tvTitle.setText(agentDlorderDetailBean.getDorder().getTitle());
@@ -154,16 +168,23 @@ public class DingDanFaHuoActivity extends BaseActivity {
                         tvXiadanren.setText("下单人:" + agentDlorderDetailBean.getDorder().getNi_name());
 
                         if (!TextUtils.isEmpty(agentDlorderDetailBean.getDorder().getExp())) {
-                            etKuaidiName.setText(agentDlorderDetailBean.getDorder().getExp());
+                            tvKuaidiName.setText(agentDlorderDetailBean.getDorder().getExp());
                             etKuaidiNum.setText(agentDlorderDetailBean.getDorder().getExpnum());
-                            etKuaidiName.setFocusable(false);
+                            tvKuaidiName.setFocusable(false);
                             etKuaidiNum.setFocusable(false);
                             btnSubmit.setFocusable(false);
                         } else {
+                            for (int i = 0; i < agentDlorderDetailBean.getList().size(); i++) {
+                                wuLiuList.add(agentDlorderDetailBean.getList().get(i).getName());
+                            }
+                            tvKuaidiName.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    ShowPickerView_fuwu();
+                                }
+                            });
 
                         }
-
-
                     } else {
                         EasyToast.showShort(context, R.string.hasError);
                     }
@@ -181,6 +202,73 @@ public class DingDanFaHuoActivity extends BaseActivity {
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    /**
+     * 订单信息获取
+     */
+    private void doDlorder() {
+        HashMap<String, String> params = new HashMap<>(9);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("oid", getIntent().getStringExtra("id"));
+        params.put("kid", kid);
+        params.put("expnum ", etKuaidiNum.getText().toString().trim());
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("DingDanFaHuoActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/do_dlorder", "agent/do_dlorder", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                dialog.dismiss();
+                Log.e("DingDanFaHuoActivity", result);
+                try {
+                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
+                    if (1 == codeBean.getStatus()) {
+                        EasyToast.showShort(context, codeBean.getMsg());
+                        btnSubmit.setText("已发货");
+                        btnSubmit.setFocusable(false);
+                    } else {
+                        EasyToast.showShort(context, codeBean.getMsg());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                dialog.dismiss();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+    /**
+     * 弹出选择器
+     */
+    private void ShowPickerView_fuwu() {
+        OptionsPickerView pvOptions = new OptionsPickerView.Builder(this, new OptionsPickerView.OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                tvKuaidiName.setText(wuLiuList.get(options1));
+                kid = agentDlorderDetailBean.getList().get(options1).getId();
+            }
+        })
+                .setTitleBgColor(getResources().getColor(R.color.bgtitle))
+                .setCancelColor(getResources().getColor(R.color.text))
+                .setSubmitColor(getResources().getColor(R.color.text))
+                .setTitleText("物流选择")
+                .setTitleColor(getResources().getColor(R.color.text))
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(18)
+                .build();
+        pvOptions.setPicker(wuLiuList);//三级选择器
+        pvOptions.show();
+
     }
 
 }

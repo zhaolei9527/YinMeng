@@ -17,7 +17,10 @@ import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.yinmeng.Activity.AddressActivitry;
 import com.yinmeng.Activity.ChangePasswordActivity;
+import com.yinmeng.Activity.GuanYuWoMenActivity;
+import com.yinmeng.Activity.LianXiWoMenActivity;
 import com.yinmeng.Activity.MyMessageActivity;
+import com.yinmeng.Activity.OrderListActivity;
 import com.yinmeng.Activity.TiXianGuanLiActivity;
 import com.yinmeng.Activity.TiXianListActivity;
 import com.yinmeng.Activity.TuiGuangActivity;
@@ -175,6 +178,15 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 break;
             case R.id.ll_tixianjilu:
                 startActivity(new Intent(context, TiXianListActivity.class));
+                break;
+            case R.id.ll_lianxiwomen:
+                startActivity(new Intent(context, LianXiWoMenActivity.class));
+                break;
+            case R.id.ll_guangyuwm:
+                startActivity(new Intent(context, GuanYuWoMenActivity.class));
+                break;
+            case R.id.ll_wdedingdan:
+                startActivity(new Intent(context, OrderListActivity.class));
                 break;
             default:
                 break;

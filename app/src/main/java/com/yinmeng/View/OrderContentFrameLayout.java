@@ -130,7 +130,6 @@ public class OrderContentFrameLayout extends LinearLayout {
         HashMap<String, String> params = new HashMap<>(4);
         params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("st", stu);
         params.put("page", String.valueOf(p));
         Log.e("OrderContentFrameLayout", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/index", "order/index", params, new VolleyInterface(context) {
@@ -143,7 +142,7 @@ public class OrderContentFrameLayout extends LinearLayout {
                     if (1 == orderListsBean.getStatus()) {
                         ll_empty.setVisibility(View.GONE);
                         if (1 == p) {
-                            adapter = new MyOrderAdapter(context, orderListsBean.getMsg());
+                            adapter = new MyOrderAdapter(context, orderListsBean.getOrder());
                             mRecyclerView.setAdapter(adapter);
                             mRecyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
@@ -153,18 +152,15 @@ public class OrderContentFrameLayout extends LinearLayout {
                             });
                         } else {
                             mRecyclerView.loadMoreComplete();
-                            adapter.setDatas(orderListsBean.getMsg());
+                            adapter.setDatas(orderListsBean.getOrder());
                         }
-                        if (0 == orderListsBean.getFy()) {
-                            mRecyclerView.loadMoreEnd();
-                            mRecyclerView.setCanloadMore(false);
-                        } else {
-                            mRecyclerView.setCanloadMore(true);
-                        }
+                        mRecyclerView.setCanloadMore(true);
                     } else {
                         if (1 == p) {
                             ll_empty.setVisibility(View.VISIBLE);
                         } else {
+                            mRecyclerView.loadMoreEnd();
+                            mRecyclerView.setCanloadMore(false);
                             EasyToast.showShort(context, R.string.notmore);
                         }
                     }

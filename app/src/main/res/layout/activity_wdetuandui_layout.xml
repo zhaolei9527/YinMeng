@@ -93,6 +93,7 @@
         </LinearLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_lv_list"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30">
 
@@ -124,9 +125,11 @@
             android:id="@+id/ll_lv_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
 
             <RelativeLayout
+                android:id="@+id/rl_lv1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30">
 
@@ -156,12 +159,10 @@
                 android:layout_height="@dimen/x1"
                 android:background="@color/bgddd"></View>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x1"
-                android:background="@color/bgddd"></View>
 
             <RelativeLayout
+                android:id="@+id/rl_lv2"
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30">
 
@@ -186,7 +187,14 @@
 
             </RelativeLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:background="@color/bgddd"></View>
+
             <RelativeLayout
+                android:id="@+id/rl_lv3"
+
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/y30">
 
@@ -200,6 +208,37 @@
 
                 <TextView
                     android:id="@+id/tv_lv3_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/x20"
+                    android:text="0人"
+                    android:textColor="@color/text333" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x1"
+                android:background="@color/bgddd"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_lv4"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30">
+
+                <TextView
+                    android:id="@+id/tv_lv4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="三级以上" />
+
+                <TextView
+                    android:id="@+id/tv_lv4_num"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"

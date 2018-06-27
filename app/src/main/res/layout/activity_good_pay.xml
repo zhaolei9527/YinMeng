@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/x42"
-            android:background="@color/bgtitle"
+            android:background="@color/bgfff"
             android:visibility="visible">
 
             <FrameLayout
@@ -29,6 +29,7 @@
                     android:layout_centerVertical="true"
                     android:layout_gravity="center"
                     android:background="@mipmap/fanhui" />
+
             </FrameLayout>
 
             <TextView
@@ -36,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:text="支付成功"
-                android:textColor="@color/bgfff"
+                android:textColor="@color/text000"
                 android:textSize="@dimen/x16" />
         </RelativeLayout>
 

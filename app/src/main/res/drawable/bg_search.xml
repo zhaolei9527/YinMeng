@@ -3,10 +3,10 @@
 
     <!-- 圆角 -->
     <corners
-        android:bottomLeftRadius="2dp"
-        android:bottomRightRadius="2dp"
-        android:topLeftRadius="2dp"
-        android:topRightRadius="2dp" /><!-- 设置圆角半径 -->
+        android:bottomLeftRadius="10dp"
+        android:bottomRightRadius="10dp"
+        android:topLeftRadius="10dp"
+        android:topRightRadius="10dp" /><!-- 设置圆角半径 -->
     <!-- 大小 -->
     <size
         android:width="@dimen/x87"

@@ -77,6 +77,29 @@ public class HomeFragment extends BaseLazyFragment {
         }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String HomeFragment = (String) SpUtil.get(context, "HomeFragment", "");
+        if (!TextUtils.isEmpty(HomeFragment)) {
+            p = 1;
+            HomeBean homeBean = new Gson().fromJson(HomeFragment, HomeBean.class);
+            adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
+            rv_homelist.setAdapter(adapter);
+            rv_homelist.loadMoreComplete();
+            rv_homelist.setCanloadMore(true);
+            rv_homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (i != 0) {
+                        startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i - 1).getId()));
+                    }
+                }
+            });
+        }
+    }
+
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         context = getActivity();
@@ -136,14 +159,13 @@ public class HomeFragment extends BaseLazyFragment {
             public void onMySuccess(String result) {
                 Log.e("HomeFragment", result);
                 try {
-                    SpUtil.putAndApply(context, "HomeFragment", result);
                     HomeBean homeBean = new Gson().fromJson(result, HomeBean.class);
                     rv_homelist.loadMoreComplete();
                     if (1 == homeBean.getStatus()) {
                         if (adapter == null) {
+                            SpUtil.putAndApply(context, "HomeFragment", result);
                             adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
                             rv_homelist.setAdapter(adapter);
-
                             rv_homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -152,7 +174,6 @@ public class HomeFragment extends BaseLazyFragment {
                                     }
                                 }
                             });
-
                         } else {
                             adapter.setDatas(homeBean.getGoods());
                         }

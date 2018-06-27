@@ -146,7 +146,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x10"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_time"
@@ -158,12 +158,11 @@
 
                 <TextView
                     android:id="@+id/tv_xiadanren"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x5"
                     android:layout_marginRight="@dimen/x10"
-                    android:layout_weight="1"
                     android:ellipsize="end"
-                    android:gravity="end"
                     android:singleLine="true"
                     android:textColor="@color/text666"
                     android:textSize="@dimen/x14" />
@@ -295,8 +294,8 @@
                     android:textColor="@color/text666"
                     android:textSize="@dimen/x14" />
 
-                <EditText
-                    android:id="@+id/et_kuaidi_name"
+                <TextView
+                    android:id="@+id/tv_kuaidi_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/x10"

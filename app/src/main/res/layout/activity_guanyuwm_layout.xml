@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:fitsSystemWindows="true"
     android:orientation="vertical">
+
 
     <RelativeLayout
         android:id="@+id/rl_title"
@@ -38,35 +35,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="订单详情"
+            android:text="关于我们"
             android:textColor="@color/text000"
             android:textSize="@dimen/x16" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rl_title">
+        android:layout_height="@dimen/y1"
+        android:background="@color/bgea"></View>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/wb"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bgfff"></com.tencent.smtt.sdk.WebView>
 
-            <include layout="@layout/order_address"></include>
-
-            <LinearLayout
-                android:id="@+id/ll_orders"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-            </LinearLayout>
-
-            <include layout="@layout/order_details_bottom"></include>
-
-        </LinearLayout>
-    </ScrollView>
-
-</RelativeLayout>
+</LinearLayout>

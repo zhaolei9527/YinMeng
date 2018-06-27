@@ -12,7 +12,7 @@
         android:id="@+id/rl_title"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x42"
-        android:background="@color/bgtitle"
+        android:background="@color/bgfff"
         android:visibility="visible">
 
         <FrameLayout
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="确认订单"
-            android:textColor="@color/bgfff"
+            android:textColor="@color/text000"
             android:textSize="@dimen/x16" />
 
 
@@ -64,6 +64,90 @@
             </LinearLayout>
 
             <include layout="@layout/order_bottom"></include>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="#efefef">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="支付方式" />
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30">
+
+                <ImageView
+                    android:id="@+id/img_weixin"
+                    android:layout_width="@dimen/x21"
+                    android:layout_height="@dimen/x21"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:background="@mipmap/wwixin" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_toRightOf="@id/img_weixin"
+                    android:text="微信" />
+
+                <CheckBox
+                    android:id="@+id/Choosedweixin"
+                    android:layout_width="@dimen/x18"
+                    android:layout_height="@dimen/x18"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginRight="@dimen/x15"
+                    android:background="@drawable/rb_selector"
+                    android:button="@null"
+                    android:checked="true" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30">
+
+                <ImageView
+                    android:id="@+id/img_alipay"
+                    android:layout_width="@dimen/x21"
+                    android:layout_height="@dimen/x21"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:background="@mipmap/zhifubao" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_toRightOf="@id/img_alipay"
+                    android:text="支付宝" />
+
+                <CheckBox
+                    android:id="@+id/Choosedalipay"
+                    android:layout_width="@dimen/x18"
+                    android:layout_height="@dimen/x18"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginRight="@dimen/x15"
+                    android:background="@drawable/rb_selector"
+                    android:button="@null" />
+            </RelativeLayout>
 
         </LinearLayout>
 
