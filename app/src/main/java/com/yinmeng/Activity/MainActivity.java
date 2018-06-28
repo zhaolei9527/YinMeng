@@ -11,11 +11,11 @@ import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 import com.yinmeng.Base.BaseActivity;
-import com.yinmeng.Fragment.NewsFragment;
 import com.yinmeng.Fragment.HomeFragment;
+import com.yinmeng.Fragment.JiFenFragment;
 import com.yinmeng.Fragment.LianMengFragment;
 import com.yinmeng.Fragment.MeFragment;
-import com.yinmeng.Fragment.JiFenFragment;
+import com.yinmeng.Fragment.NewsFragment;
 import com.yinmeng.R;
 import com.yinmeng.View.CustomViewPager;
 
@@ -25,6 +25,9 @@ import java.util.List;
 import sakura.bottomtabbar.BottomTabBar;
 
 public class MainActivity extends BaseActivity {
+
+    private CustomViewPager viewpager;
+    private ArrayList<Fragment> fragments;
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -68,7 +71,7 @@ public class MainActivity extends BaseActivity {
                 });
 
 
-        final ArrayList<Fragment> fragments = new ArrayList<>();
+        fragments = new ArrayList<>();
 
         fragments.add(new HomeFragment());
         fragments.add(new LianMengFragment());
@@ -76,7 +79,7 @@ public class MainActivity extends BaseActivity {
         fragments.add(new NewsFragment());
         fragments.add(new MeFragment());
 
-        CustomViewPager viewpager = (CustomViewPager) findViewById(R.id.fl_content);
+        viewpager = (CustomViewPager) findViewById(R.id.fl_content);
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
             public int getCount() {
@@ -115,5 +118,14 @@ public class MainActivity extends BaseActivity {
     protected void initData() {
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            //通过id或者tag可以从manager获取fragment对象，
+            fragments.get(4).onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
 
 }

@@ -209,7 +209,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         }
     }
 
-
     /**
      * 订单删除
      */

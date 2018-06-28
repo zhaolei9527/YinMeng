@@ -1,7 +1,11 @@
 package com.yinmeng.Fragment;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
@@ -24,6 +28,7 @@ import com.yinmeng.Activity.OrderListActivity;
 import com.yinmeng.Activity.TiXianGuanLiActivity;
 import com.yinmeng.Activity.TiXianListActivity;
 import com.yinmeng.Activity.TuiGuangActivity;
+import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.Bean.UserIndexBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
@@ -33,11 +38,15 @@ import com.yinmeng.Utils.Utils;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import me.iwf.photopicker.PhotoPickUtils;
 
 /**
  * com.wenguoyi.Fragment
@@ -75,15 +84,12 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
     Unbinder unbinder;
     private Context context;
+    private String pic = "";
 
     @Override
     public void onResume() {
         super.onResume();
-        if (Utils.isConnected(context)) {
-            userIndex();
-        } else {
-            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
-        }
+
 
     }
 
@@ -105,7 +111,11 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
 
     @Override
     protected void initData() {
-
+        if (Utils.isConnected(context)) {
+            userIndex();
+        } else {
+            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
+        }
     }
 
     @Override
@@ -155,9 +165,95 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         });
     }
 
+    private Dialog dialogResult;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        PhotoPickUtils.onActivityResult(requestCode, resultCode, data, new PhotoPickUtils.PickHandler() {
+            @Override
+            public void onPickSuccess(ArrayList<String> photos, int requestCode) {
+                final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
+                switch (requestCode) {
+                    case 505:
+                        dialogResult = Utils.showLoadingDialog(context);
+                        dialogResult.show();
+                        pic = photos.get(0);
+                        SimpleDraweeView.setImageURI("file://" + photos.get(0));
+                        List<File> imgfiles = new ArrayList<>();
+                        List<String> imgnames = new ArrayList<>();
+                        imgfiles.add(new File(pic));
+                        imgnames.add("touxiang");
+                        userDoinfo(imgnames,imgfiles);
+                        break;
+                    default:
+                        break;
+                }
+                Log.e("MyMessageActivity", photos.get(0));
+            }
+
+            @Override
+            public void onPreviewBack(ArrayList<String> photos, int requestCode) {
+                Log.e("MyMessageActivity", photos.get(0));
+            }
+
+            @Override
+            public void onPickFail(String error, int requestCode) {
+                EasyToast.showShort(context, error);
+            }
+
+            @Override
+            public void onPickCancle(int requestCode) {
+                EasyToast.showShort(context, "取消选择");
+            }
+
+        });
+
+    }
+
+
+    /**
+     * 更换头像
+     */
+    private void userDoinfo(List<String> imgnames, List<File> imgs) {
+        final HashMap<String, String> params = new HashMap<>(2);
+        params.put("pwd", UrlUtils.KEY);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        Log.e("MyMessageActivity", params.toString());
+        Utils.uploadMultipart(context, UrlUtils.BASE_URL + "about/touxiang", imgnames, imgs, params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                dialogResult.dismiss();
+                Log.e("MyMessageActivity", result);
+                try {
+                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
+                    if (1 == codeBean.getStatus()) {
+                        EasyToast.showShort(context, codeBean.getMsg());
+                    } else {
+                        EasyToast.showShort(context, codeBean.getMsg());
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    EasyToast.showShort(context, getString(R.string.Abnormalserver));
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialogResult.dismiss();
+                EasyToast.showShort(context, getString(R.string.Abnormalserver));
+                error.printStackTrace();
+            }
+        });
+    }
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
+            case R.id.SimpleDraweeView:
+                PhotoPickUtils.startPick().setPhotoCount(1).setShowCamera(true).start((Activity) context, 505);
+                break;
             case R.id.ll_wdeziliao:
                 startActivity(new Intent(context, MyMessageActivity.class));
                 break;
@@ -208,6 +304,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         llWdeshoucang.setOnClickListener(this);
         llTixianguanli.setOnClickListener(this);
         llTixianjilu.setOnClickListener(this);
+        SimpleDraweeView.setOnClickListener(this);
         return rootView;
     }
 }

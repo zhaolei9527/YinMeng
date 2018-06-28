@@ -14,6 +14,7 @@ import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.R;
+import com.yinmeng.Utils.UrlUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -94,7 +95,7 @@ public class LianXiWoMenActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        wb.loadUrl("http://www.baidu.com");
+        wb.loadUrl(UrlUtils.BASE_URL+"danye/lianxi?id=7");
     }
 
     @Override
