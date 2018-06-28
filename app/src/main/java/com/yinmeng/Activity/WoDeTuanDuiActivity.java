@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -89,6 +90,7 @@ public class WoDeTuanDuiActivity extends BaseActivity {
     private int p = 1;
     private String agrade = "1";
     private Dialog dialog;
+    private String id;
 
     @Override
     protected int setthislayout() {
@@ -112,6 +114,7 @@ public class WoDeTuanDuiActivity extends BaseActivity {
                 agentIndex();
             }
         });
+        id = getIntent().getStringExtra("id");
     }
 
     @Override
@@ -150,7 +153,11 @@ public class WoDeTuanDuiActivity extends BaseActivity {
     private void agentIndex() {
         HashMap<String, String> params = new HashMap<>(2);
         params.put("pwd", UrlUtils.KEY);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        if (TextUtils.isEmpty(id)) {
+            params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        } else {
+            params.put("uid", id);
+        }
         params.put("page", String.valueOf(p));
         params.put("agrade", agrade);
         Log.e("WoDeTuanDuiActivity", params.toString());

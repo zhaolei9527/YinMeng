@@ -21,16 +21,20 @@
         <activity
             android:name="com.yinmeng.Activity.MainActivity"
             android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.LoginActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.FlashActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,161 +45,199 @@
 
         <activity
             android:name="me.iwf.photopicker.PhotoPickerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/customTheme" />
 
         <activity
             android:name="me.iwf.photopicker.PhotoPagerActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/customTheme" />
 
 
         <activity
             android:name="com.yinmeng.Activity.RegisterActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.PriceDetailsActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.ShopListActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.MyMessageActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.AddAdressActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.AddressActivitry"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.ForgetActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.GoodPayActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.SettingActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
         <activity
             android:name="com.yinmeng.Activity.ChangePasswordActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.OrderActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.OrderBuyActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.PayActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.MyOrderDetailsActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.MyShopCarActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.TuiGuangActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.TiXianGuanLiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.TiXianListActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
+
 
         <activity
             android:name="com.yinmeng.Activity.TuiGuangShouYiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.ShouYiMingXiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.TuanDuiXinXiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.DaiLiShangActivity"
-            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
 
         <activity
             android:name="com.yinmeng.Activity.JiJuActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.KaiDaiLiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.DaiLiDingDanListActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.DingDanFaHuoActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.WoDeTuanDuiActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.POSShopListActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.LianXiWoMenActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.GuanYuWoMenActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.Activity.OrderListActivity"
             android:launchMode="singleTop"
+            android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
+        <activity
+            android:name="com.yinmeng.Activity.OrderWuLiuActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
         <activity
             android:name="com.yinmeng.wxapi.WXEntryActivity"

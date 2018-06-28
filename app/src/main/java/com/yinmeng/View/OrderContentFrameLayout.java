@@ -136,8 +136,8 @@ public class OrderContentFrameLayout extends LinearLayout {
             @Override
             public void onMySuccess(String result) {
                 Log.e("OrderContentFrameLayout", result);
-                dialog.dismiss();
                 try {
+                    dialog.dismiss();
                     final OrderListsBean orderListsBean = new Gson().fromJson(result, OrderListsBean.class);
                     if (1 == orderListsBean.getStatus()) {
                         ll_empty.setVisibility(View.GONE);

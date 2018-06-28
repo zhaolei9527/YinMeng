@@ -2,6 +2,7 @@ package com.yinmeng.Activity;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.KeyEvent;
@@ -29,13 +30,26 @@ public class MainActivity extends BaseActivity {
     private CustomViewPager viewpager;
     private ArrayList<Fragment> fragments;
 
+    private boolean mIsExit;
+
+    /**
+     * 双击返回键退出
+     */
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            Intent home = new Intent(Intent.ACTION_MAIN);
-            home.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            home.addCategory(Intent.CATEGORY_HOME);
-            startActivity(home);
+            if (mIsExit) {
+                this.finish();
+            } else {
+                Toast.makeText(this, "再按一次退出", Toast.LENGTH_SHORT).show();
+                mIsExit = true;
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        mIsExit = false;
+                    }
+                }, 2000);
+            }
             return true;
         }
         return super.onKeyDown(keyCode, event);

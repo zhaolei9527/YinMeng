@@ -3,6 +3,7 @@ package com.yinmeng.Adapter;
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.yinmeng.Activity.DaiLiDingDanListActivity;
 import com.yinmeng.Activity.DingDanFaHuoActivity;
 import com.yinmeng.Bean.AgentDllistBean;
 import com.yinmeng.R;
+import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.UrlUtils;
 
 import java.util.ArrayList;
@@ -60,7 +63,11 @@ public class DaiLiDingDanListAdapter extends RecyclerView.Adapter<DaiLiDingDanLi
         holder.btn_fahuo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mContext.startActivity(new Intent(mContext, DingDanFaHuoActivity.class).putExtra("id", datas.get(position).getId()));
+                if (TextUtils.isEmpty(DaiLiDingDanListActivity.id)) {
+                    mContext.startActivity(new Intent(mContext, DingDanFaHuoActivity.class).putExtra("id", datas.get(position).getId()));
+                } else {
+                    EasyToast.showShort(mContext, "暂不可越级发货");
+                }
             }
         });
 

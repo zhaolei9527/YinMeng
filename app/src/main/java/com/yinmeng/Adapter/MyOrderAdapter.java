@@ -76,26 +76,31 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.btn_isget_order.setVisibility(View.GONE);
             holder.btn_delete_order.setVisibility(View.VISIBLE);
             holder.btn_dodelete_order.setVisibility(View.GONE);
+            holder.btn_wuliu_order.setVisibility(View.GONE);
         } else if ("2".equals(stu)) {
             holder.btn_dodelete_order.setVisibility(View.GONE);
             holder.tv_order_type.setText("待发货");
             holder.btn_delete_order.setVisibility(View.GONE);
             holder.btn_pay_order.setVisibility(View.GONE);
             holder.btn_isget_order.setVisibility(View.GONE);
+            holder.btn_wuliu_order.setVisibility(View.GONE);
         } else if ("3".equals(stu)) {
             holder.btn_delete_order.setVisibility(View.GONE);
             holder.btn_pay_order.setVisibility(View.GONE);
             holder.btn_isget_order.setVisibility(View.VISIBLE);
+            holder.btn_wuliu_order.setVisibility(View.VISIBLE);
             holder.tv_order_type.setText("待收货");
             holder.btn_dodelete_order.setVisibility(View.GONE);
         } else if ("4".equals(stu)) {
             holder.tv_order_type.setText("已完成");
+            holder.btn_wuliu_order.setVisibility(View.GONE);
             holder.btn_pay_order.setVisibility(View.GONE);
             holder.btn_isget_order.setVisibility(View.GONE);
             holder.btn_delete_order.setVisibility(View.GONE);
             holder.btn_dodelete_order.setVisibility(View.VISIBLE);
         } else {
             holder.tv_order_type.setText("已取消");
+            holder.btn_wuliu_order.setVisibility(View.GONE);
             holder.btn_pay_order.setVisibility(View.GONE);
             holder.btn_isget_order.setVisibility(View.GONE);
             holder.btn_delete_order.setVisibility(View.GONE);
@@ -172,7 +177,12 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             }
         });
 
+        holder.btn_wuliu_order.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+            }
+        });
     }
 
     @Override
@@ -192,11 +202,13 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         public LinearLayout ll_oreders;
         public Button btn_delete_order;
         public Button btn_dodelete_order;
+        public Button btn_wuliu_order;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             this.rootView = itemView;
+            this.btn_wuliu_order = (Button) rootView.findViewById(R.id.btn_wuliu_order);
             this.btn_delete_order = (Button) rootView.findViewById(R.id.btn_delete_order);
             this.btn_dodelete_order = (Button) rootView.findViewById(R.id.btn_dodelete_order);
             this.tv_order_form_time = (TextView) rootView.findViewById(R.id.tv_order_form_time);

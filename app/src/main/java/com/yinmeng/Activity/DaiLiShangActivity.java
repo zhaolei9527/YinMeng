@@ -1,11 +1,14 @@
 package com.yinmeng.Activity;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -21,6 +24,7 @@ import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
+import com.yinmeng.Utils.Utils;
 import com.yinmeng.View.ProgressView;
 import com.yinmeng.View.SakuraLinearLayoutManager;
 import com.yinmeng.View.WenguoyiRecycleView;
@@ -61,6 +65,8 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
     RelativeLayout LLEmpty;
     private SakuraLinearLayoutManager line;
     private int p = 1;
+    private String id;
+    private Dialog dialog;
 
 
     @Override
@@ -85,6 +91,7 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
                 agentIndex();
             }
         });
+        id = getIntent().getStringExtra("id");
     }
 
     @Override
@@ -95,7 +102,6 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
                 finish();
             }
         });
-
         llWdedaili.setOnClickListener(this);
         llDingdanguanli.setOnClickListener(this);
         llWdetuandui.setOnClickListener(this);
@@ -104,6 +110,8 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
 
     @Override
     protected void initData() {
+        dialog = Utils.showLoadingDialog(context);
+        dialog.show();
         agentIndex();
     }
 
@@ -120,13 +128,25 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
             case R.id.ll_wdedaili:
                 break;
             case R.id.ll_dingdanguanli:
-                startActivity(new Intent(context, DaiLiDingDanListActivity.class));
+                if (TextUtils.isEmpty(id)) {
+                    startActivity(new Intent(context, DaiLiDingDanListActivity.class));
+                } else {
+                    startActivity(new Intent(context, DaiLiDingDanListActivity.class).putExtra("id", id));
+                }
                 break;
             case R.id.ll_wdetuandui:
-                startActivity(new Intent(context, WoDeTuanDuiActivity.class));
+                if (TextUtils.isEmpty(id)) {
+                    startActivity(new Intent(context, WoDeTuanDuiActivity.class));
+                } else {
+                    startActivity(new Intent(context, WoDeTuanDuiActivity.class).putExtra("id", id));
+                }
                 break;
             case R.id.ll_kaidaili:
-                startActivity(new Intent(context, KaiDaiLiActivity.class));
+                if (TextUtils.isEmpty(id)) {
+                    startActivity(new Intent(context, KaiDaiLiActivity.class));
+                } else {
+                    EasyToast.showShort(context, "请使用本身账户开代理");
+                }
                 break;
             default:
                 break;
@@ -139,7 +159,11 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
     private void agentIndex() {
         HashMap<String, String> params = new HashMap<>(2);
         params.put("pwd", UrlUtils.KEY);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        if (TextUtils.isEmpty(id)) {
+            params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        } else {
+            params.put("uid", id);
+        }
         params.put("page", String.valueOf(p));
         Log.e("DaiLiShangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/index", "agent/index", params, new VolleyInterface(context) {
@@ -150,6 +174,7 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
                 String decode = result;
                 Log.e("DaiLiShangActivity", decode);
                 try {
+                    dialog.dismiss();
                     reDailiList.loadMoreComplete();
 //                    CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
 //                    if (1 != codeBean.getStatus()) {
@@ -163,14 +188,24 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
 //                            return;
 //                        }
 //                    }
-                    AgentIndexBean agentIndexBean = new Gson().fromJson(result, AgentIndexBean.class);
+                    final AgentIndexBean agentIndexBean = new Gson().fromJson(result, AgentIndexBean.class);
+                    tvDailiming.setText(agentIndexBean.getUagen().getAgen_name());
+                    tvDailidengji.setText(agentIndexBean.getUagen().getDl_rank());
                     if (1 == agentIndexBean.getStatus()) {
                         LLEmpty.setVisibility(View.GONE);
-                        tvDailiming.setText(agentIndexBean.getUagen().getAgen_name());
-                        tvDailidengji.setText(agentIndexBean.getUagen().getDl_rank());
                         if (1 == p) {
                             daiLiShangAdapter = new DaiLiShangAdapter(DaiLiShangActivity.this, agentIndexBean.getDluser());
                             reDailiList.setAdapter(daiLiShangAdapter);
+                            reDailiList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                    if (TextUtils.isEmpty(id)) {
+                                        startActivity(new Intent(context, DaiLiShangActivity.class).putExtra("id", agentIndexBean.getDluser().get(i).getId()));
+                                    } else {
+                                        EasyToast.showShort(context, "暂不可越级查看");
+                                    }
+                                }
+                            });
                         } else {
                             reDailiList.loadMoreComplete();
                             daiLiShangAdapter.setDatas(agentIndexBean.getDluser());
@@ -193,6 +228,7 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
             @Override
             public void onMyError(VolleyError error) {
                 error.printStackTrace();
+                dialog.dismiss();
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
         });

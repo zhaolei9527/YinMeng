@@ -93,6 +93,18 @@
                 android:textSize="@dimen/x11"
                 android:visibility="gone" />
 
+
+            <Button
+                android:id="@+id/btn_wuliu_order"
+                android:layout_width="@dimen/x75"
+                android:layout_height="@dimen/y25"
+                android:layout_marginRight="@dimen/x5"
+                android:background="@drawable/bg_login"
+                android:text="查看物流"
+                android:textColor="@color/bgfff"
+                android:textSize="@dimen/x11"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/btn_isget_order"
                 android:layout_width="@dimen/x75"
