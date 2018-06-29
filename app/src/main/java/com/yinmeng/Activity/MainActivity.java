@@ -158,15 +158,15 @@ public class MainActivity extends BaseActivity {
             if ("0".equals(is_shou)) {
                 rlShouclosered.setVisibility(View.VISIBLE);
                 rlOpenred.setOnClickListener(new View.OnClickListener() {
-
                     @Override
                     public void onClick(View view) {
                         dialog = Utils.showLoadingDialog(context);
                         dialog.show();
-                        hongBaoRedPackage();
+                        hongBaoRedPackage("1");
                     }
                 });
-
+            } else {
+                hongBaoRedPackage("2");
             }
         }
 
@@ -201,10 +201,10 @@ public class MainActivity extends BaseActivity {
     /**
      * 获取红包
      */
-    private void hongBaoRedPackage() {
+    private void hongBaoRedPackage(final String type) {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
-        params.put("type", "1");
+        params.put("type", type);
         Log.e("MainActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "hongbao/red_package", "hongbao/red_package", params, new VolleyInterface(context) {
             @Override
@@ -214,16 +214,36 @@ public class MainActivity extends BaseActivity {
                     dialog.dismiss();
                     HongBaoRedPackageBean hongBaoRedPackageBean = new Gson().fromJson(result, HongBaoRedPackageBean.class);
                     if (1 == hongBaoRedPackageBean.getStatus()) {
-                        rlOpenred.setVisibility(View.GONE);
-                        rlRed.setVisibility(View.VISIBLE);
-                        tvRedMoney.setText(String.valueOf(hongBaoRedPackageBean.getPrice()));
-                        EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
-                        rlRed.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                rlShouclosered.setVisibility(View.GONE);
-                            }
-                        });
+                        if ("1".equals(type)) {
+                            rlOpenred.setVisibility(View.GONE);
+                            rlRed.setVisibility(View.VISIBLE);
+                            tvRedMoney.setText(String.valueOf(hongBaoRedPackageBean.getPrice()));
+                            EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                            rlRed.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    rlShouclosered.setVisibility(View.GONE);
+                                }
+                            });
+                        } else {
+                            rlOpenred.setVisibility(View.VISIBLE);
+                            tvRedMoney.setText(String.valueOf(hongBaoRedPackageBean.getPrice()));
+                            EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                            rlOpenred.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    rlOpenred.setVisibility(View.GONE);
+                                    rlRed.setVisibility(View.VISIBLE);
+                                }
+                            });
+                            rlRed.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    rlShouclosered.setVisibility(View.GONE);
+                                }
+                            });
+                        }
+
                     } else {
                         EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
                     }
