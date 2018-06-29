@@ -12,12 +12,12 @@ public class UrlUtils {
     /**
      * url连接头
      */
-    public static final String URL = "http://192.168.1.212/";
+    public static final String URL = "http://ymapp.l.100help.net/";
 
     /**
      * api连接头
      */
-    public static final String BASE_URL = "http://192.168.1.212/api.php/";
+    public static final String BASE_URL = "http://ymapp.l.100help.net/api.php?s=/";
 
     /**
      * 接口连接key

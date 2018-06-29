@@ -183,7 +183,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                         List<String> imgnames = new ArrayList<>();
                         imgfiles.add(new File(pic));
                         imgnames.add("touxiang");
-                        userDoinfo(imgnames,imgfiles);
+                        userDoinfo(imgnames, imgfiles);
                         break;
                     default:
                         break;
@@ -268,10 +268,24 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
                 startActivity(new Intent(context, TuiGuangActivity.class));
                 break;
             case R.id.ll_tixianguanli:
-                startActivity(new Intent(context, TiXianGuanLiActivity.class));
+                String is_shen = String.valueOf(SpUtil.get(context, "is_shen", ""));
+                if (!TextUtils.isEmpty(is_shen)) {
+                    if ("1".equals(is_shen)) {
+                        startActivity(new Intent(context, TiXianGuanLiActivity.class));
+                    } else {
+                        startActivity(new Intent(context, MyMessageActivity.class));
+                    }
+                }
                 break;
             case R.id.ll_tixianjilu:
-                startActivity(new Intent(context, TiXianListActivity.class));
+                String shen = String.valueOf(SpUtil.get(context, "is_shen", ""));
+                if (!TextUtils.isEmpty(shen)) {
+                    if ("1".equals(shen)) {
+                        startActivity(new Intent(context, TiXianListActivity.class));
+                    } else {
+                        startActivity(new Intent(context, MyMessageActivity.class));
+                    }
+                }
                 break;
             case R.id.ll_lianxiwomen:
                 startActivity(new Intent(context, LianXiWoMenActivity.class));

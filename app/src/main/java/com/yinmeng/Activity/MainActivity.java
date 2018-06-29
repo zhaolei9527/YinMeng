@@ -211,7 +211,9 @@ public class MainActivity extends BaseActivity {
             public void onMySuccess(String result) {
                 Log.e("MainActivity", result);
                 try {
-                    dialog.dismiss();
+                    if (dialog != null) {
+                        dialog.dismiss();
+                    }
                     HongBaoRedPackageBean hongBaoRedPackageBean = new Gson().fromJson(result, HongBaoRedPackageBean.class);
                     if (1 == hongBaoRedPackageBean.getStatus()) {
                         if ("1".equals(type)) {
@@ -245,7 +247,7 @@ public class MainActivity extends BaseActivity {
                         }
 
                     } else {
-                        EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                        //EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
                     }
                     result = null;
                 } catch (Exception e) {
@@ -256,7 +258,9 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onMyError(VolleyError error) {
-                dialog.dismiss();
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
                 error.printStackTrace();
                 Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
             }
