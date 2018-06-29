@@ -190,7 +190,6 @@ public class POSShopListActivity extends BaseActivity {
      */
     private void goodsSouSuo() {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         params.put("type", type);

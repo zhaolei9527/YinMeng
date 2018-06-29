@@ -13,7 +13,7 @@ public class LoginBean {
     /**
      * status : 1
      * msg : 登陆成功
-     * udata : {"id":"22625","is_shen":"1","img":"/Public/headimg.jpg","ni_name":"sakura","tel":"17629345001","is_dai":"0"}
+     * udata : {"id":"22625","is_shen":"1","img":"/Public/uploads/touxiang/2018-06-28/5b343aed03200.jpg","ni_name":"sakura","tel":"17629345001","is_dai":"1","is_shou":"1"}
      */
 
     private int status;
@@ -48,10 +48,11 @@ public class LoginBean {
         /**
          * id : 22625
          * is_shen : 1
-         * img : /Public/headimg.jpg
+         * img : /Public/uploads/touxiang/2018-06-28/5b343aed03200.jpg
          * ni_name : sakura
          * tel : 17629345001
-         * is_dai : 0
+         * is_dai : 1
+         * is_shou : 1
          */
 
         private String id;
@@ -60,6 +61,7 @@ public class LoginBean {
         private String ni_name;
         private String tel;
         private String is_dai;
+        private String is_shou;
 
         public String getId() {
             return id;
@@ -107,6 +109,14 @@ public class LoginBean {
 
         public void setIs_dai(String is_dai) {
             this.is_dai = is_dai;
+        }
+
+        public String getIs_shou() {
+            return is_shou;
+        }
+
+        public void setIs_shou(String is_shou) {
+            this.is_shou = is_shou;
         }
     }
 }

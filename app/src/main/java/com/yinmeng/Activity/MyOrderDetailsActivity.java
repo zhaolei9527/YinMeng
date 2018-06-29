@@ -152,7 +152,6 @@ public class MyOrderDetailsActivity extends BaseActivity implements View.OnClick
      */
     private void orderDetail() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("oid", orderid);
         Log.e("MyOrderDetailsActivity", params.toString());

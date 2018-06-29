@@ -162,7 +162,6 @@ public class ShopListActivity extends BaseActivity implements View.OnClickListen
 
     private void getData() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         params.put("key", key);
         //一级分类

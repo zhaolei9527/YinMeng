@@ -284,7 +284,6 @@ public class OrderActivity extends BaseActivity {
      */
     private void orderOrder(String addressId) {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("addr", addressId);
         if (mChoosedBalance.isChecked()) {
@@ -338,7 +337,6 @@ public class OrderActivity extends BaseActivity {
      */
     private void goodsZhifu(String addressId) {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("oid", goodsXiadanBean.getOrder().getId());
         params.put("aid", addressId);

@@ -312,7 +312,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
      */
     private void addressAdd() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("name", name);
         params.put("tel", phone);

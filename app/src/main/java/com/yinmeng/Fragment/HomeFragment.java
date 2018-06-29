@@ -150,7 +150,6 @@ public class HomeFragment extends BaseLazyFragment {
     //数据获取
     public void getData() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         params.put("page", String.valueOf(p));
         Log.e("HomeFragment", params.toString());

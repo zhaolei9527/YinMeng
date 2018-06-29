@@ -1,36 +1,69 @@
 package com.yinmeng.Activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.google.gson.Gson;
 import com.mylhyl.acp.Acp;
 import com.mylhyl.acp.AcpListener;
 import com.mylhyl.acp.AcpOptions;
 import com.yinmeng.Base.BaseActivity;
+import com.yinmeng.Bean.HongBaoRedPackageBean;
 import com.yinmeng.Fragment.HomeFragment;
 import com.yinmeng.Fragment.JiFenFragment;
 import com.yinmeng.Fragment.LianMengFragment;
 import com.yinmeng.Fragment.MeFragment;
 import com.yinmeng.Fragment.NewsFragment;
 import com.yinmeng.R;
+import com.yinmeng.Utils.EasyToast;
+import com.yinmeng.Utils.SpUtil;
+import com.yinmeng.Utils.UrlUtils;
+import com.yinmeng.Utils.Utils;
 import com.yinmeng.View.CustomViewPager;
+import com.yinmeng.Volley.VolleyInterface;
+import com.yinmeng.Volley.VolleyRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import sakura.bottomtabbar.BottomTabBar;
 
 public class MainActivity extends BaseActivity {
 
+    @BindView(R.id.fl_content)
+    CustomViewPager flContent;
+    @BindView(R.id.BottomTabBar)
+    sakura.bottomtabbar.BottomTabBar BottomTabBar;
+    @BindView(R.id.rl_openred)
+    RelativeLayout rlOpenred;
+    @BindView(R.id.tv_red_money)
+    TextView tvRedMoney;
+    @BindView(R.id.rl_red)
+    RelativeLayout rlRed;
+    @BindView(R.id.rl_shouclosered)
+    RelativeLayout rlShouclosered;
     private CustomViewPager viewpager;
     private ArrayList<Fragment> fragments;
 
     private boolean mIsExit;
+    private String is_shou;
+    private Dialog dialog;
 
     /**
      * 双击返回键退出
@@ -86,7 +119,6 @@ public class MainActivity extends BaseActivity {
 
 
         fragments = new ArrayList<>();
-
         fragments.add(new HomeFragment());
         fragments.add(new LianMengFragment());
         fragments.add(new JiFenFragment());
@@ -121,6 +153,23 @@ public class MainActivity extends BaseActivity {
                 .addTabItem("个人中心", getResources().getDrawable(R.mipmap.me), getResources().getDrawable(R.mipmap.me2))
                 .commit();
 
+        is_shou = (String) SpUtil.get(context, "is_shou", "");
+        if (!TextUtils.isEmpty(is_shou)) {
+            if ("0".equals(is_shou)) {
+                rlShouclosered.setVisibility(View.VISIBLE);
+                rlOpenred.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        dialog = Utils.showLoadingDialog(context);
+                        dialog.show();
+                        hongBaoRedPackage();
+                    }
+                });
+
+            }
+        }
+
     }
 
     @Override
@@ -139,6 +188,59 @@ public class MainActivity extends BaseActivity {
             //通过id或者tag可以从manager获取fragment对象，
             fragments.get(4).onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
+
+    /**
+     * 获取红包
+     */
+    private void hongBaoRedPackage() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
+        params.put("type", "1");
+        Log.e("MainActivity", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "hongbao/red_package", "hongbao/red_package", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                Log.e("MainActivity", result);
+                try {
+                    dialog.dismiss();
+                    HongBaoRedPackageBean hongBaoRedPackageBean = new Gson().fromJson(result, HongBaoRedPackageBean.class);
+                    if (1 == hongBaoRedPackageBean.getStatus()) {
+                        rlOpenred.setVisibility(View.GONE);
+                        rlRed.setVisibility(View.VISIBLE);
+                        tvRedMoney.setText(String.valueOf(hongBaoRedPackageBean.getPrice()));
+                        EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                        rlRed.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                rlShouclosered.setVisibility(View.GONE);
+                            }
+                        });
+                    } else {
+                        EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                    }
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

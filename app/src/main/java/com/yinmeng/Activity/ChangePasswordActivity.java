@@ -117,7 +117,6 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
      */
     private void changpasswordIndex() {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("opwd", oldpassword);
         params.put("npwd1", newpassword);

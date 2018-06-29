@@ -103,7 +103,6 @@ public class KaiDaiLiActivity extends BaseActivity {
 
     private void submit() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         params.put("agen_name", Name);
         params.put("tel", Phone);

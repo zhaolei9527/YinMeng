@@ -158,7 +158,6 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
      */
     private void agentIndex() {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         if (TextUtils.isEmpty(id)) {
             params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         } else {

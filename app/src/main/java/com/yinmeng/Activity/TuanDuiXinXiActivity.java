@@ -124,7 +124,6 @@ public class TuanDuiXinXiActivity extends BaseActivity {
      */
     private void aboutTeam() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         Log.e("TuanDuiXinXiActivity", params.toString());

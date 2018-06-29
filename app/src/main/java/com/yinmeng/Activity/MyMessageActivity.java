@@ -295,7 +295,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
      */
     private void userResetinfor() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("MyMessageActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "about/myshow", "about/myshow", params, new VolleyInterface(context) {
@@ -402,7 +401,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
      */
     private void userDoinfo(List<String> imgnames, List<File> imgs) {
         final HashMap<String, String> params = new HashMap<>(6);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("tel", String.valueOf(SpUtil.get(context, "tel", "")));
         params.put("truename", name);
@@ -414,7 +412,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         params.put("shi", shi);
         params.put("xian", xian);
         Log.e("MyMessageActivity", params.toString());
-        Utils.uploadMultipart(context, UrlUtils.BASE_URL + "about/perfect", imgnames, imgs, params, new VolleyInterface(context) {
+        VolleyRequest.uploadMultipart(context, UrlUtils.BASE_URL + "about/perfect", imgnames, imgs, params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
@@ -596,7 +594,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
      */
     private void getUserPlace(String phone) {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("type", "3");
         Log.e("RegisterActivity", params.toString());

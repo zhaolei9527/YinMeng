@@ -124,7 +124,6 @@ public class FlashActivity extends BaseActivity {
      */
     private void getLogin(final String tel, final String password, String type, String openid) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("key", UrlUtils.KEY);
         params.put("tel", tel);
         params.put("password", password);
         Log.e("LoginActivity", "params:" + params);
@@ -145,6 +144,7 @@ public class FlashActivity extends BaseActivity {
                         SpUtil.putAndApply(context, "tel", loginBean.getUdata().getTel());
                         SpUtil.putAndApply(context, "is_shen", loginBean.getUdata().getIs_shen());
                         SpUtil.putAndApply(context, "is_dai", loginBean.getUdata().getIs_dai());
+                        SpUtil.putAndApply(context, "is_shou", loginBean.getUdata().getIs_shou());
                         gotoMain();
                     } else {
                         delayGoToLogin();

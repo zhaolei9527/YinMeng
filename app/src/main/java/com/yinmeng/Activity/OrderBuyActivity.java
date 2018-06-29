@@ -260,7 +260,6 @@ public class OrderBuyActivity extends BaseActivity {
      */
     private void orderOrder(String addressId) {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("gid", gid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("addr", addressId);

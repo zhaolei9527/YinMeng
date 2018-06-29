@@ -176,7 +176,6 @@ public class TuiGuangShouYiActivity extends BaseActivity {
      */
     private void agentExtend() {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("TuiGuangShouYiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/extend", "agent/extend", params, new VolleyInterface(context) {

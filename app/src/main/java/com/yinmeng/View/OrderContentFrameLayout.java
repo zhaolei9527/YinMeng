@@ -128,7 +128,6 @@ public class OrderContentFrameLayout extends LinearLayout {
      */
     private void orderLists(final String stu) {
         HashMap<String, String> params = new HashMap<>(4);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         Log.e("OrderContentFrameLayout", params.toString());

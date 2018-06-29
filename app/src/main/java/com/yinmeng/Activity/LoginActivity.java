@@ -221,7 +221,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
      */
     private void getLogin(final String tel, final String password, final String openid) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tel", tel);
         params.put("password", password);
         Log.e("LoginActivity", params.toString());
@@ -243,6 +242,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                         SpUtil.putAndApply(context, "tel", loginBean.getUdata().getTel());
                         SpUtil.putAndApply(context, "is_shen", loginBean.getUdata().getIs_shen());
                         SpUtil.putAndApply(context, "is_dai", loginBean.getUdata().getIs_dai());
+                        SpUtil.putAndApply(context, "is_shou", loginBean.getUdata().getIs_shou());
                         gotoMain();
                     } else if (2 == loginBean.getStatus()) {
                         EasyToast.showShort(context, loginBean.getMsg().toString());

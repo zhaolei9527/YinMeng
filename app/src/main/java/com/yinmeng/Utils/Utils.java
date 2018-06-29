@@ -290,17 +290,6 @@ public class Utils {
         App.getQueues().start();
     }
 
-    public static void uploadMultipart(Context context, String url, List<String> listname,
-                                       List<File> listFile, Map<String, String> params,
-                                       VolleyInterface listener) {
-        MultipartRequestUpload request = new MultipartRequestUpload(url, listname, listFile, params, listener);
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                30000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        App.getQueues().add(request);
-        App.getQueues().start();
-    }
 
 
     public static String Html2Text(String inputString) {

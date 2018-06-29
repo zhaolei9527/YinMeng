@@ -126,7 +126,6 @@ public class JiJuActivity extends BaseActivity {
 
     private void submit() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         params.put("gid", gid);
         params.put("number", sn);
@@ -184,7 +183,6 @@ public class JiJuActivity extends BaseActivity {
 
     private void getData() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("JiJuActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "brand/index", "brand/index", params, new VolleyInterface(context) {

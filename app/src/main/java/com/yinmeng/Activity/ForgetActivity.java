@@ -158,7 +158,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
      */
     private void getUserPlace(String phone) {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("key", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("type", "2");
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/tel", "login/tel", params, new VolleyInterface(context) {
@@ -239,7 +238,6 @@ public class ForgetActivity extends BaseActivity implements View.OnClickListener
      */
     private void getFindPWD(String phone, String code, String password) {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("code", code);
         params.put("password",password);

@@ -170,7 +170,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void getUserPlace(String phone) {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("type", "1");
         Log.e("RegisterActivity", params.toString());
@@ -258,7 +257,6 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
      */
     private void getRegister(String phone, String code, String password) {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tel", phone);
         params.put("name", name);
         params.put("code", code);

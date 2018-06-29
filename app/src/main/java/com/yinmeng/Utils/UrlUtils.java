@@ -22,7 +22,7 @@ public class UrlUtils {
     /**
      * 接口连接key
      */
-    public static final String KEY = "dd6573891ec1834ebbc889255f731a02";
+    public static final String KEY = "yinmeng20170625";
 
 
 }

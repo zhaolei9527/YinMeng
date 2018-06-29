@@ -130,7 +130,6 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
      */
     private void userIndex() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("MeFragment", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "about/index", "about/index", params, new VolleyInterface(context) {
@@ -217,10 +216,9 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
      */
     private void userDoinfo(List<String> imgnames, List<File> imgs) {
         final HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("MyMessageActivity", params.toString());
-        Utils.uploadMultipart(context, UrlUtils.BASE_URL + "about/touxiang", imgnames, imgs, params, new VolleyInterface(context) {
+        VolleyRequest.uploadMultipart(context, UrlUtils.BASE_URL + "about/touxiang", imgnames, imgs, params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialogResult.dismiss();

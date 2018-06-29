@@ -152,7 +152,6 @@ public class WoDeTuanDuiActivity extends BaseActivity {
      */
     private void agentIndex() {
         HashMap<String, String> params = new HashMap<>(2);
-        params.put("pwd", UrlUtils.KEY);
         if (TextUtils.isEmpty(id)) {
             params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         } else {

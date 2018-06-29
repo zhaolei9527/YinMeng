@@ -144,7 +144,6 @@ public class ShouYiMingXiActivity extends BaseActivity {
      */
     private void agentProfit() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         params.put("type", type);

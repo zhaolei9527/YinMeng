@@ -80,7 +80,6 @@ public class TuiGuangActivity extends BaseActivity {
 
     private void getData() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("TuiGuangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "about/ewm", "about/ewm", params, new VolleyInterface(context) {

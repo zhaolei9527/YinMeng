@@ -96,7 +96,6 @@ public class TiXianListActivity extends BaseActivity {
      */
     private void userTx_record() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(txjlp));
         Log.e("TiXianListActivity", params.toString());

@@ -246,7 +246,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void goodsDetail() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("num", "1");
@@ -298,7 +297,6 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
      */
     private void goodsXiadan() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("gid", String.valueOf(getIntent().getStringExtra("id")));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("num", "1");

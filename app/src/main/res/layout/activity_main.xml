@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:focusable="true"
-    android:focusableInTouchMode="true"
-    android:layout_height="match_parent">
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,5 +22,78 @@
             android:layout_height="wrap_content"></sakura.bottomtabbar.BottomTabBar>
 
     </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_shouclosered"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#b9000000"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <RelativeLayout
+            android:id="@+id/rl_openred"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/y170"
+            android:layout_centerInParent="true"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/redclose" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y7"
+                android:gravity="center"
+                android:text="点击打开红包"
+                android:textColor="@color/textred" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_red"
+            android:layout_width="@dimen/x250"
+            android:layout_height="@dimen/y170"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/redopen" />
+
+            <TextView
+                android:id="@+id/tv_red_money"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y85"
+                android:gravity="center"
+                android:text="0.00"
+                android:textColor="@color/textred"
+                android:textSize="@dimen/x18" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/y7"
+                android:gravity="center"
+                android:text="可在账户余额中查看红包"
+                android:textColor="@color/textred" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
 
 </FrameLayout>

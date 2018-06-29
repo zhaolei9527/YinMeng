@@ -94,7 +94,6 @@ public class TiXianGuanLiActivity extends BaseActivity {
      */
     private void userDotxsq() {
         HashMap<String, String> params = new HashMap<>(1);
-        params.put("pwd", UrlUtils.KEY);
         params.put("tixian_num", etJine.getText().toString().trim());
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("MyQianBaoActivity", params.toString());
@@ -131,7 +130,6 @@ public class TiXianGuanLiActivity extends BaseActivity {
      */
     private void tixianIndex() {
         HashMap<String, String> params = new HashMap<>(5);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
         Log.e("TiXianGuanLiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "tixian/index", "tixian/index", params, new VolleyInterface(context) {

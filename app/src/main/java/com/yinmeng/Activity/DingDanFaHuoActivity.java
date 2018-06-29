@@ -145,7 +145,6 @@ public class DingDanFaHuoActivity extends BaseActivity {
      */
     private void agentDlorderDetail() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("pwd", UrlUtils.KEY);
         params.put("oid", getIntent().getStringExtra("id"));
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("DingDanFaHuoActivity", params.toString());
@@ -210,7 +209,6 @@ public class DingDanFaHuoActivity extends BaseActivity {
      */
     private void doDlorder() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("pwd", UrlUtils.KEY);
         params.put("oid", getIntent().getStringExtra("id"));
         params.put("kid", kid);
         params.put("expnum ", etKuaidiNum.getText().toString().trim());

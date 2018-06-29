@@ -186,7 +186,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      */
     private void orderPay() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("RegisterActivity", params.toString());
@@ -224,7 +223,6 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
      */
     private void orderWxpay() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("orderWxpay", params.toString());

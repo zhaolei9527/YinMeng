@@ -226,7 +226,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
      */
     private void orderShanchu(String id) {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(mContext, "uid", "")));
         params.put("oid", id);
         VolleyRequest.RequestPost(mContext, UrlUtils.BASE_URL + "order/shanchu", "order/shanchu", params, new VolleyInterface(mContext) {
@@ -262,7 +261,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
      */
     private void orderCancel(String id) {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(mContext, "uid", "")));
         params.put("oid", id);
         VolleyRequest.RequestPost(mContext, UrlUtils.BASE_URL + "order/quxiao", "order/quxiao", params, new VolleyInterface(mContext) {
@@ -298,7 +296,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
      */
     private void orderReceipt(String id) {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(mContext, "uid", "")));
         params.put("oid", id);
         Log.e("MyOrderAdapter", "params:" + params);
