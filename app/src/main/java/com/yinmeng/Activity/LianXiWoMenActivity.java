@@ -95,7 +95,7 @@ public class LianXiWoMenActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        wb.loadUrl(UrlUtils.BASE_URL+"danye/lianxi?id=7");
+        wb.loadUrl(UrlUtils.BASE_URL+"danye/lianxi/id=7");
     }
 
     @Override

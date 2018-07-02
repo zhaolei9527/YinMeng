@@ -1,5 +1,7 @@
 package com.yinmeng.Bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -10,17 +12,17 @@ import java.util.List;
  * 功能描述：
  */
 public class NewsListBean {
+
     /**
      * status : 1
-     * msg : [{"id":"53","title":"我们就是这么同日军拼命的：九死一生的抗战飞行员自述"},{"id":"43","title":"东营开展两节期间专利执法检查 进商场现场讲解"},{"id":"42","title":" 性能超980 七彩虹GTX1070商城仅3299元"},{"id":"36","title":"电竞高保真 魔磁M660京东商城售890元"},{"id":"64","title":"老司机教你装修收尾怎么做？"},{"id":"63","title":"超级连接故宫博物院：采取新方法，迎接新公众"},{"id":"61","title":"为什么人们比以前老得慢了"},{"id":"59","title":"万万没想到这个习惯能防癌"},{"id":"57","title":"山王庄兵马俑，汉代王公陪葬一套别墅和重装备保安队伍"},{"id":"54","title":"你知道江西有多少座\u201c世界级\u201d名山？"},{"id":"51","title":"父母最好的决策是放手 理想的高考志愿自己做主"},{"id":"39","title":" 畅玩主流游戏 北影GTX960商城售1299元"}]
-     * fy : 0
-     * newscate : [{"id":"1","cate_name":"讲堂"},{"id":"2","cate_name":"直播"},{"id":"15","cate_name":"养生"},{"id":"16","cate_name":"饮食"},{"id":"17","cate_name":"慢病调理"},{"id":"18","cate_name":"常见病"},{"id":"19","cate_name":"育儿亲子"},{"id":"20","cate_name":"两性健康"},{"id":"21","cate_name":"减肥"},{"id":"22","cate_name":"美容"}]
+     * type : [{"id":"4","name":"生活","grade":"3"},{"id":"2","name":"社会","grade":"1"},{"id":"7","name":"房产","grade":"0"},{"id":"8","name":"游戏","grade":"0"},{"id":"9","name":"国际","grade":"0"},{"id":"5","name":"历史","grade":"0"},{"id":"6","name":"汽车","grade":"0"}]
+     * new : [{"id":"30","ncid":"4","add_time":"1528851440","title":"一个好的企业，需要\u201c闭环服务\u201d意识","grade":"0","img":"/Public/uploads/news/2018-07-02/5b398ea2bd426.jpg","name":"生活"},{"id":"29","ncid":"4","add_time":"1528697795","title":"听起来高大上的iBeacon签到是什么？","grade":"0","img":"/Public/uploads/news/2018-06-12/5b1f5c2c66bc0.jpg","name":"生活"}]
      */
 
     private int status;
-    private int fy;
-    private List<MsgBean> msg;
-    private List<NewscateBean> newscate;
+    private List<TypeBean> type;
+    @SerializedName("new")
+    private List<NewBean> newX;
 
     public int getStatus() {
         return status;
@@ -30,38 +32,32 @@ public class NewsListBean {
         this.status = status;
     }
 
-    public int getFy() {
-        return fy;
+    public List<TypeBean> getType() {
+        return type;
     }
 
-    public void setFy(int fy) {
-        this.fy = fy;
+    public void setType(List<TypeBean> type) {
+        this.type = type;
     }
 
-    public List<MsgBean> getMsg() {
-        return msg;
+    public List<NewBean> getNewX() {
+        return newX;
     }
 
-    public void setMsg(List<MsgBean> msg) {
-        this.msg = msg;
+    public void setNewX(List<NewBean> newX) {
+        this.newX = newX;
     }
 
-    public List<NewscateBean> getNewscate() {
-        return newscate;
-    }
-
-    public void setNewscate(List<NewscateBean> newscate) {
-        this.newscate = newscate;
-    }
-
-    public static class MsgBean {
+    public static class TypeBean {
         /**
-         * id : 53
-         * title : 我们就是这么同日军拼命的：九死一生的抗战飞行员自述
+         * id : 4
+         * name : 生活
+         * grade : 3
          */
 
         private String id;
-        private String title;
+        private String name;
+        private String grade;
 
         public String getId() {
             return id;
@@ -69,6 +65,66 @@ public class NewsListBean {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getGrade() {
+            return grade;
+        }
+
+        public void setGrade(String grade) {
+            this.grade = grade;
+        }
+    }
+
+    public static class NewBean {
+        /**
+         * id : 30
+         * ncid : 4
+         * add_time : 1528851440
+         * title : 一个好的企业，需要“闭环服务”意识
+         * grade : 0
+         * img : /Public/uploads/news/2018-07-02/5b398ea2bd426.jpg
+         * name : 生活
+         */
+
+        private String id;
+        private String ncid;
+        private String add_time;
+        private String title;
+        private String grade;
+        private String img;
+        private String name;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getNcid() {
+            return ncid;
+        }
+
+        public void setNcid(String ncid) {
+            this.ncid = ncid;
+        }
+
+        public String getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(String add_time) {
+            this.add_time = add_time;
         }
 
         public String getTitle() {
@@ -78,31 +134,29 @@ public class NewsListBean {
         public void setTitle(String title) {
             this.title = title;
         }
-    }
 
-    public static class NewscateBean {
-        /**
-         * id : 1
-         * cate_name : 讲堂
-         */
-
-        private String id;
-        private String cate_name;
-
-        public String getId() {
-            return id;
+        public String getGrade() {
+            return grade;
         }
 
-        public void setId(String id) {
-            this.id = id;
+        public void setGrade(String grade) {
+            this.grade = grade;
         }
 
-        public String getCate_name() {
-            return cate_name;
+        public String getImg() {
+            return img;
         }
 
-        public void setCate_name(String cate_name) {
-            this.cate_name = cate_name;
+        public void setImg(String img) {
+            this.img = img;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
         }
     }
 }

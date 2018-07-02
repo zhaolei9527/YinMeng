@@ -95,7 +95,7 @@ public class GuanYuWoMenActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        wb.loadUrl(UrlUtils.BASE_URL+"danye/aboutus?id=6");
+        wb.loadUrl(UrlUtils.BASE_URL+"danye/aboutus/id=6");
     }
 
     @Override
