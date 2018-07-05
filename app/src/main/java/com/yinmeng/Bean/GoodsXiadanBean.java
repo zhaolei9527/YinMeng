@@ -9,10 +9,11 @@ package com.yinmeng.Bean;
  */
 public class GoodsXiadanBean {
 
+
     /**
      * status : 1
-     * order : {"id":"1586","price":"0.00","yunfei":"15.00","totalprice":"15.00","recename":"sakura","recetel":"17629345001","receadd":"河南省 郑州市 金水区 jingsanluchenxulu","num":"1","aid":"24"}
-     * gdata : {"id":"43","title":"瑞和宝（瑞银信手刷）","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","fei":"0.55","paizhao":"瑞和宝","gz_num":"6943","tab":"推广奖励80元","price":"0.00"}
+     * order : {"id":"1627","price":"0.01","yunfei":"0.00","totalprice":"0.01","recename":"翟磊","recetel":"17629345001","receadd":"河南省 郑州市 中原区 啊啊啊啊阿","num":"1","orderid":"20180704151440657154","aid":"26"}
+     * gdata : {"id":"43","title":"瑞和宝（瑞银信手刷）","img_feng":"/Public/uploads/goods/2018-04-28/5ae42b6445c72.jpg","fei":"0.55","paizhao":"瑞和宝","gz_num":"6943","tab":"推广奖励80元","price":"0.01"}
      */
 
     private int status;
@@ -45,15 +46,16 @@ public class GoodsXiadanBean {
 
     public static class OrderBean {
         /**
-         * id : 1586
-         * price : 0.00
-         * yunfei : 15.00
-         * totalprice : 15.00
-         * recename : sakura
+         * id : 1627
+         * price : 0.01
+         * yunfei : 0.00
+         * totalprice : 0.01
+         * recename : 翟磊
          * recetel : 17629345001
-         * receadd : 河南省 郑州市 金水区 jingsanluchenxulu
+         * receadd : 河南省 郑州市 中原区 啊啊啊啊阿
          * num : 1
-         * aid : 24
+         * orderid : 20180704151440657154
+         * aid : 26
          */
 
         private String id;
@@ -64,6 +66,7 @@ public class GoodsXiadanBean {
         private String recetel;
         private String receadd;
         private String num;
+        private String orderid;
         private String aid;
 
         public String getId() {
@@ -130,6 +133,14 @@ public class GoodsXiadanBean {
             this.num = num;
         }
 
+        public String getOrderid() {
+            return orderid;
+        }
+
+        public void setOrderid(String orderid) {
+            this.orderid = orderid;
+        }
+
         public String getAid() {
             return aid;
         }
@@ -148,7 +159,7 @@ public class GoodsXiadanBean {
          * paizhao : 瑞和宝
          * gz_num : 6943
          * tab : 推广奖励80元
-         * price : 0.00
+         * price : 0.01
          */
 
         private String id;

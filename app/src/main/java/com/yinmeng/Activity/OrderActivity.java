@@ -21,7 +21,6 @@ import com.yinmeng.App;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.GoodsXiadanBean;
 import com.yinmeng.Bean.GoodsZhiFuBean;
-import com.yinmeng.Bean.OrderYueBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
@@ -165,7 +164,16 @@ public class OrderActivity extends BaseActivity {
                     goodsZhifu(addressID);
                 } else {
                     dialog.dismiss();
-                    EasyToast.showShort(context, "在线支付待审核");
+                    if (Choosedweixin.isChecked()) {
+                        startActivity(new Intent(context, PayActivity.class)
+                                .putExtra("orderid", goodsXiadanBean.getOrder().getId())
+                                .putExtra("order", goodsXiadanBean.getOrder().getOrderid())
+                                .putExtra("ordermoney", goodsXiadanBean.getOrder().getTotalprice())
+                                .putExtra("aid", addressID));
+                        finish();
+                    } else {
+                        EasyToast.showShort(context, "支付宝在线支付待审核");
+                    }
                 }
 
             }
@@ -278,59 +286,6 @@ public class OrderActivity extends BaseActivity {
             EasyToast.showShort(context, "网络未连接");
         }
     }
-
-    /**
-     * 订单生成
-     */
-    private void orderOrder(String addressId) {
-        HashMap<String, String> params = new HashMap<>(5);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        params.put("addr", addressId);
-        if (mChoosedBalance.isChecked()) {
-            params.put("is_yue", "1");
-        } else {
-            params.put("is_yue", "0");
-        }
-        //params.put("cart_id", cart_id);
-        //params.put("amount_list", amount_list);
-        Log.e("OrderActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/yue", "order/yue", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                dialog.dismiss();
-                Log.e("OrderActivity", result);
-                try {
-                    OrderYueBean orderYueBean = new Gson().fromJson(result, OrderYueBean.class);
-                    if (1 == orderYueBean.getStatus()) {
-                        EasyToast.showShort(context, orderYueBean.getMsg());
-                        if ("1".equals(String.valueOf(orderYueBean.getPay()))) {
-                            startActivity(new Intent(context, GoodPayActivity.class)
-                                    .putExtra("orderid", orderYueBean.getOid())
-                                    .putExtra("type", "good"));
-                            finish();
-                        } else {
-                            startActivity(new Intent(context, PayActivity.class)
-                                    .putExtra("orderid", orderYueBean.getOid()));
-                            finish();
-                        }
-                    } else {
-                        Toast.makeText(context, "订单异常", Toast.LENGTH_SHORT).show();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
 
     /**
      * 订单支付，免费

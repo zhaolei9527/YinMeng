@@ -70,33 +70,35 @@ public class HomeFragment extends BaseLazyFragment {
 
     @Override
     protected void initData() {
-        if (Utils.isConnected(context)) {
-            getData();
-        } else {
-            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
-        }
+
     }
 
 
     @Override
     public void onResume() {
         super.onResume();
-        String HomeFragment = (String) SpUtil.get(context, "HomeFragment", "");
-        if (!TextUtils.isEmpty(HomeFragment)) {
+//        String HomeFragment = (String) SpUtil.get(context, "HomeFragment", "");
+//        if (!TextUtils.isEmpty(HomeFragment)) {
+//            p = 1;
+//            HomeBean homeBean = new Gson().fromJson(HomeFragment, HomeBean.class);
+//            adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
+//            rv_homelist.setAdapter(adapter);
+//            rv_homelist.loadMoreComplete();
+//            rv_homelist.setCanloadMore(true);
+//            rv_homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                    if (i != 0) {
+//                        startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i - 1).getId()));
+//                    }
+//                }
+//            });
+//        }
+        if (Utils.isConnected(context)) {
             p = 1;
-            HomeBean homeBean = new Gson().fromJson(HomeFragment, HomeBean.class);
-            adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
-            rv_homelist.setAdapter(adapter);
-            rv_homelist.loadMoreComplete();
-            rv_homelist.setCanloadMore(true);
-            rv_homelist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (i != 0) {
-                        startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i - 1).getId()));
-                    }
-                }
-            });
+            getData();
+        } else {
+            EasyToast.showShort(context, getResources().getString(R.string.Networkexception));
         }
     }
 
@@ -161,6 +163,10 @@ public class HomeFragment extends BaseLazyFragment {
                     HomeBean homeBean = new Gson().fromJson(result, HomeBean.class);
                     rv_homelist.loadMoreComplete();
                     if (1 == homeBean.getStatus()) {
+                        rv_homelist.setCanloadMore(true);
+                        if (p == 1) {
+                            adapter = null;
+                        }
                         if (adapter == null) {
                             SpUtil.putAndApply(context, "HomeFragment", result);
                             adapter = new HomeListAdapter((MainActivity) getActivity(), homeBean);
@@ -174,7 +180,9 @@ public class HomeFragment extends BaseLazyFragment {
                                 }
                             });
                         } else {
-                            adapter.setDatas(homeBean.getGoods());
+                            if (p != 1) {
+                                adapter.setDatas(homeBean.getGoods());
+                            }
                         }
                     } else {
                         if (p != 1) {

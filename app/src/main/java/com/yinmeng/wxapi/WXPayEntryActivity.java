@@ -41,11 +41,12 @@ public class WXPayEntryActivity extends Activity implements IWXAPIEventHandler {
 
     @Override
     public void onReq(BaseReq req) {
-
+        Log.e(TAG, req.toString());
     }
 
     @Override
     public void onResp(BaseResp resp) {
+        Log.e(TAG, String.valueOf(resp.toString()));
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
             if (resp.errCode == 0) {
                 EasyToast.showLong(WXPayEntryActivity.this, "支付成功");

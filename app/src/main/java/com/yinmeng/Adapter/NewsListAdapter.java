@@ -1,6 +1,7 @@
 package com.yinmeng.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.yinmeng.Activity.NewsDetailsActivity;
 import com.yinmeng.Bean.NewsListBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DateUtils;
@@ -56,11 +58,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<NewsListAdapter.ViewHo
         holder.fl_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String id = datas.get(position).getId();
-//                holder.fl_item.getContext().startActivity(new Intent(holder.fl_item.getContext(), NewsDetailsActivity.class)
-//                        .putExtra("id", id)
-//                        .putExtra("shareimg", datas.get(position).getImg())
-//                );
+                String id = datas.get(position).getId();
+                holder.fl_item.getContext().startActivity(new Intent(holder.fl_item.getContext(), NewsDetailsActivity.class)
+                        .putExtra("id", id)
+                );
             }
         });
 

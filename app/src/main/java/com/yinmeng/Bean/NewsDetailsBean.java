@@ -1,5 +1,7 @@
 package com.yinmeng.Bean;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * com.wenguoyi.Bean
  *
@@ -11,11 +13,12 @@ public class NewsDetailsBean {
 
     /**
      * status : 1
-     * msg : {"title":"电竞高保真 魔磁M660京东商城售890元","num":45,"addtime":"1474161153","id":"36"}
+     * new : {"id":"30","add_time":"1528851440","title":"一个好的企业，需要\u201c闭环服务\u201d意识","content":"http://ymapp.l.100help.net//api.php?s=/danye/newsdetail/nid/30.html"}
      */
 
     private int status;
-    private MsgBean msg;
+    @SerializedName("new")
+    private NewBean newX;
 
     public int getStatus() {
         return status;
@@ -25,26 +28,42 @@ public class NewsDetailsBean {
         this.status = status;
     }
 
-    public MsgBean getMsg() {
-        return msg;
+    public NewBean getNewX() {
+        return newX;
     }
 
-    public void setMsg(MsgBean msg) {
-        this.msg = msg;
+    public void setNewX(NewBean newX) {
+        this.newX = newX;
     }
 
-    public static class MsgBean {
+    public static class NewBean {
         /**
-         * title : 电竞高保真 魔磁M660京东商城售890元
-         * num : 45
-         * addtime : 1474161153
-         * id : 36
+         * id : 30
+         * add_time : 1528851440
+         * title : 一个好的企业，需要“闭环服务”意识
+         * content : http://ymapp.l.100help.net//api.php?s=/danye/newsdetail/nid/30.html
          */
 
-        private String title;
-        private int num;
-        private String addtime;
         private String id;
+        private String add_time;
+        private String title;
+        private String content;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getAdd_time() {
+            return add_time;
+        }
+
+        public void setAdd_time(String add_time) {
+            this.add_time = add_time;
+        }
 
         public String getTitle() {
             return title;
@@ -54,29 +73,12 @@ public class NewsDetailsBean {
             this.title = title;
         }
 
-        public int getNum() {
-            return num;
+        public String getContent() {
+            return content;
         }
 
-        public void setNum(int num) {
-            this.num = num;
-        }
-
-        public String getAddtime() {
-            return addtime;
-        }
-
-        public void setAddtime(String addtime) {
-            this.addtime = addtime;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
+        public void setContent(String content) {
+            this.content = content;
         }
     }
-
 }

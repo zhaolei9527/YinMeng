@@ -28,6 +28,7 @@ import com.yinmeng.Activity.OrderListActivity;
 import com.yinmeng.Activity.TiXianGuanLiActivity;
 import com.yinmeng.Activity.TiXianListActivity;
 import com.yinmeng.Activity.TuiGuangActivity;
+import com.yinmeng.App;
 import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.Bean.UserIndexBean;
 import com.yinmeng.R;
@@ -96,6 +97,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        App.getQueues().cancelAll("about/index");
         unbinder.unbind();
     }
 

@@ -23,6 +23,7 @@ public class GoodPayActivity extends BaseActivity implements View.OnClickListene
     private String orderid;
     private String order;
     private String type;
+    private String aid;
 
     @Override
     protected int setthislayout() {
@@ -46,6 +47,7 @@ public class GoodPayActivity extends BaseActivity implements View.OnClickListene
         type = getIntent().getStringExtra("type");
         orderid = getIntent().getStringExtra("orderid");
         order = getIntent().getStringExtra("order");
+        aid = getIntent().getStringExtra("aid");
         if (TextUtils.isEmpty(type)) {
             type = "bad";
         }
@@ -84,7 +86,9 @@ public class GoodPayActivity extends BaseActivity implements View.OnClickListene
             case R.id.btn_repay:
                 startActivity(new Intent(context, PayActivity.class)
                         .putExtra("orderid", orderid)
-                        .putExtra("order", order));
+                        .putExtra("order", order)
+                        .putExtra("ordermoney", getIntent().getStringExtra("ordermoney"))
+                        .putExtra("aid", aid));
                 finish();
                 break;
             case R.id.btn_abckorder:

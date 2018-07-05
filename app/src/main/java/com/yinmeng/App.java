@@ -47,7 +47,7 @@ public class App extends MultiDexApplication {
         MobSDK.init(this);
         QbSdk.initX5Environment(this, null);
         MultiDex.install(this);
-        Bugly.init(getApplicationContext(), "f905a9d3d6", false);
+        Bugly.init(getApplicationContext(), "9b3b53f4a8", false);
         queues = Volley.newRequestQueue(getApplicationContext());
         Fresco.initialize(this);
         pausableThreadPoolExecutor = new PausableThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());

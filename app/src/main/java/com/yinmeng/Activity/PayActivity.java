@@ -23,7 +23,6 @@ import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.yinmeng.App;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.BankEvent;
-import com.yinmeng.Bean.OrderPay;
 import com.yinmeng.Bean.OrderWxpayBean;
 import com.yinmeng.Bean.PayResult;
 import com.yinmeng.R;
@@ -95,6 +94,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
 
         ;
     };
+    private String ordermoney;
 
 
     @Override
@@ -130,8 +130,14 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         btn_paynow = (Button) findViewById(R.id.btn_paynow);
         orderid = getIntent().getStringExtra("orderid");
         order = getIntent().getStringExtra("order");
+        ordermoney = getIntent().getStringExtra("ordermoney");
+
         if (!TextUtils.isEmpty(order)) {
             tv_ordernumber.setText(order);
+        }
+
+        if (!TextUtils.isEmpty(ordermoney)) {
+            tv_totalmoney.setText(ordermoney);
         }
 
         //注册EventBus
@@ -153,7 +159,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     @Override
     protected void initData() {
         if (Utils.isConnected(context)) {
-            orderPay();
+
         } else {
             finish();
             EasyToast.showShort(context, "网络未连接");
@@ -182,51 +188,17 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     }
 
     /**
-     * 订单支付
-     */
-    private void orderPay() {
-        HashMap<String, String> params = new HashMap<>(3);
-        params.put("id", orderid);
-        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
-        Log.e("RegisterActivity", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/pay", "order/pay", params, new VolleyInterface(context) {
-            @Override
-            public void onMySuccess(String result) {
-                dialog.dismiss();
-                Log.e("RegisterActivity", result);
-                try {
-                    OrderPay orderPay = new Gson().fromJson(result, OrderPay.class);
-                    if ("1".equals(String.valueOf(orderPay.getStatus()))) {
-                        tv_totalmoney.setText("￥" + orderPay.getMsg().getMoney());
-                        tv_ordernumber.setText(String.valueOf(orderPay.getMsg().getOrderid()));
-                    } else {
-                        Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                    }
-                    result = null;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onMyError(VolleyError error) {
-                dialog.dismiss();
-                error.printStackTrace();
-                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    /**
-     * 订单支付
+     * 订单支付，微信
      */
     private void orderWxpay() {
         HashMap<String, String> params = new HashMap<>(3);
-        params.put("id", orderid);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("oid", getIntent().getStringExtra("orderid"));
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("aid"))) {
+            params.put("aid", getIntent().getStringExtra("aid"));
+        }
         Log.e("orderWxpay", params.toString());
-        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/dopay", "order/dopay", params, new VolleyInterface(context) {
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/wxpay", "order/wxpay", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
                 dialog.dismiss();
@@ -236,12 +208,12 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     if (api != null) {
                         PayReq req = new PayReq();
                         req.appId = Constants.APP_ID;
-                        req.partnerId = orderWxpayBean.getMsg().getMch_id();
-                        req.prepayId = orderWxpayBean.getMsg().getPrepay_id();
+                        req.partnerId = orderWxpayBean.getData().getMch_id();
+                        req.prepayId = orderWxpayBean.getData().getPrepay_id();
                         req.packageValue = "Sign=WXPay";
-                        req.nonceStr = orderWxpayBean.getMsg().getNonceStr();
-                        req.timeStamp = orderWxpayBean.getMsg().getTimeStamp();
-                        req.sign = "aaaaa";
+                        req.nonceStr = orderWxpayBean.getData().getNonceStr();
+                        req.timeStamp = orderWxpayBean.getData().getTimeStamp();
+                        req.sign = orderWxpayBean.getData().getSign();
                         api.sendReq(req);
                     }
                     orderWxpayBean = null;
@@ -276,6 +248,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                 } else if ("bad".equals(event.getMsg())) {
                     startActivity(new Intent(context, GoodPayActivity.class)
                             .putExtra("order", order)
+                            .putExtra("aid", getIntent().getStringExtra("aid"))
+                            .putExtra("ordermoney", getIntent().getStringExtra("ordermoney"))
                             .putExtra("orderid", orderid));
                     finish();
                 }

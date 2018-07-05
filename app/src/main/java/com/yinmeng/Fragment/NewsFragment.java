@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.yinmeng.Adapter.NewsPageAdapter;
+import com.yinmeng.App;
 import com.yinmeng.Bean.NewsListBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.SpUtil;
@@ -45,6 +46,7 @@ public class NewsFragment extends BaseLazyFragment {
     Unbinder unbinder;
     private Context context;
     private int p = 1;
+    private int lastp = 1;
     private String ncid = "";
     private List titles = new ArrayList();
     private List titleid = new ArrayList();
@@ -62,6 +64,13 @@ public class NewsFragment extends BaseLazyFragment {
 
     @Override
     protected void initData() {
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        p = 1;
         getIndex();
     }
 
@@ -107,11 +116,12 @@ public class NewsFragment extends BaseLazyFragment {
                     if (adapter == null) {
                         adapter = new NewsPageAdapter(getChildFragmentManager(), getActivity(), titles, titleid);
                         VpNewsContext.setAdapter(adapter);
+                        tabs.setViewPager(VpNewsContext);
                     } else {
-                        adapter = new NewsPageAdapter(getChildFragmentManager(), getActivity(), titles, titleid);
-                        VpNewsContext.setAdapter(adapter);
+                        if (p != 1) {
+                            VpNewsContext.setAdapter(adapter);
+                        }
                     }
-                    tabs.setViewPager(VpNewsContext);
                     //缓存首页数据
                     SpUtil.putAndApply(getActivity(), "index", decode);
                     cate = null;
@@ -135,5 +145,6 @@ public class NewsFragment extends BaseLazyFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+        App.getQueues().cancelAll("new/index");
     }
 }

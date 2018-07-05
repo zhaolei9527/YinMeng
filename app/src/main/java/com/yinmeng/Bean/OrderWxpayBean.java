@@ -11,13 +11,14 @@ import com.google.gson.annotations.SerializedName;
  */
 public class OrderWxpayBean {
 
+
     /**
      * status : 1
-     * msg : {"appId":"wxe921d2ca987f9c35","mch_id":"1507215981","nonceStr":"3zq22uxr0wlni004ujpcnl7nqa591839","package":"Sign=WXPay","prepay_id":"wx11102015023922af50b250f32408348115","timeStamp":1528683615,"sign":"B37BD76818FF400F9423A7251C434DB7"}
+     * data : {"appId":"wxc217d5d3083c1834","mch_id":"1508851941","nonceStr":"gxl1sfhcagamza10s5qb4t5fkxz142w9","package":"Sign=WXPay","prepay_id":"wx041400353574736b526ae17c0427986921","timeStamp":1530684035,"sign":"2100"}
      */
 
     private int status;
-    private MsgBean msg;
+    private DataBean data;
 
     public int getStatus() {
         return status;
@@ -27,23 +28,23 @@ public class OrderWxpayBean {
         this.status = status;
     }
 
-    public MsgBean getMsg() {
-        return msg;
+    public DataBean getData() {
+        return data;
     }
 
-    public void setMsg(MsgBean msg) {
-        this.msg = msg;
+    public void setData(DataBean data) {
+        this.data = data;
     }
 
-    public static class MsgBean {
+    public static class DataBean {
         /**
-         * appId : wxe921d2ca987f9c35
-         * mch_id : 1507215981
-         * nonceStr : 3zq22uxr0wlni004ujpcnl7nqa591839
+         * appId : wxc217d5d3083c1834
+         * mch_id : 1508851941
+         * nonceStr : gxl1sfhcagamza10s5qb4t5fkxz142w9
          * package : Sign=WXPay
-         * prepay_id : wx11102015023922af50b250f32408348115
-         * timeStamp : 1528683615
-         * sign : B37BD76818FF400F9423A7251C434DB7
+         * prepay_id : wx041400353574736b526ae17c0427986921
+         * timeStamp : 1530684035
+         * sign : 2100
          */
 
         private String appId;

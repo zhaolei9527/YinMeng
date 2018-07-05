@@ -51,7 +51,8 @@
             android:background="@null"
             android:hint="请输入手机号"
             android:inputType="number"
-            android:singleLine="true"
+            android:maxLength="11"
+            android:maxLines="1"
             android:textColor="@color/text333"
             android:textColorHint="@color/text333" />
 
@@ -86,7 +87,7 @@
             android:hint="请输入密码"
             android:inputType="textPassword"
             android:maxLength="18"
-            android:singleLine="true"
+            android:maxLines="1"
             android:textColor="@color/text333"
             android:textColorHint="@color/text333" />
     </RelativeLayout>

@@ -2,6 +2,7 @@ package com.yinmeng.Volley;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -49,7 +50,7 @@ public class VolleyRequest {
         request = new StringRequest(Request.Method.POST, url, vif.loadingListener(), vif.errorListener()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                String s = formatUrlMap(params, true, false);
+                String s = formatUrlMap(params, false, false);
                 String s1 = urlmd5(s, UrlUtils.KEY);
                 params.put("pwd", s1);
                 return params;
@@ -74,7 +75,7 @@ public class VolleyRequest {
         request = new StringRequest(Request.Method.POST, url, vif.loadingListener(), vif.errorListener()) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                String s = formatUrlMap(params, true, false);
+                String s = formatUrlMap(params, false, false);
                 String s1 = urlmd5(s, UrlUtils.KEY);
                 params.put("pwd", s1);
                 return params;
@@ -92,13 +93,14 @@ public class VolleyRequest {
         }
     }
 
-
     public static void uploadMultipart(Context context, String url, List<String> listname,
                                        List<File> listFile, Map<String, String> params,
                                        VolleyInterface listener) {
-        String s = formatUrlMap(params, true, false);
+        String s = formatUrlMap(params, false, false);
+        Log.e("VolleyRequest", s);
         String s1 = urlmd5(s, UrlUtils.KEY);
         params.put("pwd", s1);
+        Log.e("VolleyRequest", params.toString());
         MultipartRequestUpload request = new MultipartRequestUpload(url, listname, listFile, params, listener);
         request.setRetryPolicy(new DefaultRetryPolicy(
                 30000,
@@ -107,7 +109,6 @@ public class VolleyRequest {
         App.getQueues().add(request);
         App.getQueues().start();
     }
-
 
 
     /**

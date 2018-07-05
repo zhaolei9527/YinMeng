@@ -123,6 +123,8 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 mContext.startActivity(new Intent(mContext, PayActivity.class)
+                        .putExtra("order", datas.get(position).getOrderid())
+                        .putExtra("ordermoney", datas.get(position).getTotalprice())
                         .putExtra("orderid", datas.get(position).getId())
                 );
             }

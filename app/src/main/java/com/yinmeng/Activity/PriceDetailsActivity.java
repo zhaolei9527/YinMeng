@@ -226,6 +226,7 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.rl_back:
                 finish();
+                startActivity(new Intent(context, MainActivity.class));
                 break;
             default:
                 break;

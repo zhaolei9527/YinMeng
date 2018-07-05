@@ -20,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 import com.bigkoo.pickerview.OptionsPickerView;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -40,20 +39,16 @@ import com.yinmeng.Utils.Validator;
 import com.yinmeng.View.NeutralDialogFragment;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
-
 import org.json.JSONArray;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.iwf.photopicker.PhotoPickUtils;
-
 import static com.yinmeng.R.id.btn_getSMScode;
 
 /**
@@ -321,7 +316,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
 
                             etName.setFocusable(false);
                             etShenfenzheng.setFocusable(false);
-
                             etName.setText(userResetinforBean.getUdata().getTruename());
                             etShenfenzheng.setText(userResetinforBean.getUdata().getIdcard());
                             etYinhangkahao.setText(userResetinforBean.getUdata().getCart());
@@ -332,6 +326,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                             sheng = userResetinforBean.getUdata().getSheng();
                             shi = userResetinforBean.getUdata().getShi();
                             xian = userResetinforBean.getUdata().getXian();
+                            SpUtil.putAndApply(context, "is_shen", "1");
                         } else if ("-1".equals(userResetinforBean.getUdata().getIs_shen())) {
                             btnSubmit.setText("重新提交");
 
