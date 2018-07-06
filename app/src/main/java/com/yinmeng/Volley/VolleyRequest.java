@@ -53,6 +53,9 @@ public class VolleyRequest {
                 String s = formatUrlMap(params, false, false);
                 String s1 = urlmd5(s, UrlUtils.KEY);
                 params.put("pwd", s1);
+                Log.e("VolleyRequest", "params:" + s);
+                Log.e("VolleyRequest", "params:" + s1);
+                Log.e("VolleyRequest", "params:" + params);
                 return params;
             }
         };

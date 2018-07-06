@@ -94,6 +94,25 @@ public class HomeFragment extends BaseLazyFragment {
 //                }
 //            });
 //        }
+        String is_shen = String.valueOf(SpUtil.get(context, "is_shen", ""));
+
+        if (!TextUtils.isEmpty(is_shen)) {
+            if ("1".equals(is_shen)) {
+                v_isshen.setVisibility(View.GONE);
+            } else {
+                v_isshen.setVisibility(View.VISIBLE);
+            }
+        } else {
+            v_isshen.setVisibility(View.VISIBLE);
+        }
+
+        v_isshen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, MyMessageActivity.class));
+            }
+        });
+
         if (Utils.isConnected(context)) {
             p = 1;
             getData();
@@ -129,23 +148,6 @@ public class HomeFragment extends BaseLazyFragment {
             }
         });
 
-        String is_shen = String.valueOf(SpUtil.get(context, "is_shen", ""));
-        if (!TextUtils.isEmpty(is_shen)) {
-            if ("1".equals(is_shen)) {
-                v_isshen.setVisibility(View.GONE);
-            } else {
-                v_isshen.setVisibility(View.VISIBLE);
-            }
-        } else {
-            v_isshen.setVisibility(View.VISIBLE);
-        }
-
-        v_isshen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(context, MyMessageActivity.class));
-            }
-        });
 
     }
 

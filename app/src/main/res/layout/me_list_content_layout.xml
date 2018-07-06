@@ -309,6 +309,28 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/ll_exit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="@dimen/x26"
+                    android:layout_height="@dimen/x26"
+                    android:background="@mipmap/exit" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x5"
+                    android:text="退出登录"
+                    android:textColor="@color/text333"
+                    android:textSize="@dimen/x13" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>

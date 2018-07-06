@@ -14,8 +14,6 @@ import me.iwf.photopicker.utils.Initer;
  */
 public class PhotoPickUtils {
 
-
-
     public static HolderGenerator holderGenerator;
 
     public static void onActivityResult(int requestCode, int resultCode, Intent data,PickHandler pickHandler ) {

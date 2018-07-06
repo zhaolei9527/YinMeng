@@ -361,7 +361,6 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
      */
     private void addressDoedit() {
         HashMap<String, String> params = new HashMap<>(9);
-        params.put("pwd", UrlUtils.KEY);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("id", id);
         params.put("name", name);
@@ -375,6 +374,7 @@ public class AddAdressActivity extends BaseActivity implements View.OnClickListe
         } else {
             params.put("type", "0");
         }
+        Log.e("addressAdd", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "add/edit", "add/edit", params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {

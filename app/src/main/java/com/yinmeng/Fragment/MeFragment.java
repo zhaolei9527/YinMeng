@@ -23,6 +23,7 @@ import com.yinmeng.Activity.AddressActivitry;
 import com.yinmeng.Activity.ChangePasswordActivity;
 import com.yinmeng.Activity.GuanYuWoMenActivity;
 import com.yinmeng.Activity.LianXiWoMenActivity;
+import com.yinmeng.Activity.LoginActivity;
 import com.yinmeng.Activity.MyMessageActivity;
 import com.yinmeng.Activity.OrderListActivity;
 import com.yinmeng.Activity.TiXianGuanLiActivity;
@@ -36,6 +37,7 @@ import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
 import com.yinmeng.Utils.Utils;
+import com.yinmeng.View.CommomDialog;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
@@ -81,6 +83,8 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
     LinearLayout llTixianguanli;
     @BindView(R.id.ll_tixianjilu)
     LinearLayout llTixianjilu;
+    @BindView(R.id.ll_exit)
+    LinearLayout llExit;
     @BindView(R.id.SimpleDraweeView)
     com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
     Unbinder unbinder;
@@ -298,6 +302,23 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
             case R.id.ll_wdedingdan:
                 startActivity(new Intent(context, OrderListActivity.class));
                 break;
+            case R.id.ll_exit:
+                new CommomDialog(context, R.style.dialog, "您确定退出登录么？", new CommomDialog.OnCloseListener() {
+                    @Override
+                    public void onClick(Dialog dialog, final boolean confirm) {
+                        if (confirm) {
+                            dialog.dismiss();
+                        } else {
+                            dialog.dismiss();
+                            SpUtil.clear(context);
+                            Intent intent = new Intent(context, LoginActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                            startActivity(intent);
+                            getActivity().finish();
+                        }
+                    }
+                }).setTitle("提示").show();
+                break;
             default:
                 break;
         }
@@ -319,6 +340,7 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
         llTixianguanli.setOnClickListener(this);
         llTixianjilu.setOnClickListener(this);
         SimpleDraweeView.setOnClickListener(this);
+        llExit.setOnClickListener(this);
         return rootView;
     }
 }

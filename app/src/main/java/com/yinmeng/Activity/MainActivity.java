@@ -3,6 +3,7 @@ package com.yinmeng.Activity;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -36,6 +37,7 @@ import com.yinmeng.View.CustomViewPager;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -108,7 +110,7 @@ public class MainActivity extends BaseActivity {
                 new AcpListener() {
                     @Override
                     public void onGranted() {
-
+                        isHasPermission();
                     }
 
                     @Override
@@ -116,7 +118,6 @@ public class MainActivity extends BaseActivity {
                         Toast.makeText(MainActivity.this, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
                     }
                 });
-
 
         fragments = new ArrayList<>();
         fragments.add(new HomeFragment());
@@ -196,6 +197,19 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
+    }
+
+    private boolean isHasPermission() {
+        Field fieldPassword = null;
+        try {
+            Camera camera = Camera.open();
+            fieldPassword = camera.getClass().getDeclaredField("mHasPermission");
+            fieldPassword.setAccessible(true);
+            return (boolean) fieldPassword.get(camera);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        }
     }
 
     /**

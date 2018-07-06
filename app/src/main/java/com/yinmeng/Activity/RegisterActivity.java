@@ -264,7 +264,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         params.put("fpassword", password);
         String tuijianphone = et_tuijianphone.getText().toString().trim();
         if (!TextUtils.isEmpty(tuijianphone)) {
-            params.put("invite", Utils.md5(password));
+            params.put("invite", tuijianphone);
         }
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "login/register", "login/register", params, new VolleyInterface(context) {
             @Override
