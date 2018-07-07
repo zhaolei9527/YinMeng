@@ -29,6 +29,7 @@ import com.yinmeng.Volley.VolleyRequest;
 
 import java.util.HashMap;
 
+import cn.jpush.android.api.JPushInterface;
 import cn.sharesdk.framework.Platform;
 import cn.sharesdk.framework.PlatformActionListener;
 import cn.sharesdk.framework.ShareSDK;
@@ -234,6 +235,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     LoginBean loginBean = new Gson().fromJson(decode, LoginBean.class);
                     EasyToast.showShort(context, loginBean.getMsg().toString());
                     if (1 == loginBean.getStatus()) {
+                        JPushInterface.setAlias(getApplicationContext(), 200, loginBean.getUdata().getId());
                         SpUtil.putAndApply(context, "uid", loginBean.getUdata().getId());
                         SpUtil.putAndApply(context, "username", loginBean.getUdata().getNi_name());
                         SpUtil.putAndApply(context, "img", loginBean.getUdata().getImg());

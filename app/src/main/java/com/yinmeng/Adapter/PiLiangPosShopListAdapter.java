@@ -7,15 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.yinmeng.Bean.GoodsListsBean;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.yinmeng.Bean.GoodsSouSuoBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.UrlUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * com.wenguoyi.Adapter
@@ -24,21 +22,21 @@ import butterknife.ButterKnife;
  * @date 2018/5/15
  * 功能描述：
  */
-public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHolder> {
+public class PiLiangPosShopListAdapter extends RecyclerView.Adapter<PiLiangPosShopListAdapter.ViewHolder> {
 
     private Activity mContext;
-    private ArrayList<GoodsListsBean.MsgBean> datas = new ArrayList();
+    private ArrayList<GoodsSouSuoBean.GoodsBean> datas = new ArrayList();
 
-    public ArrayList<GoodsListsBean.MsgBean> getDatas() {
+    public ArrayList<GoodsSouSuoBean.GoodsBean> getDatas() {
         return datas;
     }
 
-    public ShopListAdapter(Activity context, List<GoodsListsBean.MsgBean> msgBeanList) {
+    public PiLiangPosShopListAdapter(Activity context, List<GoodsSouSuoBean.GoodsBean> msgBeanList) {
         this.mContext = context;
         this.datas.addAll(msgBeanList);
     }
 
-    public void setDatas(List<GoodsListsBean.MsgBean> datas) {
+    public void setDatas(List<GoodsSouSuoBean.GoodsBean> datas) {
         this.datas.addAll(datas);
     }
 
@@ -51,9 +49,9 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImgurl());
-        holder.tvPrice.setText("￥" + datas.get(position).getPrice());
-        holder.tvTitle.setText(datas.get(position).getGname());
+        holder.simpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg_feng());
+        holder.tv_title.setText(datas.get(position).getTitle());
+        holder.tv_price.setText(datas.get(position).getPrice());
     }
 
     @Override
@@ -61,20 +59,19 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHo
         return datas.size();
     }
 
-
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View rootView;
-        @BindView(R.id.SimpleDraweeView)
-        com.facebook.drawee.view.SimpleDraweeView SimpleDraweeView;
-        @BindView(R.id.tv_title)
-        TextView tvTitle;
-        @BindView(R.id.tv_price)
-        TextView tvPrice;
+        public SimpleDraweeView simpleDraweeView;
+        public TextView tv_title;
+        public TextView tv_price;
 
         public ViewHolder(View view) {
             super(view);
             this.rootView = view;
-            ButterKnife.bind(this, view);
+            this.simpleDraweeView = (SimpleDraweeView) rootView.findViewById(R.id.SimpleDraweeView);
+            this.tv_title = (TextView) rootView.findViewById(R.id.tv_title);
+            this.tv_price = (TextView) rootView.findViewById(R.id.tv_price);
         }
     }
+
 }

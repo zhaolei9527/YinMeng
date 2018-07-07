@@ -22,6 +22,7 @@ import com.yinmeng.Activity.JiJuActivity;
 import com.yinmeng.Activity.MainActivity;
 import com.yinmeng.Activity.MyMessageActivity;
 import com.yinmeng.Activity.POSShopListActivity;
+import com.yinmeng.Activity.PiLiangPosListActivity;
 import com.yinmeng.Activity.TuiGuangShouYiActivity;
 import com.yinmeng.Bean.HomeBean;
 import com.yinmeng.R;
@@ -129,7 +130,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                             mContext.startActivity(new Intent(mContext, TuiGuangShouYiActivity.class));
                             break;
                         case 4:
-                            EasyToast.showShort(mContext, "正在开发中");
+                            mContext.startActivity(new Intent(mContext, PiLiangPosListActivity.class));
                             break;
                         case 5:
                             EasyToast.showShort(mContext, "正在开发中");

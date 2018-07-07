@@ -255,6 +255,12 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustResize"></activity>
 
+        <activity
+            android:name="com.yinmeng.Activity.PiLiangPosListActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustResize"></activity>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.yinmeng.fileprovider"

@@ -16,6 +16,7 @@ import com.yinmeng.Utils.PausableThreadPoolExecutor;
 import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import cn.jpush.android.api.JPushInterface;
 import me.iwf.photopicker.PhotoPickUtils;
 
 
@@ -52,6 +53,8 @@ public class App extends MultiDexApplication {
         Fresco.initialize(this);
         pausableThreadPoolExecutor = new PausableThreadPoolExecutor(1, 1, 0L, TimeUnit.SECONDS, new PriorityBlockingQueue<Runnable>());
         PhotoPickUtils.init(getApplicationContext(),new FrescoIniter());//第二个参数根据具体依赖库而定
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
     }
 
     public static RequestQueue getQueues() {

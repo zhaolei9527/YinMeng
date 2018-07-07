@@ -4,7 +4,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
-import com.yinmeng.Adapter.PosShopListAdapter;
+import com.yinmeng.Adapter.PiLiangPosShopListAdapter;
 import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.GoodsSouSuoBean;
 import com.yinmeng.R;
@@ -47,7 +47,7 @@ import static com.yinmeng.R.id.et_search;
  * @date 2018/6/26
  * 功能描述：
  */
-public class POSShopListActivity extends BaseActivity {
+public class PiLiangPosListActivity extends BaseActivity {
     @BindView(R.id.rl_back)
     FrameLayout rlBack;
     @BindView(R.id.img_search)
@@ -71,7 +71,7 @@ public class POSShopListActivity extends BaseActivity {
     private SakuraLinearLayoutManager line;
     private int p = 1;
     private Dialog dialog;
-    private PosShopListAdapter posShopListAdapter;
+    private PiLiangPosShopListAdapter piLiangPosShopListAdapter;
 
     @Override
     protected int setthislayout() {
@@ -80,9 +80,8 @@ public class POSShopListActivity extends BaseActivity {
 
     @Override
     protected void initview() {
-        line = new SakuraLinearLayoutManager(context);
-        line.setOrientation(LinearLayoutManager.VERTICAL);
-        reShopList.setLayoutManager(line);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        reShopList.setLayoutManager(gridLayoutManager);
         reShopList.setItemAnimator(new DefaultItemAnimator());
         ProgressView progressView = new ProgressView(context);
         progressView.setIndicatorId(ProgressView.BallRotate);
@@ -193,8 +192,8 @@ public class POSShopListActivity extends BaseActivity {
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         params.put("page", String.valueOf(p));
         params.put("type", type);
+        params.put("ftype", "2");
         params.put("keyword", keyword);
-        params.put("ftype", "1");
         Log.e("POSShopListActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "goods/sousuo", "goods/sousuo", params, new VolleyInterface(context) {
 
@@ -209,18 +208,18 @@ public class POSShopListActivity extends BaseActivity {
                     if (1 == goodsSouSuoBean.getStatus()) {
                         LLEmpty.setVisibility(View.GONE);
                         if (1 == p) {
-                            posShopListAdapter = new PosShopListAdapter(POSShopListActivity.this, goodsSouSuoBean.getGoods());
-                            reShopList.setAdapter(posShopListAdapter);
+                            piLiangPosShopListAdapter = new PiLiangPosShopListAdapter(PiLiangPosListActivity.this, goodsSouSuoBean.getGoods());
+                            reShopList.setAdapter(piLiangPosShopListAdapter);
                             reShopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                    startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", posShopListAdapter.getDatas().get(i).getId()));
+                                    startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", piLiangPosShopListAdapter.getDatas().get(i).getId()));
                                 }
                             });
 
                         } else {
                             reShopList.loadMoreComplete();
-                            posShopListAdapter.setDatas(goodsSouSuoBean.getGoods());
+                            piLiangPosShopListAdapter.setDatas(goodsSouSuoBean.getGoods());
                         }
                         reShopList.setCanloadMore(true);
                     } else {

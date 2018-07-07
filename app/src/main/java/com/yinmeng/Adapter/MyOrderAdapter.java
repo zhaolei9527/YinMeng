@@ -97,7 +97,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             holder.btn_pay_order.setVisibility(View.GONE);
             holder.btn_isget_order.setVisibility(View.GONE);
             holder.btn_delete_order.setVisibility(View.GONE);
-            holder.btn_dodelete_order.setVisibility(View.VISIBLE);
+            holder.btn_dodelete_order.setVisibility(View.GONE);
         } else {
             holder.tv_order_type.setText("已取消");
             holder.btn_wuliu_order.setVisibility(View.GONE);

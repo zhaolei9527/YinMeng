@@ -143,7 +143,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
     }
   }
 
-
   public void addImagePagerFragment(ImagePagerFragment imagePagerFragment) {
     this.imagePagerFragment = imagePagerFragment;
     getSupportFragmentManager()
@@ -152,8 +151,6 @@ public class PhotoPickerActivity extends AppCompatActivity {
         .addToBackStack(null)
         .commit();
   }
-
-
 
   public PhotoPickerActivity getActivity() {
     return this;
