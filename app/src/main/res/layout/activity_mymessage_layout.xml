@@ -125,8 +125,8 @@
                     android:layout_weight="1"
                     android:background="#00ffffff"
                     android:gravity="center_vertical"
-                    android:inputType="number"
                     android:hint="您的手机号码"
+                    android:inputType="number"
                     android:textColor="@color/text333"
                     android:textColorHint="#999"
                     android:textSize="@dimen/x12" />
@@ -140,7 +140,8 @@
                     android:layout_marginRight="@dimen/x10"
                     android:background="@drawable/bg_login"
                     android:text="获取验证码"
-                    android:textColor="@color/bgfff" />
+                    android:textColor="@color/bgfff"
+                    android:textSize="@dimen/x10" />
 
             </LinearLayout>
 

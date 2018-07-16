@@ -3,10 +3,7 @@ package com.yinmeng.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -104,7 +101,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
     private String account;
     private Timer timer;
     private TimerTask task;
-    private int time = 100;
+    private int time = 120;
     private ArrayList<JsonBean> options1Items = new ArrayList<>();
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private ArrayList<ArrayList<ArrayList<String>>> options3Items = new ArrayList<>();
@@ -411,6 +408,10 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         params.put("shi", shi);
         params.put("xian", xian);
         Log.e("MyMessageActivity", params.toString());
+
+
+
+
         VolleyRequest.uploadMultipart(context, UrlUtils.BASE_URL + "about/perfect", imgnames, imgs, params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {
@@ -447,6 +448,9 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                 error.printStackTrace();
             }
         });
+
+
+
     }
 
     @Override
@@ -573,7 +577,7 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                             timer.cancel();
                             btnGetSMScode.setText("获取验证码");
                             btnGetSMScode.setEnabled(true);
-                            time = 100;
+                            time = 120;
                         }
                     }
                 });
@@ -633,15 +637,14 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         PhotoPickUtils.onActivityResult(requestCode, resultCode, data, new PhotoPickUtils.PickHandler() {
             @Override
             public void onPickSuccess(ArrayList<String> photos, int requestCode) {
-                final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
                 switch (requestCode) {
                     case 1:
                         pic = photos.get(0);
-                        SimpleDraweeView1.setBackground(new BitmapDrawable(mbitmap));
+                        SimpleDraweeView1.setImageURI("file://"+pic);
                         break;
                     case 2:
                         pic2 = photos.get(0);
-                        SimpleDraweeView2.setBackground(new BitmapDrawable(mbitmap));
+                        SimpleDraweeView2.setImageURI("file://"+pic2);
                         break;
                     default:
                         break;
@@ -691,13 +694,13 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
                             timer.cancel();
                             btnGetSMScode.setText("获取验证码");
                             btnGetSMScode.setEnabled(true);
-                            time = 100;
+                            time = 120;
                         }
                     }
                 });
             }
         };
-        if (time != 100) {
+        if (time != 120) {
             timer.schedule(task, 1000, 1000);
         }
     }

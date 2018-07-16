@@ -217,16 +217,13 @@ public class PriceDetailsActivity extends BaseActivity implements View.OnClickLi
         goodsDetail();
     }
 
-
     private boolean typeshow = false;
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl_back:
                 finish();
-                startActivity(new Intent(context, MainActivity.class));
                 break;
             default:
                 break;

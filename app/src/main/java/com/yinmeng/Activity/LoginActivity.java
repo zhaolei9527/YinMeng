@@ -8,8 +8,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,20 +39,12 @@ import cn.sharesdk.wechat.friends.Wechat;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private Dialog dialog;
-    private ImageView img;
-    private ImageView img_yonghu;
     private EditText et_account;
-    private RelativeLayout rl;
-    private ImageView img_mima;
     private EditText et_password;
-    private RelativeLayout rl2;
     private TextView tv_forgetpassworld;
     private TextView tv_register;
-    private RelativeLayout rl3;
     private Button btn_login;
-    private RelativeLayout rl4;
     private ImageView img_weixin;
-    private LinearLayout rl5;
     private int pswminlen = 6;
     private String account;
     private String password;
@@ -73,7 +63,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initview() {
-        initView();
+        et_account = (EditText) findViewById(R.id.et_account);
+        et_password = (EditText) findViewById(R.id.et_password);
+        tv_forgetpassworld = (TextView) findViewById(R.id.tv_forgetpassworld);
+        tv_register = (TextView) findViewById(R.id.tv_register);
+        btn_login = (Button) findViewById(R.id.btn_login);
+        img_weixin = (ImageView) findViewById(R.id.img_weixin);
     }
 
     @Override
@@ -93,11 +88,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent();
-        intent.setAction("LoginActivityIsStart");
-        sendBroadcast(intent);
     }
-
 
     private void gotoMain() {
         startActivity(new Intent(context, MainActivity.class));
@@ -170,23 +161,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             default:
                 break;
         }
-    }
-
-    private void initView() {
-        img = (ImageView) findViewById(R.id.img);
-        img_yonghu = (ImageView) findViewById(R.id.img_yonghu);
-        et_account = (EditText) findViewById(R.id.et_account);
-        rl = (RelativeLayout) findViewById(R.id.rl);
-        img_mima = (ImageView) findViewById(R.id.img_mima);
-        et_password = (EditText) findViewById(R.id.et_password);
-        rl2 = (RelativeLayout) findViewById(R.id.rl2);
-        tv_forgetpassworld = (TextView) findViewById(R.id.tv_forgetpassworld);
-        tv_register = (TextView) findViewById(R.id.tv_register);
-        rl3 = (RelativeLayout) findViewById(R.id.rl3);
-        btn_login = (Button) findViewById(R.id.btn_login);
-        rl4 = (RelativeLayout) findViewById(R.id.rl4);
-        img_weixin = (ImageView) findViewById(R.id.img_weixin);
-        rl5 = (LinearLayout) findViewById(R.id.rl5);
     }
 
     private void submit() {

@@ -100,10 +100,8 @@ public class VolleyRequest {
                                        List<File> listFile, Map<String, String> params,
                                        VolleyInterface listener) {
         String s = formatUrlMap(params, false, false);
-        Log.e("VolleyRequest", s);
         String s1 = urlmd5(s, UrlUtils.KEY);
         params.put("pwd", s1);
-        Log.e("VolleyRequest", params.toString());
         MultipartRequestUpload request = new MultipartRequestUpload(url, listname, listFile, params, listener);
         request.setRetryPolicy(new DefaultRetryPolicy(
                 30000,

@@ -1,5 +1,6 @@
 package com.yinmeng.Adapter;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -14,7 +15,9 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.hintview.IconHintView;
 import com.yinmeng.Activity.DaiLiShangActivity;
@@ -24,16 +27,23 @@ import com.yinmeng.Activity.MyMessageActivity;
 import com.yinmeng.Activity.POSShopListActivity;
 import com.yinmeng.Activity.PiLiangPosListActivity;
 import com.yinmeng.Activity.TuiGuangShouYiActivity;
+import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.Bean.HomeBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.DensityUtils;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
+import com.yinmeng.View.CommomDialog;
 import com.yinmeng.View.MyGridView;
+import com.yinmeng.Volley.VolleyInterface;
+import com.yinmeng.Volley.VolleyRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import static com.yinmeng.R.style.dialog;
 
 /**
  * com.wenguoyi.Adapter
@@ -121,6 +131,17 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                 mContext.startActivity(new Intent(mContext, DaiLiShangActivity.class));
                             } else {
                                 EasyToast.showShort(mContext, "你还不是代理!~");
+                                new CommomDialog(mContext, dialog, "申请成为代理？", new CommomDialog.OnCloseListener() {
+                                    @Override
+                                    public void onClick(Dialog dialog, final boolean confirm) {
+                                        if (confirm) {
+                                            dialog.dismiss();
+                                        } else {
+                                            aboutIsDaiPower();
+                                            dialog.dismiss();
+                                        }
+                                    }
+                                }).setTitle("提示").show();
                             }
                             break;
                         case 2:
@@ -255,4 +276,35 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             return inflate;
         }
     }
+
+    /**
+     * 登录获取
+     */
+    private void aboutIsDaiPower() {
+        HashMap<String, String> params = new HashMap<>(1);
+        params.put("uid", String.valueOf(SpUtil.get(mContext, "uid", "0")));
+        Log.e("HomeListAdapter", params.toString());
+        VolleyRequest.RequestPost(mContext, UrlUtils.BASE_URL + "about/is_daipower", "about/is_daipower", params, new VolleyInterface(mContext) {
+            @Override
+            public void onMySuccess(String result) {
+                String decode = result;
+                Log.e("HomeListAdapter", decode);
+                try {
+                    CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
+                    EasyToast.showShort(mContext, codeBean.getMsg());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    EasyToast.showShort(mContext, R.string.Abnormalserver);
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                error.printStackTrace();
+                EasyToast.showShort(mContext, R.string.Abnormalserver);
+            }
+        });
+    }
+
+
 }

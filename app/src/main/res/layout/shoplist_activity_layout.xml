@@ -29,7 +29,6 @@
                 android:layout_gravity="center"
                 android:background="@mipmap/fanhui" />
 
-
         </FrameLayout>
 
         <LinearLayout

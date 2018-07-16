@@ -127,6 +127,7 @@
                         android:textSize="@dimen/x13" />
 
                     <Button
+                        android:textSize="@dimen/x10"
                         android:id="@+id/btn_getSMScode"
                         android:layout_width="@dimen/x80"
                         android:layout_height="@dimen/y26"
