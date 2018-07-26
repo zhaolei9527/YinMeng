@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.yinmeng">
 
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
@@ -20,7 +21,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:name">
 
         <activity
             android:name="com.tencent.bugly.beta.ui.BetaActivity"
@@ -29,7 +31,7 @@
 
         <activity
             android:name="com.yinmeng.Activity.MainActivity"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize"></activity>
 
@@ -43,7 +45,6 @@
             android:name="com.yinmeng.Activity.FlashActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"
-
             android:windowSoftInputMode="adjustPan|stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -24,6 +24,8 @@ import com.yinmeng.Volley.VolleyRequest;
 import java.util.HashMap;
 import java.util.List;
 
+import cn.jpush.android.api.JPushInterface;
+
 
 /**
  * Created by 赵磊 on 2017/7/13.
@@ -75,9 +77,7 @@ public class FlashActivity extends BaseActivity {
                     @Override
                     public void onGranted() {
 
-
                     }
-
                     @Override
                     public void onDenied(List<String> permissions) {
                         Toast.makeText(context, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
@@ -136,6 +136,7 @@ public class FlashActivity extends BaseActivity {
                     LoginBean loginBean = new Gson().fromJson(decode, LoginBean.class);
                     if (1 == loginBean.getStatus()) {
                         Toast.makeText(context, "欢迎回来", Toast.LENGTH_SHORT).show();
+                        JPushInterface.setAlias(context, 200, loginBean.getUdata().getId());
                         SpUtil.putAndApply(context, "uid", loginBean.getUdata().getId());
                         SpUtil.putAndApply(context, "username", loginBean.getUdata().getNi_name());
                         SpUtil.putAndApply(context, "isshen", loginBean.getUdata().getIs_shen());

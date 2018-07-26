@@ -19,5 +19,7 @@ public class UrlUtils {
     /**
      * 接口连接key
      */
-    public static final String KEY = "yinmeng20170625";
+//    public static final String KEY = "yinmeng20170625";
+    public static final String KEY = "xiaoman20170712";
+
 }

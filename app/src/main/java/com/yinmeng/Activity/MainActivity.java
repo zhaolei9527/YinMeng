@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.mylhyl.acp.Acp;
@@ -36,12 +35,10 @@ import com.yinmeng.Utils.Utils;
 import com.yinmeng.View.CustomViewPager;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sakura.bottomtabbar.BottomTabBar;
@@ -62,7 +59,6 @@ public class MainActivity extends BaseActivity {
     RelativeLayout rlShouclosered;
     private CustomViewPager viewpager;
     private ArrayList<Fragment> fragments;
-
     private boolean mIsExit;
     private String is_shou;
     private Dialog dialog;
@@ -125,7 +121,6 @@ public class MainActivity extends BaseActivity {
         fragments.add(new JiFenFragment());
         fragments.add(new NewsFragment());
         fragments.add(new MeFragment());
-
         viewpager = (CustomViewPager) findViewById(R.id.fl_content);
         viewpager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
             @Override
@@ -155,6 +150,7 @@ public class MainActivity extends BaseActivity {
                 .commit();
 
         is_shou = (String) SpUtil.get(context, "is_shou", "");
+
         if (!TextUtils.isEmpty(is_shou)) {
             if ("0".equals(is_shou)) {
                 rlShouclosered.setVisibility(View.VISIBLE);

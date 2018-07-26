@@ -205,7 +205,7 @@ public class DingDanFaHuoActivity extends BaseActivity {
 
 
     /**
-     * 订单信息获取
+     * 订单发货
      */
     private void doDlorder() {
         HashMap<String, String> params = new HashMap<>(9);
