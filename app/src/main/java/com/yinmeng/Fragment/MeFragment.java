@@ -107,12 +107,10 @@ public class MeFragment extends BaseLazyFragment implements View.OnClickListener
 
     @Override
     protected void initPrepare() {
-
     }
 
     @Override
     protected void onInvisible() {
-
     }
 
     @Override

@@ -129,7 +129,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                             String is_dai = (String) SpUtil.get(mContext, "is_dai", "0");
                             if ("1".equals(is_dai)) {
                                 mContext.startActivity(new Intent(mContext, DaiLiShangActivity.class));
-                            } else {
+                            } else if ("0".equals(is_dai)) {
                                 EasyToast.showShort(mContext, "你还不是代理!~");
                                 new CommomDialog(mContext, dialog, "申请成为代理？", new CommomDialog.OnCloseListener() {
                                     @Override
@@ -142,6 +142,10 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                                         }
                                     }
                                 }).setTitle("提示").show();
+                            } else if ("2".equals(is_dai)) {
+                                EasyToast.showShort(mContext, "代理权限被关闭!~");
+                            } else if ("3".equals(is_dai)) {
+                                EasyToast.showShort(mContext, "代理权限审核中!~");
                             }
                             break;
                         case 2:
@@ -171,8 +175,8 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
         } else {
             holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position - 1).getImg_feng());
             holder.tv_title.setText(datas.get(position - 1).getTitle());
-            holder.tv_price.setText(datas.get(position - 1).getPrice());
-            holder.tv_feilv.setText(datas.get(position - 1).getFei());
+            holder.tv_price.setText("￥" + datas.get(position - 1).getPrice());
+            holder.tv_feilv.setText(datas.get(position - 1).getFei() + "%");
             if (!TextUtils.isEmpty(datas.get(position - 1).getYajin())) {
                 if ("0.00".equals(datas.get(position - 1).getYajin())) {
                     holder.tv_yajin.setText("无押金");
@@ -184,6 +188,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
             }
             holder.tv_paizhao.setText("支付牌照：" + datas.get(position - 1).getPaizhao());
             holder.tv_show.setText(datas.get(position - 1).getGz_num() + "人已关注");
+            holder.tv_jiangli.setText(datas.get(position - 1).getTab());
         }
     }
 
@@ -291,6 +296,7 @@ public class HomeListAdapter extends RecyclerView.Adapter<HomeListAdapter.ViewHo
                 Log.e("HomeListAdapter", decode);
                 try {
                     CodeBean codeBean = new Gson().fromJson(decode, CodeBean.class);
+                    SpUtil.putAndApply(mContext, "is_dai", "3");
                     EasyToast.showShort(mContext, codeBean.getMsg());
                 } catch (Exception e) {
                     e.printStackTrace();

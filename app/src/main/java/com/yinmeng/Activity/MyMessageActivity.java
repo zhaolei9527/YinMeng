@@ -408,10 +408,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         params.put("shi", shi);
         params.put("xian", xian);
         Log.e("MyMessageActivity", params.toString());
-
-
-
-
         VolleyRequest.uploadMultipart(context, UrlUtils.BASE_URL + "about/perfect", imgnames, imgs, params, new VolleyInterface(context) {
             @Override
             public void onMySuccess(String result) {

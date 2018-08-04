@@ -51,7 +51,7 @@ public class PiLiangPosShopListAdapter extends RecyclerView.Adapter<PiLiangPosSh
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.simpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg_feng());
         holder.tv_title.setText(datas.get(position).getTitle());
-        holder.tv_price.setText(datas.get(position).getPrice());
+        holder.tv_price.setText("￥"+datas.get(position).getPrice());
     }
 
     @Override
