@@ -119,12 +119,14 @@ public class DingDanFaHuoActivity extends BaseActivity {
                     EasyToast.showShort(context, "请输入快递单号");
                     return;
                 }
+
                 if (Utils.isConnected(context)) {
                     dialog.show();
                     doDlorder();
                 } else {
                     EasyToast.showShort(context, R.string.Networkexception);
                 }
+
             }
         });
     }
@@ -171,7 +173,7 @@ public class DingDanFaHuoActivity extends BaseActivity {
                             etKuaidiNum.setText(agentDlorderDetailBean.getDorder().getExpnum());
                             tvKuaidiName.setFocusable(false);
                             etKuaidiNum.setFocusable(false);
-                            btnSubmit.setFocusable(false);
+                            btnSubmit.setVisibility(View.INVISIBLE);
                         } else {
                             for (int i = 0; i < agentDlorderDetailBean.getList().size(); i++) {
                                 wuLiuList.add(agentDlorderDetailBean.getList().get(i).getName());
@@ -211,7 +213,7 @@ public class DingDanFaHuoActivity extends BaseActivity {
         HashMap<String, String> params = new HashMap<>(9);
         params.put("oid", getIntent().getStringExtra("id"));
         params.put("kid", kid);
-        params.put("expnum ", etKuaidiNum.getText().toString().trim());
+        params.put("expnum", etKuaidiNum.getText().toString().trim());
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
         Log.e("DingDanFaHuoActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/do_dlorder", "agent/do_dlorder", params, new VolleyInterface(context) {
@@ -224,7 +226,7 @@ public class DingDanFaHuoActivity extends BaseActivity {
                     if (1 == codeBean.getStatus()) {
                         EasyToast.showShort(context, codeBean.getMsg());
                         btnSubmit.setText("已发货");
-                        btnSubmit.setFocusable(false);
+                        btnSubmit.setVisibility(View.INVISIBLE);
                     } else {
                         EasyToast.showShort(context, codeBean.getMsg());
                     }

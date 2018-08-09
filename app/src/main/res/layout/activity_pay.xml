@@ -134,6 +134,39 @@
                 android:focusable="false" />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30">
+
+            <ImageView
+                android:id="@+id/img_alipay"
+                android:layout_width="@dimen/x21"
+                android:layout_height="@dimen/x21"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@mipmap/zhifubao" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x10"
+                android:layout_toRightOf="@id/img_alipay"
+                android:text="支付宝" />
+
+            <CheckBox
+                android:id="@+id/Choosedalipay"
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginRight="@dimen/x15"
+                android:background="@drawable/rb_selector"
+                android:button="@null" />
+        </RelativeLayout>
+
         <Button
             android:id="@+id/btn_paynow"
             android:layout_width="@dimen/x262"

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alipay.sdk.app.PayTask;
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.tencent.mm.opensdk.modelpay.PayReq;
@@ -25,6 +26,7 @@ import com.yinmeng.Base.BaseActivity;
 import com.yinmeng.Bean.BankEvent;
 import com.yinmeng.Bean.OrderWxpayBean;
 import com.yinmeng.Bean.PayResult;
+import com.yinmeng.Bean.ZfpayBean;
 import com.yinmeng.R;
 import com.yinmeng.Utils.Constants;
 import com.yinmeng.Utils.EasyToast;
@@ -95,7 +97,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         ;
     };
     private String ordermoney;
-
+    private CheckBox Choosedalipay;
 
     @Override
     protected void onResume() {
@@ -127,6 +129,8 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         tv_totalmoney = (TextView) findViewById(R.id.tv_totalmoney);
         img_weixin = (ImageView) findViewById(R.id.img_weixin);
         Choosedweixin = (CheckBox) findViewById(R.id.Choosedweixin);
+        Choosedalipay = (CheckBox) findViewById(R.id.Choosedalipay);
+
         btn_paynow = (Button) findViewById(R.id.btn_paynow);
         orderid = getIntent().getStringExtra("orderid");
         order = getIntent().getStringExtra("order");
@@ -139,6 +143,29 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         if (!TextUtils.isEmpty(ordermoney)) {
             tv_totalmoney.setText(ordermoney);
         }
+
+        Choosedalipay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Choosedalipay.isChecked()) {
+                    Choosedweixin.setChecked(false);
+                } else {
+                    Choosedweixin.setChecked(true);
+                }
+            }
+        });
+
+        Choosedweixin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Choosedweixin.isChecked()) {
+                    Choosedalipay.setChecked(false);
+                } else {
+                    Choosedalipay.setChecked(true);
+                }
+            }
+        });
+
 
         //注册EventBus
         if (!EventBus.getDefault().isRegistered(PayActivity.this)) {
@@ -174,7 +201,13 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
                     if (!dialog.isShowing()) {
                         dialog.show();
                     }
-                    orderWxpay();
+                    if (Choosedalipay.isChecked()) {
+                        orderZfpay();
+                    } else if (Choosedweixin.isChecked()) {
+                        orderWxpay();
+                    } else {
+                        EasyToast.showShort(context, "请选择支付方式");
+                    }
                 } else {
                     EasyToast.showShort(context, "网络未连接");
                 }
@@ -185,6 +218,57 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
             default:
                 break;
         }
+    }
+
+
+    /**
+     * 订单支付，支付宝
+     */
+    private void orderZfpay() {
+        HashMap<String, String> params = new HashMap<>(3);
+        params.put("uid", String.valueOf(SpUtil.get(context, "uid", "")));
+        params.put("oid", getIntent().getStringExtra("orderid"));
+        if (!TextUtils.isEmpty(getIntent().getStringExtra("aid"))) {
+            params.put("aid", getIntent().getStringExtra("aid"));
+        }
+        Log.e("orderZfpay", params.toString());
+        VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "order/zfpay", "order/zfpay", params, new VolleyInterface(context) {
+            @Override
+            public void onMySuccess(String result) {
+                dialog.dismiss();
+                Log.e("orderZfpay", result);
+                try {
+                    ZfpayBean zfpayBean = new Gson().fromJson(result, ZfpayBean.class);
+                    final ZfpayBean finalZfpayBean = zfpayBean;
+                    Runnable payRunnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            PayTask alipay = new PayTask(PayActivity.this);
+                            Map<String, String> result = alipay.payV2(finalZfpayBean.getRes(), true);
+                            Log.e("msp", result.toString());
+                            Message msg = new Message();
+                            msg.what = SDK_PAY_FLAG;
+                            msg.obj = result;
+                            mHandler.sendMessage(msg);
+                        }
+                    };
+                    Thread payThread = new Thread(payRunnable);
+                    payThread.start();
+                    zfpayBean = null;
+                    result = null;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onMyError(VolleyError error) {
+                dialog.dismiss();
+                error.printStackTrace();
+                Toast.makeText(context, getString(R.string.Abnormalserver), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     /**

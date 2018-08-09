@@ -53,7 +53,7 @@ public class PosShopListAdapter extends RecyclerView.Adapter<PosShopListAdapter.
         holder.SimpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg_feng());
         holder.tv_title.setText(datas.get(position).getTitle());
         holder.tv_price.setText("￥" + datas.get(position).getPrice());
-        holder.tv_feilv.setText(datas.get(position).getFei());
+        holder.tv_feilv.setText(datas.get(position).getFei() + "%");
         if (!TextUtils.isEmpty(datas.get(position).getYajin())) {
             if ("0.00".equals(datas.get(position).getYajin())) {
                 holder.tv_yajin.setText("无押金");

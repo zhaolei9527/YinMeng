@@ -164,6 +164,7 @@ public class VolleyRequest {
 
     public static String urlmd5(String url, String appid) {
         String s = url + "&appkey=" + appid;
+        Log.e("VolleyRequest", "params:" + s);
         String s1 = Utils.md5(s);
         String substring = s1.substring(0, 18);
         return substring.toUpperCase();

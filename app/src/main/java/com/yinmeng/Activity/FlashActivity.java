@@ -83,8 +83,6 @@ public class FlashActivity extends BaseActivity {
                         Toast.makeText(context, R.string.Thepermissionapplicationisrejected, Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
     }
 
     @Override

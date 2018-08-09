@@ -98,6 +98,10 @@ public class ShouYiMingXiActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+        tvTuiguangfanli.setBackgroundColor(getResources().getColor(R.color.buleshen));
+        tvShuakafanli.setBackgroundColor(getResources().getColor(R.color.buleqian));
+
         rlBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -108,6 +112,8 @@ public class ShouYiMingXiActivity extends BaseActivity {
         tvTuiguangfanli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tvTuiguangfanli.setBackgroundColor(getResources().getColor(R.color.buleshen));
+                tvShuakafanli.setBackgroundColor(getResources().getColor(R.color.buleqian));
                 dialog.show();
                 p = 1;
                 type = "1";
@@ -118,6 +124,8 @@ public class ShouYiMingXiActivity extends BaseActivity {
         tvShuakafanli.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                tvTuiguangfanli.setBackgroundColor(getResources().getColor(R.color.buleqian));
+                tvShuakafanli.setBackgroundColor(getResources().getColor(R.color.buleshen));
                 dialog.show();
                 p = 1;
                 type = "2";

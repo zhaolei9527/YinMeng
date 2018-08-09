@@ -142,6 +142,8 @@ public class JiJuActivity extends BaseActivity {
                     CodeBean codeBean = new Gson().fromJson(result, CodeBean.class);
                     if (1 == codeBean.getStatus()) {
                         EasyToast.showShort(context, codeBean.getMsg());
+                        etPhone.setText("");
+                        etSn.setText("");
                     } else {
                         EasyToast.showShort(context, codeBean.getMsg());
                     }
