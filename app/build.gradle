@@ -23,14 +23,14 @@ android {
         applicationId "com.yinmeng1"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 7
-        versionName "1.7"
+        versionCode 9
+        versionName "1.9"
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             //设置支持的SO库架构
-            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a','x86', 'x86_64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'arm64-v8a'//,'x86', 'x86_64'
         }
         manifestPlaceholders = [
                 JPUSH_PKGNAME: applicationId,
@@ -51,6 +51,7 @@ android {
 }
 
 MobSDK {
+
     appKey "d580ad56b4b5"
     appSecret "7fcae59a62342e7e2759e9e397c82bdd"
 

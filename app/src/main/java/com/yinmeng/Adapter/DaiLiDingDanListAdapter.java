@@ -55,7 +55,7 @@ public class DaiLiDingDanListAdapter extends RecyclerView.Adapter<DaiLiDingDanLi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+        holder.btn_fahuo.setText(datas.get(position).getStatus_s());
         holder.simpleDraweeView.setImageURI(UrlUtils.URL + datas.get(position).getImg_feng());
         holder.tv_jifen.setText("0");
         holder.tv_price.setText("￥" + datas.get(position).getTotalprice());

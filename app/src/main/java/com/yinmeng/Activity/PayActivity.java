@@ -98,6 +98,7 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
     };
     private String ordermoney;
     private CheckBox Choosedalipay;
+    private String type;
 
     @Override
     protected void onResume() {
@@ -135,6 +136,16 @@ public class PayActivity extends BaseActivity implements View.OnClickListener {
         orderid = getIntent().getStringExtra("orderid");
         order = getIntent().getStringExtra("order");
         ordermoney = getIntent().getStringExtra("ordermoney");
+
+        type = getIntent().getStringExtra("type");
+
+        if ("1".equals(type)) {
+            Choosedweixin.setChecked(true);
+            Choosedalipay.setChecked(false);
+        } else {
+            Choosedalipay.setChecked(true);
+            Choosedweixin.setChecked(false);
+        }
 
         if (!TextUtils.isEmpty(order)) {
             tv_ordernumber.setText(order);

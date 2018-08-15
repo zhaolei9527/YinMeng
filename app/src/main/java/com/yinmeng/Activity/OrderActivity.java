@@ -169,10 +169,17 @@ public class OrderActivity extends BaseActivity {
                                 .putExtra("orderid", goodsXiadanBean.getOrder().getId())
                                 .putExtra("order", goodsXiadanBean.getOrder().getOrderid())
                                 .putExtra("ordermoney", goodsXiadanBean.getOrder().getTotalprice())
+                                .putExtra("type", "1")
                                 .putExtra("aid", addressID));
                         finish();
                     } else {
-                        EasyToast.showShort(context, "支付宝在线支付待审核");
+                        startActivity(new Intent(context, PayActivity.class)
+                                .putExtra("orderid", goodsXiadanBean.getOrder().getId())
+                                .putExtra("order", goodsXiadanBean.getOrder().getOrderid())
+                                .putExtra("ordermoney", goodsXiadanBean.getOrder().getTotalprice())
+                                .putExtra("type", "2")
+                                .putExtra("aid", addressID));
+                        finish();
                     }
                 }
 
