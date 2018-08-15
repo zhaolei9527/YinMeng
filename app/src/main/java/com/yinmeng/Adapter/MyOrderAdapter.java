@@ -17,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.gson.Gson;
 import com.yinmeng.Activity.PayActivity;
+import com.yinmeng.Activity.WuLiuDetailsActivity;
 import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.Bean.OrderListsBean;
 import com.yinmeng.R;
@@ -182,7 +183,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
         holder.btn_wuliu_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                mContext.startActivity(new Intent(mContext, WuLiuDetailsActivity.class).putExtra("name", datas.get(position).getExpnum()).putExtra("id", datas.get(position).getExp()));
             }
         });
     }

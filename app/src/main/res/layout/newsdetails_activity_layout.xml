@@ -32,63 +32,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="资讯详情"
+            android:text="物流详情"
             android:textColor="@color/text000"
             android:textSize="@dimen/x16" />
 
     </RelativeLayout>
 
-    <ScrollView
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/forum_context"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-
-            <TextView
-                android:id="@+id/tv_title"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/x10"
-                android:gravity="center"
-                android:textColor="@color/text000"
-                android:textSize="@dimen/x17" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x5">
-
-                <TextView
-                    android:id="@+id/tv_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x10"
-                    android:textColor="@color/text555" />
-
-                <TextView
-                    android:id="@+id/tv_show"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/x10"
-                    android:layout_weight="1"
-                    android:gravity="end"
-                    android:textColor="@color/text555" />
-
-            </LinearLayout>
-
-            <com.tencent.smtt.sdk.WebView
-                android:id="@+id/forum_context"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/x5" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x5" />
 
 </LinearLayout>
