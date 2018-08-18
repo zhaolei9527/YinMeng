@@ -37,7 +37,7 @@ public class WuLiuDetailsActivity extends BaseActivity {
 
     @Override
     protected int setthislayout() {
-        return R.layout.newsdetails_activity_layout;
+        return R.layout.wuliudetails_activity_layout;
     }
 
     @Override

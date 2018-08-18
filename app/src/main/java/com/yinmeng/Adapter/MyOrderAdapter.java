@@ -170,7 +170,6 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
             }
         });
 
-
         holder.btn_isget_order.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,6 +185,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.ViewHold
                 mContext.startActivity(new Intent(mContext, WuLiuDetailsActivity.class).putExtra("name", datas.get(position).getExpnum()).putExtra("id", datas.get(position).getExp()));
             }
         });
+
     }
 
     @Override

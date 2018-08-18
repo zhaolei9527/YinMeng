@@ -118,6 +118,7 @@ public class TuanDuiXinXiActivity extends BaseActivity {
         ButterKnife.bind(this);
     }
 
+    private TuanDuiXinXiAdapter tuanDuiXinXiAdapter;
 
     /**
      * 团队信息
@@ -128,7 +129,6 @@ public class TuanDuiXinXiActivity extends BaseActivity {
         params.put("page", String.valueOf(p));
         Log.e("TuanDuiXinXiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "about/team", "about/team", params, new VolleyInterface(context) {
-            private TuanDuiXinXiAdapter tuanDuiXinXiAdapter;
 
             @Override
             public void onMySuccess(String result) {

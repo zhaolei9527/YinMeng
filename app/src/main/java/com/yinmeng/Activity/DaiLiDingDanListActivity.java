@@ -77,6 +77,9 @@ public class DaiLiDingDanListActivity extends BaseActivity {
         id = getIntent().getStringExtra("id");
     }
 
+    private DaiLiDingDanListAdapter daiLiDingDanListAdapter;
+
+
     private void agentDllist() {
         HashMap<String, String> params = new HashMap<>(2);
         if (TextUtils.isEmpty(id)) {
@@ -87,7 +90,6 @@ public class DaiLiDingDanListActivity extends BaseActivity {
         params.put("page", String.valueOf(p));
         Log.e("DaiLiShangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/dllist", "agent/dllist", params, new VolleyInterface(context) {
-            private DaiLiDingDanListAdapter daiLiDingDanListAdapter;
 
             @Override
             public void onMySuccess(String result) {
