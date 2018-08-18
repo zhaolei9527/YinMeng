@@ -153,6 +153,9 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    private DaiLiShangAdapter daiLiShangAdapter;
+
+
     /**
      * 代理商
      */
@@ -166,7 +169,6 @@ public class DaiLiShangActivity extends BaseActivity implements View.OnClickList
         params.put("page", String.valueOf(p));
         Log.e("DaiLiShangActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/index", "agent/index", params, new VolleyInterface(context) {
-            private DaiLiShangAdapter daiLiShangAdapter;
 
             @Override
             public void onMySuccess(String result) {

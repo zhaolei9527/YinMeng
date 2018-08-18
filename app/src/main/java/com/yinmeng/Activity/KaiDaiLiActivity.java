@@ -101,6 +101,8 @@ public class KaiDaiLiActivity extends BaseActivity {
 
     }
 
+    private JiJuListAdapter jiJuListAdapter;
+
     private void submit() {
         HashMap<String, String> params = new HashMap<>(1);
         params.put("uid", String.valueOf(SpUtil.get(context, "uid", "0")));
@@ -108,7 +110,6 @@ public class KaiDaiLiActivity extends BaseActivity {
         params.put("tel", Phone);
         Log.e("JiJuActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/add_agen", "agent/add_agen", params, new VolleyInterface(context) {
-            private JiJuListAdapter jiJuListAdapter;
 
             @Override
             public void onMySuccess(String result) {

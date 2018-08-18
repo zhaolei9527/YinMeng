@@ -90,6 +90,7 @@ public class TiXianListActivity extends BaseActivity {
     }
 
     private int txjlp = 1;
+    private TiXianJiLuAdapter tiXianJiLuAdapter;
 
     /**
      * 提现记录
@@ -100,7 +101,6 @@ public class TiXianListActivity extends BaseActivity {
         params.put("page", String.valueOf(txjlp));
         Log.e("TiXianListActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "tixian/txlist", "tixian/txlist", params, new VolleyInterface(context) {
-            private TiXianJiLuAdapter tiXianJiLuAdapter;
 
             @Override
             public void onMySuccess(String result) {

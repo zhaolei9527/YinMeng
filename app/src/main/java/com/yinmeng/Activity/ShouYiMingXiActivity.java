@@ -147,6 +147,8 @@ public class ShouYiMingXiActivity extends BaseActivity {
 
     }
 
+    private ShouYiMingXiAdapter shouYiMingXiAdapter;
+
     /**
      * 收益明细
      */
@@ -158,7 +160,6 @@ public class ShouYiMingXiActivity extends BaseActivity {
         params.put("daty", daty);
         Log.e("ShouYiMingXiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/profit", "agent/profit", params, new VolleyInterface(context) {
-            private ShouYiMingXiAdapter shouYiMingXiAdapter;
 
             @Override
             public void onMySuccess(String result) {

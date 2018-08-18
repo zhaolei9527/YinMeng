@@ -146,6 +146,7 @@ public class WoDeTuanDuiActivity extends BaseActivity {
     }
 
     private boolean isshow = false;
+    private WoDeTuanDuiAdapter woDeTuanDuiAdapter;
 
     /**
      * 代理商
@@ -161,7 +162,6 @@ public class WoDeTuanDuiActivity extends BaseActivity {
         params.put("agrade", agrade);
         Log.e("WoDeTuanDuiActivity", params.toString());
         VolleyRequest.RequestPost(context, UrlUtils.BASE_URL + "agent/team", "agent/team", params, new VolleyInterface(context) {
-            private WoDeTuanDuiAdapter woDeTuanDuiAdapter;
 
             @Override
             public void onMySuccess(String result) {
