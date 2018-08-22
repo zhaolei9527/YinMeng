@@ -3,8 +3,11 @@ package com.yinmeng.Activity;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
@@ -27,6 +30,7 @@ import com.yinmeng.Bean.CodeBean;
 import com.yinmeng.Bean.JsonBean;
 import com.yinmeng.Bean.UserDoInfoBean;
 import com.yinmeng.Bean.UserResetinforBean;
+import com.yinmeng.Other.PriorityRunnable;
 import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.GetJsonDataUtil;
@@ -37,6 +41,8 @@ import com.yinmeng.Utils.Validator;
 import com.yinmeng.View.NeutralDialogFragment;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
+
+import net.bither.util.NativeUtil;
 
 import org.json.JSONArray;
 
@@ -51,6 +57,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.iwf.photopicker.PhotoPickUtils;
 
+import static com.yinmeng.App.pausableThreadPoolExecutor;
 import static com.yinmeng.R.id.btn_getSMScode;
 
 /**
@@ -446,7 +453,6 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         });
 
 
-
     }
 
     @Override
@@ -527,7 +533,18 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
 
                     imgnames.add("idcardimg");
                     imgnames.add("bankimg");
+                } else {
+                    if (changePhotopic) {
+                        imgfiles.add(new File(pic));
+                        imgnames.add("idcardimg");
+                    }
+                    if (changePhotopic2) {
+                        imgfiles.add(new File(pic2));
+                        imgnames.add("bankimg");
+                    }
                 }
+
+
                 dialog.show();
                 userDoinfo(imgnames, imgfiles);
                 break;
@@ -560,31 +577,35 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
     }
 
     private void getcaptcha(String phone) {
-        timer = new Timer();
-        task = new TimerTask() {
-            @Override
-            public void run() {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        time--;
-                        btnGetSMScode.setText("" + time);
-                        if (time <= 0) {
-                            timer.cancel();
-                            btnGetSMScode.setText("获取验证码");
-                            btnGetSMScode.setEnabled(true);
-                            time = 120;
+        try {
+            timer = new Timer();
+            task = new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            time--;
+                            btnGetSMScode.setText("" + time);
+                            if (time <= 0) {
+                                timer.cancel();
+                                btnGetSMScode.setText("获取验证码");
+                                btnGetSMScode.setEnabled(true);
+                                time = 120;
+                            }
                         }
-                    }
-                });
+                    });
+                }
+            };
+            timer.schedule(task, 1000, 1000);
+            //// TODO: 2017/5/18  发送验证码
+            if (Utils.isConnected(context)) {
+                getUserPlace(phone);
+            } else {
+                Toast.makeText(context, getString(R.string.Networkexception), Toast.LENGTH_SHORT).show();
             }
-        };
-        timer.schedule(task, 1000, 1000);
-        //// TODO: 2017/5/18  发送验证码
-        if (Utils.isConnected(context)) {
-            getUserPlace(phone);
-        } else {
-            Toast.makeText(context, getString(R.string.Networkexception), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -627,20 +648,65 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         });
     }
 
+    private boolean changePhotopic = false;
+    private boolean changePhotopic2 = false;
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         PhotoPickUtils.onActivityResult(requestCode, resultCode, data, new PhotoPickUtils.PickHandler() {
             @Override
             public void onPickSuccess(ArrayList<String> photos, int requestCode) {
+
                 switch (requestCode) {
                     case 1:
-                        pic = photos.get(0);
-                        SimpleDraweeView1.setImageURI("file://"+pic);
+                        changePhotopic = true;
+                        final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
+                        final int finalI = 0;
+                        pausableThreadPoolExecutor.execute(new PriorityRunnable(finalI) {
+                            @Override
+                            public void doSth() {
+                                // 首先保存图片
+                                File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
+                                if (!appDir.exists()) {
+                                    appDir.mkdir();
+                                }
+                                NativeUtil.compressBitmap(mbitmap, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png", true);
+
+                                pic = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png";
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        SimpleDraweeView1.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png");
+                                    }
+                                });
+                            }
+                        });
                         break;
                     case 2:
-                        pic2 = photos.get(0);
-                        SimpleDraweeView2.setImageURI("file://"+pic2);
+                        changePhotopic2 = true;
+                        final Bitmap mbitmap2 = BitmapFactory.decodeFile(photos.get(0));
+                        final int final2 = 1;
+                        pausableThreadPoolExecutor.execute(new PriorityRunnable(final2) {
+                            @Override
+                            public void doSth() {
+                                // 首先保存图片
+                                File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
+                                if (!appDir.exists()) {
+                                    appDir.mkdir();
+                                }
+                                NativeUtil.compressBitmap(mbitmap2, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png", true);
+                                pic2 = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png";
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        SimpleDraweeView2.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png");
+                                    }
+                                });
+                            }
+                        });
                         break;
                     default:
                         break;

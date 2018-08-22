@@ -177,7 +177,10 @@ public class HomeFragment extends BaseLazyFragment {
                                 @Override
                                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                                     if (i != 0) {
-                                        startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i - 1).getId()));
+                                        if (i - 1 < adapter.getDatas().size()) {
+                                            startActivity(new Intent(context, PriceDetailsActivity.class).putExtra("id", adapter.getDatas().get(i - 1).getId()));
+                                        } else {
+                                        }
                                     }
                                 }
                             });

@@ -257,7 +257,8 @@ public class MainActivity extends BaseActivity {
                         }
 
                     } else {
-                        //EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                        rlShouclosered.setVisibility(View.GONE);
+                       // EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
                     }
                     result = null;
                 } catch (Exception e) {
