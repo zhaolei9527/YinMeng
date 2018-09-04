@@ -2,19 +2,21 @@ package com.yinmeng.Activity;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
 import com.google.gson.Gson;
 import com.mylhyl.acp.Acp;
@@ -31,14 +33,16 @@ import com.yinmeng.R;
 import com.yinmeng.Utils.EasyToast;
 import com.yinmeng.Utils.SpUtil;
 import com.yinmeng.Utils.UrlUtils;
-import com.yinmeng.Utils.Utils;
+import com.yinmeng.View.CommomDialog;
 import com.yinmeng.View.CustomViewPager;
 import com.yinmeng.Volley.VolleyInterface;
 import com.yinmeng.Volley.VolleyRequest;
+
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import sakura.bottomtabbar.BottomTabBar;
@@ -107,6 +111,15 @@ public class MainActivity extends BaseActivity {
                     @Override
                     public void onGranted() {
                         isHasPermission();
+                        try {
+                            // 从API11开始android推荐使用android.content.ClipboardManager
+                            // 为了兼容低版本我们这里使用旧版的android.text.ClipboardManager，虽然提示deprecated，但不影响使用。
+                            ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                            // 将文本内容放到系统剪贴板里。
+                            cm.setText("支付宝发红包啦！人人可领，天天可领！长按复制此消息，打开支付宝领红包！VavJvm63sZ");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override
@@ -151,21 +164,33 @@ public class MainActivity extends BaseActivity {
 
         is_shou = (String) SpUtil.get(context, "is_shou", "");
 
-        if (!TextUtils.isEmpty(is_shou)) {
-            if ("0".equals(is_shou)) {
-                rlShouclosered.setVisibility(View.VISIBLE);
-                rlOpenred.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog = Utils.showLoadingDialog(context);
-                        dialog.show();
-                        hongBaoRedPackage("1");
-                    }
-                });
-            } else {
-                hongBaoRedPackage("2");
+//        if (!TextUtils.isEmpty(is_shou)) {
+//            if ("0".equals(is_shou)) {
+//                rlShouclosered.setVisibility(View.VISIBLE);
+//                rlOpenred.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        dialog = Utils.showLoadingDialog(context);
+//                        dialog.show();
+//                        hongBaoRedPackage("1");
+//                    }
+//                });
+//            } else {
+//                hongBaoRedPackage("2");
+//            }
+//        }
+
+        new CommomDialog(context, R.style.dialog, "     亿卡汇客户端由于需要深层优化，目前暂停使用，请联系上级代理关注亿卡汇微信公众号，在公众号进行购买商品和业务推广。", new CommomDialog.OnCloseListener() {
+            @Override
+            public void onClick(Dialog dialog, final boolean confirm) {
+                if (confirm) {
+                    dialog.dismiss();
+                } else {
+                    dialog.dismiss();
+                }
             }
-        }
+        }).setTitle("提示").show();
+
 
     }
 
@@ -258,7 +283,7 @@ public class MainActivity extends BaseActivity {
 
                     } else {
                         rlShouclosered.setVisibility(View.GONE);
-                       // EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
+                        // EasyToast.showShort(context, hongBaoRedPackageBean.getMsg());
                     }
                     result = null;
                 } catch (Exception e) {

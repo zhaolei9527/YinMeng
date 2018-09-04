@@ -2,7 +2,6 @@ package com.yinmeng.Utils;
 
 /**
  * sakura.sweepcodesignin.utils
- *
  * @author 赵磊
  * @date 2017/10/26
  * 功能描述：UrlUtils 接口连接url地址存放

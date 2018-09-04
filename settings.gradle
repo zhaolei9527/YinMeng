@@ -1,1 +1,1 @@
-include ':app', ':picker', ':pickerview', ':fresco'
+include ':app', ':picker', ':pickerview', ':fresco', ':xxpicturecompress'

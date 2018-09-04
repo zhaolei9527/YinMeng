@@ -658,60 +658,63 @@ public class MyMessageActivity extends BaseActivity implements View.OnClickListe
         PhotoPickUtils.onActivityResult(requestCode, resultCode, data, new PhotoPickUtils.PickHandler() {
             @Override
             public void onPickSuccess(ArrayList<String> photos, int requestCode) {
-
-                switch (requestCode) {
-                    case 1:
-                        changePhotopic = true;
-                        final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
-                        final int finalI = 0;
-                        pausableThreadPoolExecutor.execute(new PriorityRunnable(finalI) {
-                            @Override
-                            public void doSth() {
-                                // 首先保存图片
-                                File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
-                                if (!appDir.exists()) {
-                                    appDir.mkdir();
-                                }
-                                NativeUtil.compressBitmap(mbitmap, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png", true);
-
-                                pic = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png";
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        SimpleDraweeView1.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png");
+                try {
+                    switch (requestCode) {
+                        case 1:
+                            changePhotopic = true;
+                            final Bitmap mbitmap = BitmapFactory.decodeFile(photos.get(0));
+                            final int finalI = 0;
+                            pausableThreadPoolExecutor.execute(new PriorityRunnable(finalI) {
+                                @Override
+                                public void doSth() {
+                                    // 首先保存图片
+                                    File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
+                                    if (!appDir.exists()) {
+                                        appDir.mkdir();
                                     }
-                                });
-                            }
-                        });
-                        break;
-                    case 2:
-                        changePhotopic2 = true;
-                        final Bitmap mbitmap2 = BitmapFactory.decodeFile(photos.get(0));
-                        final int final2 = 1;
-                        pausableThreadPoolExecutor.execute(new PriorityRunnable(final2) {
-                            @Override
-                            public void doSth() {
-                                // 首先保存图片
-                                File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
-                                if (!appDir.exists()) {
-                                    appDir.mkdir();
-                                }
-                                NativeUtil.compressBitmap(mbitmap2, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png", true);
-                                pic2 = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png";
+                                    NativeUtil.compressBitmap(mbitmap, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png", true);
 
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        SimpleDraweeView2.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png");
+                                    pic = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png";
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            SimpleDraweeView1.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + finalI + ".png");
+                                        }
+                                    });
+                                }
+                            });
+                            break;
+                        case 2:
+                            changePhotopic2 = true;
+                            final Bitmap mbitmap2 = BitmapFactory.decodeFile(photos.get(0));
+                            final int final2 = 1;
+                            pausableThreadPoolExecutor.execute(new PriorityRunnable(final2) {
+                                @Override
+                                public void doSth() {
+                                    // 首先保存图片
+                                    File appDir = new File(Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/");
+                                    if (!appDir.exists()) {
+                                        appDir.mkdir();
                                     }
-                                });
-                            }
-                        });
-                        break;
-                    default:
-                        break;
+                                    NativeUtil.compressBitmap(mbitmap2, Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png", true);
+                                    pic2 = Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png";
+
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            SimpleDraweeView2.setImageURI("file://" + Environment.getExternalStorageDirectory().getPath() + "/ScreenCapture/" + final2 + ".png");
+                                        }
+                                    });
+                                }
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                    Log.e("MyMessageActivity", photos.get(0));
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                Log.e("MyMessageActivity", photos.get(0));
             }
 
             @Override
